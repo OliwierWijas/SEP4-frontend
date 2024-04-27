@@ -15,6 +15,7 @@ export default function App() {
     <House rooms={dummyData}/>
     <BrownBreakline></BrownBreakline>
     <RoomManagementComponent />
+    <BrownBreakline></BrownBreakline>
       <div className="py-4 px-20">
       <Footer></Footer>
     </div>
