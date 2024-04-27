@@ -1,5 +1,6 @@
 import "../index.css";
 import { Link, Outlet } from "react-router-dom";
+import RoomManagementComponent from "../components/MyHome/GraphComponent/RoomManagementComponent.js";
 
 export default function App() {
   return (
@@ -7,6 +8,7 @@ export default function App() {
       <nav>
         <div>
           Hello world
+          <RoomManagementComponent />
           <Link to="/About">
             About
           </Link>

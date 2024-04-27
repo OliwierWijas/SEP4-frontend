@@ -1,0 +1,31 @@
+.rdrDefinedRangesWrapper {
+    display: none;
+}
+
+.rdrDateDisplayItem {
+    color: #C4B097;
+}
+
+span {
+    border-color: #C4B097 !important;
+}
+
+span::after {
+    background-color: #C4B097 !important;
+}
+
+style attribute {
+    background-color: #C4B097 !important;
+}
+
+span .rdrDayNumber {
+    background-color: #C4B097 !important;
+}
+
+.rdrInRange, .rdrStartEdge, .rdrEndEdge {
+    background-color: #C4B097;
+}
+
+.rdrDateDisplayWrapper { 
+    background-color: transparent;
+}

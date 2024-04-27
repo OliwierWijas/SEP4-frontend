@@ -4,5 +4,4 @@ function MyHome() {
     );
   }
   
-  export default MyHome;
-  
+export default MyHome;
