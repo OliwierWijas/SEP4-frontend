@@ -4,7 +4,7 @@ import CreateRoom from './CreateRoom.js';
 import '../../../styles/House.css';
 import Triangle from './Triangle.js';
 
-function House({ rooms }) {
+function House({ rooms, setTemperature, setHumidity, setLightLevel }) {
     const maxRoomsPerRow = 3;
     const minRoomWidth = 350;
     const gap = 16; 
@@ -19,7 +19,7 @@ function House({ rooms }) {
             <div className="house">
                 {rooms.map((room, index) => (
                     <div key={index} style={{ flexBasis: roomWidth }}>
-                        <Room room={room} />
+                        <Room room={room} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} />
                     </div>
                 ))}
                 <div style={{ flex: "1", minWidth: `${minRoomWidth}px` }}>

@@ -1,39 +1,16 @@
 import React from "react"
 import "../../../index.css"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import DataReadingComponent from "./DataReadingComponent.js"
 import DateIntervalPicker from "./DateIntervalPicker.js"
 import GraphComponent from "./GraphComponent.js"
 import DropdownList from "./DropdownList.js"
-import { addDays } from 'date-fns';
-import { TemperatureData } from "./Temperature.js"
-import { HumidityData } from "./Humidity.js"
-import { LightData } from "./LightData.js"
+import { TemperatureData } from "../../../dummyData/Temperature.js"
+import { HumidityData } from "../../../dummyData/Humidity.js"
+import { LightData } from "../../../dummyData/LightData.js"
 import { parse, format } from 'date-fns';
 
-function RoomManagementComponent() {
-    const [temperature, setTemperature] = useState("0°C")
-    const [humidity, setHumidity] = useState("0%")
-    const [lightLevel, setLightLevel] = useState("0%")
-    const [selectedValue, setSelectedValue] = useState("Temperature");
-
-
-    const [interval, setInterval] = useState([
-        {
-            startDate: new Date(),
-            endDate: addDays(new Date(), 7),
-            key: 'selection'
-        }
-    ])
-
-    const [data, setData] = useState({
-        labels: TemperatureData.map((data) => data.date),
-        datasets: [{
-            label: selectedValue,
-            data: TemperatureData.map((data) => data.value),
-            borderColor: '#C4B097'
-        }]
-    })
+function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue }) {
     
     useEffect(() => {
         const startDate = interval[0].startDate
@@ -77,7 +54,7 @@ function RoomManagementComponent() {
         }
 
         updateData(filterData())
-    }, [selectedValue, interval[0].startDate, interval[0].endDate]);
+    }, [data, selectedValue, interval[0].startDate, interval[0].endDate]);
 
     return (
         <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">

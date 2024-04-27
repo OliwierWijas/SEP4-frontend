@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../../styles/Room.css';
 
-function Room({ room }) {
+function Room({ room, setTemperature, setHumidity, setLightLevel }) {
   const { name, temperature, humidity, lightLevel } = room;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -13,12 +13,18 @@ function Room({ room }) {
     setIsHovered(false);
   };
 
+  const onClick = () => {
+    setTemperature(room.temperature + "°C")
+    setHumidity(room.humidity + "%")
+    setLightLevel(room.lightLevel + "%")
+  }
+
   return (
     <div
       className="room flex flex-col justify-center bg-medium-brown items-center mx-2 shadow-md rounded"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      
+      onClick={onClick}
     >
       {isHovered ? (
         <div className="hover-content">
