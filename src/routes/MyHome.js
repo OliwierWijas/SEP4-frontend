@@ -7,7 +7,6 @@ import dummyData from "../dummyData/RoomData.js";
 import { addDays } from 'date-fns';
 import { TemperatureData } from "../dummyData/Temperature.js"
 
-
 function MyHome() {
   const [temperature, setTemperature] = useState("0°C")
   const [humidity, setHumidity] = useState("0%")

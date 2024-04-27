@@ -11,7 +11,6 @@ import { LightData } from "../../../dummyData/LightData.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue }) {
-    
     useEffect(() => {
         const startDate = interval[0].startDate
         const endDate = interval[0].endDate
@@ -54,7 +53,7 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
         }
 
         updateData(filterData())
-    }, [data, selectedValue, interval[0].startDate, interval[0].endDate]);
+    }, [selectedValue, interval[0].startDate, interval[0].endDate]);
 
     return (
         <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
