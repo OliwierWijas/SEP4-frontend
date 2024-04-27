@@ -6,9 +6,7 @@ export default function App() {
     <>
       <nav>
         <div>
-          Hello world
-          <Link to="/About">
-            About
+            <Link to="/About">
           </Link>
         </div>
       </nav>

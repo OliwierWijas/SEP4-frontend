@@ -1,0 +1,9 @@
+.room:hover {
+    background-color: #A79277;
+  }
+
+.room {
+  height: 150px;
+  width: 375px;
+}
+  

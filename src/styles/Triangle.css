@@ -1,0 +1,26 @@
+.triangle-container {
+    position: relative;
+  }
+  
+  .triangle {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-left: 40vw solid transparent; 
+    border-right: 40vw solid transparent; 
+    border-bottom: 15vw solid #837058; 
+  }
+  
+  .triangle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5vw; 
+    color: #EEE5D8;
+  }
+  
+  .triangle-text span {
+    font-weight: bold;
+  }
+  
