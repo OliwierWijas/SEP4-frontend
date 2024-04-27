@@ -3,6 +3,8 @@ import RoomManagementComponent from "../components/MyHome/GraphComponent/RoomMan
 import Header from "../components/Header.js";
 import Footer from "../components/Footer.js";
 import BrownBreakline from "../components/BrownBreakline.js";
+import House from "../components/MyHome/HouseComponent/House.js";
+import dummyData from "../dummyData/RoomData.js";
 
 export default function App() {
   return (
@@ -10,8 +12,9 @@ export default function App() {
     <div className="py-4 px-20">
       <Header></Header>
     </div>
+    <House rooms={dummyData}/>
+    <BrownBreakline></BrownBreakline>
     <RoomManagementComponent />
-      <BrownBreakline></BrownBreakline>
       <div className="py-4 px-20">
       <Footer></Footer>
     </div>
