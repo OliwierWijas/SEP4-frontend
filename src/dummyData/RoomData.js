@@ -9,7 +9,7 @@ const roomData = [
     { name: "Bedroom3", temperature: "23", humidity: 50, lightLevel: "3" },
     { name: "Bedroom3", temperature: "23", humidity: 50, lightLevel: "3" },
     { name: "Bedroom3", temperature: "23", humidity: 50, lightLevel: "3" },
-
+    { name: "Bedroom100", temperature: "23", humidity: 50, lightLevel: "3" },
     
   ];
   
