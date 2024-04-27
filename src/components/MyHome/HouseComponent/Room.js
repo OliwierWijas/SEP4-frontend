@@ -21,7 +21,7 @@ function Room({ room, setTemperature, setHumidity, setLightLevel }) {
 
   return (
     <div
-      className="room flex flex-col justify-center bg-medium-brown items-center mx-2 shadow-md rounded"
+      className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}

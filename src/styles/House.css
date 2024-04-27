@@ -6,17 +6,6 @@
     min-height: 100vh; 
 }
 
-.house {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px; 
-    padding: 2rem;
-    width: 80%;
-    margin-top: 1rem; 
-    justify-content: center;
-    align-items: flex-start;
-}
-
 .triangle-container {
     margin-top: 1rem; 
 }
