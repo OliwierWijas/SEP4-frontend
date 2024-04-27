@@ -12,13 +12,13 @@ function House({ rooms, setTemperature, setHumidity, setLightLevel }) {
     const roomWidth = `calc((100% - ${totalGap}px) / ${maxRoomsPerRow})`;
 
     return (
-        <div className="house-container">
+        <div className="house-container" data-testid="house-container">
             <div className="triangle-container">
                 <Triangle />
             </div>
             <div className="house">
                 {rooms.map((room, index) => (
-                    <div key={index} style={{ flexBasis: roomWidth }}>
+                    <div key={index} style={{ flexBasis: roomWidth }} data-testid="room">
                         <Room room={room} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} />
                     </div>
                 ))}
