@@ -1,13 +1,8 @@
 import "../../../index.css"
 
-interface selectedValueState {
-  selectedValue: string
-  setSelectedValue: (selectedValue: string) => void
-}
-
-function DropdownList({ selectedValue, setSelectedValue } : selectedValueState) {
+function DropdownList({ selectedValue, setSelectedValue }) {
   
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSelectChange = (event) => {
     setSelectedValue(event.target.value);
   };
 

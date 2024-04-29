@@ -3,14 +3,8 @@ import 'react-date-range/dist/theme/default.css';
 import { DateRangePicker } from 'react-date-range';
 import '../../../css/DateIntervalPicker.css'
 
-
-interface intervalState {
-  interval: []
-  setInterval: (interval: [any]) => void
-}
-
-function DateIntervalPicker({ interval, setInterval }: intervalState) {
-  const handleDateChange = (item : any) => {
+function DateIntervalPicker({ interval, setInterval }) {
+  const handleDateChange = (item) => {
     setInterval([item.selection]);
   }
 
@@ -18,7 +12,7 @@ function DateIntervalPicker({ interval, setInterval }: intervalState) {
     <div className='mx-auto'>
       <DateRangePicker
         onChange={handleDateChange}
-        //showSelectionPreview={true}
+        showSelectionPreview={true}
         moveRangeOnFirstSelection={false}
         months={1}
         ranges={interval}
