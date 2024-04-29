@@ -1,7 +1,7 @@
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
 import { DateRangePicker } from 'react-date-range';
-import '../../../css/DateIntervalPicker.css'
+import '../../../styles/DateIntervalPicker.css'
 
 function DateIntervalPicker({ interval, setInterval }) {
   const handleDateChange = (item) => {

@@ -9,6 +9,7 @@
     border-left: 40vw solid transparent; 
     border-right: 40vw solid transparent; 
     border-bottom: 15vw solid #837058; 
+    border-radius: 100px;
   }
   
   .triangle-text {
