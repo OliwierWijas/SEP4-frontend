@@ -37,6 +37,7 @@ function MyHome() {
       <House rooms={dummyData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} />
       <BrownBreakline></BrownBreakline>
       <RoomManagementComponent data={graphData} setData={setGraphData} temperature={temperature} humidity={humidity} lightLevel={lightLevel} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+      <BrownBreakline></BrownBreakline>
     </>
   );
 }

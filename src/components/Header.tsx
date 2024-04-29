@@ -39,7 +39,6 @@ export default function Header() {
               </Link>
               <BrownButton
                 text="Log out"
-                className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
               />
             </div>
             <div className="flex items-center md:hidden">

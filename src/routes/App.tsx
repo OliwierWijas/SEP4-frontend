@@ -1,6 +1,6 @@
 import "../index.css";
-import Header from "../components/Header.js";
-import Footer from "../components/Footer.js";
+import Header from "../components/Header.tsx";
+import Footer from "../components/Footer.tsx";
 
 export default function App() {
   return (
