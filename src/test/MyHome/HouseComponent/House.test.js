@@ -40,7 +40,4 @@ describe('House component', () => {
     const roomElements = screen.getAllByTestId('room');
     expect(roomElements.length).toBe(rooms.length);
   });
-
-
-
 });

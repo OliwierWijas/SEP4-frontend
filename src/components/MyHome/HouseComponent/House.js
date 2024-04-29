@@ -10,16 +10,21 @@ function House({ rooms }) {
     const [width, setWidth] = useState('')
 
     useEffect(() => {
-        const restOfRooms = rooms.length%3;
-        let newWidth
-        if (restOfRooms === 0 ) {
-            newWidth = `md:w-1/2 lg:w-full`
+        const restOfRooms2 = rooms.length%2
+        const restOfRooms3 = rooms.length%3;
+        let newWidth = ``
+        if (restOfRooms2 === 1) {
+            newWidth = `md:w-1/2`
         }
-        else if (restOfRooms === 1 ) {
-            newWidth = `md:1/2 lg:w-2/3`
+
+        if (restOfRooms3 === 0 ) {
+            newWidth += ` lg:w-full`
+        }
+        else if (restOfRooms3 === 1 ) {
+            newWidth += ` lg:w-2/3`
         }
         else   {
-            newWidth = `lg:w-1/3`
+            newWidth += ` lg:w-1/3`
         }
         setWidth(newWidth)
     }, [rooms])
@@ -31,7 +36,7 @@ function House({ rooms }) {
             </div>
             <div className="house w-4/5 flex flex-wrap justify-between">
                 {rooms.map((room, index) => (
-                    <div key={index} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center'>
+                    <div key={index} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center' data-testid="room">
                         <Room room={room} />
                     </div>
                 ))}
