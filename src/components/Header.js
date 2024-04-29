@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import BrownButton from "./BrownButton.js";
+import BrownButton from "./BrownButton.tsx";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
