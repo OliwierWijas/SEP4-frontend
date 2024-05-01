@@ -48,12 +48,12 @@ jobs:
           kubectl port-forward service/frontend 3000:3000 &> /dev/null &
       - run: |
           curl -i http://localhost:3000/
+      - name: "Verify deployment"
+        run: |
+          kubectl get deployments
       - name: Cleanup
         run: |
           eval $(minikube docker-env -u)
           minikube delete
-      - name: "Verify deployment"
-        run: |
-          kubectl get deployments
 
 #comment
