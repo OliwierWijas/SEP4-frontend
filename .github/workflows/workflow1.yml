@@ -23,6 +23,11 @@ jobs:
           echo -n "Verifying images: "
           docker images
           echo "Images build successfully"
+      - name: Install Kompose
+        run: |
+          curl -L https://github.com/kubernetes/kompose/releases/download/v1.24.0/kompose-linux-amd64 -o kompose
+          chmod +x kompose
+          sudo mv kompose /usr/local/bin/kompose
       - name: Deploy to minikube
         run: |
           kompose convert
