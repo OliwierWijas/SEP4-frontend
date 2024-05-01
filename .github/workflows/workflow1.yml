@@ -31,15 +31,16 @@ jobs:
       - name: Deploy to minikube
         run: |
           echo "$(pwd)"
-          ls
+          echo "$(dir)"
           kompose convert
-          echo "Output of kompose convert:"
-          cat frontend-deployment.yaml
           kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl apply -f frontend-deployment.yaml 2>&1
+          kubectl apply -f frontend-service.yaml 2>&1
           kubectl get deployments
           kubectl get services
           kubectl get pods
+          kubectl wait --for=condition=Ready pod -l app=frontend
           kubectl get all
           echo "Deployment completed successfully"
       - name: Test frontend service URLs
