@@ -30,24 +30,26 @@ jobs:
           sudo mv kompose /usr/local/bin/kompose
       - name: Deploy to minikube
         run: |
+          echo "$(pwd)"
+          ls
           kompose convert
           kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl get deployments
+          kubectl get services
+          kubectl get pods
           kubectl get all
           echo "Deployment completed successfully"
       - name: Test frontend service URLs
         run: |
           echo "SERVICE_URL=$(minikube service frontend --url)"
           kubectl port-forward service/frontend 3000:3000 &> /dev/null &
-          sleep 20
+          sleep 5
           kubectl port-forward service/frontend 3000:3000 &> /dev/null &
       - run: |
           curl -i http://localhost:3000/
-      - run: |
-          kubectl get all
       - name: Cleanup
         run: |
           eval $(minikube docker-env -u)
           minikube delete
-
 #comment
