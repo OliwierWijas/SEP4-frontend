@@ -20,6 +20,7 @@ jobs:
         run: |
           npm install
           npm install typescript --save-dev
+          npm install date-fns
       
       - name: Run Jest tests
         run: npm run test a

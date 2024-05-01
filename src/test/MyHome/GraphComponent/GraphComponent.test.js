@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent, screen } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import GraphComponent from '../../../components/MyHome/GraphComponent/GraphComponent';
 import { Chart } from 'chart.js';
 import 'jest-canvas-mock';

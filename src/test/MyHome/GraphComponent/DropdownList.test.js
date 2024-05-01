@@ -1,5 +1,5 @@
 import React from 'react'
-import { fireEvent, render, screen } from "@testing-library/react"
+import { fireEvent, render, screen, act } from "@testing-library/react"
 import DropdownList from "../../../components/MyHome/GraphComponent/DropdownList"
 
 describe('DropdownList Component', () => {
