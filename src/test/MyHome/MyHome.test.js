@@ -13,6 +13,9 @@ jest.mock('../../components/MyHome/GraphComponent/DataIntervalPicker', () => {
 
 
 describe('MyHomeComponent', () => {
+  it('', () => {
+    
+  })
   /*it('renders house and room management components', () => {
     render(<MyHome />);
     expect(screen.getByTestId('house')).toBeInTheDocument();

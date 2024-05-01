@@ -17,7 +17,9 @@ jobs:
           node-version: '14'
   
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install typescript --save-dev
       
       - name: Run Jest tests
-        run: npm test
+        run: npm run test a
