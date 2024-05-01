@@ -30,6 +30,8 @@ jobs:
           sudo mv kompose /usr/local/bin/kompose
       - name: Deploy to minikube
         run: |
+          echo "$(pwd)"
+          echo "$(dir)"
           kompose convert
           kubectl apply -f frontend-deployment.yaml
           kubectl apply -f frontend-service.yaml
