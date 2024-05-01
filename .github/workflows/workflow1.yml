@@ -33,6 +33,8 @@ jobs:
           echo "$(pwd)"
           echo "$(dir)"
           kompose convert
+          kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f frontend-deployment.yaml 2>&1
           kubectl apply -f frontend-service.yaml 2>&1
           kubectl get deployments
@@ -40,8 +42,6 @@ jobs:
           kubectl get pods
           kubectl wait --for=condition=Ready pod -l app=frontend
           kubectl get all
-          kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
-          kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
           echo "Deployment completed successfully"
       - name: Test frontend service URLs
         run: |
