@@ -1,0 +1,45 @@
+name: CD - Deploy to Minikube using GitHub Actions
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  job1:
+    name: Build and Deploy to Minikube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start Minikube
+        id: minikube
+        uses: medyagh/setup-minikube@latest
+      - name: Try the cluster !
+        run: kubectl get pods -A
+      - name: Build Images
+        run: |
+          export SHELL=/bin/bash
+          eval $(minikube -p minikube docker-env)
+          docker compose build
+          echo -n "Verifying images: "
+          docker images
+          echo "Images build successfully"
+      - name: Deploy to minikube
+        run: |
+          kompose convert
+          kubectl apply -f frontend-deployment.yaml
+          kubectl apply -f frontend-service.yaml
+          kubectl wait --for=condition=Ready pod -l app=frontend
+          kubectl get all
+          echo "Deployment completed successfully"
+      - name: Test frontend service URLs
+        run: |
+          echo "SERVICE_URL=$(minikube service frontend --url)"
+          kubectl port-forward service/frontend 3000:3000 &> /dev/null &
+          sleep 5
+          kubectl port-forward service/frontend 3000:3000 &> /dev/null &
+      - run: |
+          curl -i http://localhost:3000/
+      - name: Cleanup
+        run: |
+          eval $(minikube docker-env -u)
+          minikube delete
