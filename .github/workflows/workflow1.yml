@@ -39,6 +39,7 @@ jobs:
           echo "SERVICE_URL=$(minikube service frontend --url)"
           kubectl port-forward service/frontend 3000:3000 &> /dev/null &
           sleep 20
+          kubectl port-forward service/frontend 3000:3000 &> /dev/null &
       - run: |
           curl -i http://localhost:3000/
       - run: |
