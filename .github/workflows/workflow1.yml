@@ -40,8 +40,6 @@ jobs:
           kubectl get pods
           kubectl get all
           echo "Deployment completed successfully"
-      - name: Wait for frontend pod to be ready
-        run: kubectl wait --for=condition=Ready pod -l app=frontend
       - name: Test frontend service URLs
         run: |
           echo "SERVICE_URL=$(minikube service frontend --url)"
@@ -54,5 +52,8 @@ jobs:
         run: |
           eval $(minikube docker-env -u)
           minikube delete
+      - name: "Verify deployment"
+        run: |
+          kubectl get deployments
 
 #comment
