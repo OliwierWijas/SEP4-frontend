@@ -33,6 +33,9 @@ jobs:
           kompose convert
           kubectl apply -f frontend-deployment.yaml
           kubectl apply -f frontend-service.yaml
+          kubectl get deployments
+          kubectl get services
+          kubectl get pods
           kubectl wait --for=condition=Ready pod -l app=frontend
           kubectl get all
           echo "Deployment completed successfully"
