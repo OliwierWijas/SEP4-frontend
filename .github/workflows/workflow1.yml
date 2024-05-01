@@ -33,6 +33,7 @@ jobs:
           kompose convert
           kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl get all
           echo "Deployment completed successfully"
       - name: Test frontend service URLs
         run: |
