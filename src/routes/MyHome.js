@@ -7,6 +7,7 @@ import { addDays } from 'date-fns';
 import { TemperatureData } from "../dummyData/Temperature.js"
 
 function MyHome() {
+  const [roomName, setRoomName] = useState("")
   const [temperature, setTemperature] = useState("0°C")
   const [humidity, setHumidity] = useState("0%")
   const [lightLevel, setLightLevel] = useState("0%")
@@ -33,9 +34,9 @@ function MyHome() {
 
   return (
     <>
-      <House rooms={dummyData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} />
+      <House rooms={dummyData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} setRoomName={setRoomName} />
       <BrownBreakline></BrownBreakline>
-      <RoomManagementComponent data={graphData} setData={setGraphData} temperature={temperature} humidity={humidity} lightLevel={lightLevel} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
+      <RoomManagementComponent data={graphData} setData={setGraphData} temperature={temperature} humidity={humidity} lightLevel={lightLevel} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} roomName={roomName} />
     </>
   );
 }
