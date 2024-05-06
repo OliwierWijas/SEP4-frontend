@@ -34,7 +34,9 @@ jobs:
           kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl get all
+          kubectl get pods
           echo "Deployment completed successfully"
+          sleep 5
       - name: Test frontend service URLs
         run: |
           echo "SERVICE_URL=$(minikube service frontend --url)"
