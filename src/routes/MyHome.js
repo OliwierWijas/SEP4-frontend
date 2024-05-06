@@ -13,7 +13,7 @@ function MyHome() {
   const [lightLevel, setLightLevel] = useState("0%")
 
   const [selectedValue, setSelectedValue] = useState("Temperature");
-
+  //
 
   const [interval, setInterval] = useState([
     {
