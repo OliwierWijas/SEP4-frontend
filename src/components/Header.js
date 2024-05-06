@@ -13,9 +13,9 @@ export default function Header() {
             <div className="flex items-center">
               <Link
                 to="/"
-                className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-800"
+                className="text-base text-xl md:text-2xl lg:text-4xl xl:text-3xl text-gray-800"
               >
-                <b style={{color: "#a79277"}}>Smart</b> Home
+                <p style={{color: "#a79277"}}><b>Smart</b> Home</p>
               </Link>
             </div>
             <div className="hidden md:flex md:items-center md:space-x-4">

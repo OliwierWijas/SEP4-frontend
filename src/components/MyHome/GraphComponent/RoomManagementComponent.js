@@ -10,7 +10,7 @@ import { HumidityData } from "../../../dummyData/Humidity.js"
 import { LightData } from "../../../dummyData/LightData.js"
 import { parse, format } from 'date-fns';
 
-function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue }) {
+function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue, roomName }) {
     useEffect(() => {
         const startDate = interval[0].startDate
         const endDate = interval[0].endDate
@@ -57,6 +57,7 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
 
     return (
         <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
+            <div style={{color: "#837058"}} className="text-2xl ml-2 my-3 font-bold opacity-85">{roomName}</div>
             <div className="reading-container flex flex-col lg:flex-row">
                 <DataReadingComponent readingType="Temperature" value={temperature} />
                 <DataReadingComponent readingType="Humidity" value={humidity} />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../../styles/Room.css';
 
-function Room({ room, setTemperature, setHumidity, setLightLevel }) {
+function Room({ room, setTemperature, setHumidity, setLightLevel, setRoomName }) {
   const { name, temperature, humidity, lightLevel } = room;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -17,6 +17,7 @@ function Room({ room, setTemperature, setHumidity, setLightLevel }) {
     setTemperature(room.temperature + "°C")
     setHumidity(room.humidity + "%")
     setLightLevel(room.lightLevel + "%")
+    setRoomName(room.name)
   }
 
   return (
