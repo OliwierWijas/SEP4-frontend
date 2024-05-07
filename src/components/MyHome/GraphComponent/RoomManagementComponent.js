@@ -1,17 +1,20 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import "../../../index.css"
-import { useEffect } from "react"
 import DataReadingComponent from "./DataReadingComponent.js"
 import DateIntervalPicker from "./DateIntervalPicker.js"
 import GraphComponent from "./GraphComponent.js"
 import DropdownList from "./DropdownList.js"
-import RoomController from "../RoomController.js"
+import RoomController from "./RoomController.js"
 import { TemperatureData } from "../../../dummyData/Temperature.js"
 import { HumidityData } from "../../../dummyData/Humidity.js"
 import { LightData } from "../../../dummyData/LightData.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue, roomName }) {
+    const [radiatorStatus, setRadiatorStatus] = useState(0)
+    const [windowsStatus, setWindowsStatus] = useState(0)
+    const [lightStatus, setLightStatus] = useState(0)
+ 
     useEffect(() => {
         const startDate = interval[0].startDate
         const endDate = interval[0].endDate
@@ -75,7 +78,7 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
                 </div>
             </div>
             <div>
-                <RoomController/>
+                <RoomController radiatorStatus={radiatorStatus} setRadiatorStatus={setRadiatorStatus} windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus} lightStatus={lightStatus} setLightStatus={setLightStatus} />
             </div>
         </div>
         </>
