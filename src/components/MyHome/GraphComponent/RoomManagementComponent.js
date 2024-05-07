@@ -5,6 +5,7 @@ import DataReadingComponent from "./DataReadingComponent.js"
 import DateIntervalPicker from "./DateIntervalPicker.js"
 import GraphComponent from "./GraphComponent.js"
 import DropdownList from "./DropdownList.js"
+import RoomController from "../RoomController.js"
 import { TemperatureData } from "../../../dummyData/Temperature.js"
 import { HumidityData } from "../../../dummyData/Humidity.js"
 import { LightData } from "../../../dummyData/LightData.js"
@@ -56,6 +57,7 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
     }, [selectedValue, interval[0].startDate, interval[0].endDate]);
 
     return (
+        <>
         <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
             <div style={{color: "#837058"}} className="text-2xl ml-2 my-3 font-bold opacity-85">{roomName}</div>
             <div className="reading-container flex flex-col lg:flex-row">
@@ -72,7 +74,11 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
                     <GraphComponent data={data} />
                 </div>
             </div>
+            <div>
+                <RoomController/>
+            </div>
         </div>
+        </>
     )
 }
 
