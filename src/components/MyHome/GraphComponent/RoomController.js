@@ -1,7 +1,13 @@
-import React from 'react';
-import Toggle from './Toggle';
+import Toggle from './Toggle.js';
+import { useManageTemperature } from '../../../hooks/useManageTemperature.js';
+import { useManageWindow } from '../../../hooks/useManageWindow.js';
+import { useManageLight } from '../../../hooks/useManageLight.js';
 
 function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setWindowsStatus, lightStatus, setLightStatus }) {
+    //useManageTemperature(radiatorStatus)
+    //useManageWindow(windowsStatus)
+    //useManageLight(lightStatus)
+    
     const incrementRadiatorStatus = () => {
         setRadiatorStatus(prevState => {
             if (prevState < 6) {
@@ -53,7 +59,7 @@ function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setW
                 </div>
                 <div className='flex items-center'>
                 <p style={{ color: "#a79277" }} className="font-semibold mx-2">Windows</p>
-                    <Toggle></Toggle>
+                    <Toggle windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus}></Toggle>
                 </div>
                 <div className="flex items-center mt-8 md:mt-0">
                     <p style={{ color: "#a79277" }} className="font-semibold">Light level</p>
