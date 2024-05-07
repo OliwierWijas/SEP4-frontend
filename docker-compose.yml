@@ -1,5 +1,11 @@
 version: "3.8"
 services:
+  backend:
+    image: vlaad08/smart-home:latest
+    container_name: 'sep-backend-container'
+    ports:
+      - 8080:80
+
   frontend:
     build:
       context: ./
@@ -7,8 +13,8 @@ services:
     image: 'frontend:v1'
     ports:
       - 3000:3000
-#    depends_on:
-#      - backend
+    depends_on:
+      - backend
 
 
 volumes:
