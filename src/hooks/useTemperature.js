@@ -4,7 +4,7 @@ export function useTemperature() {
     const [temperatureData, setTemperatureData] = useState(null)
 
     useEffect(() => {
-        const controller = AbortController()
+        const controller = new AbortController()
         const signal = controller.signal
 
         fetch('https://localhost:8080/reading/temperature', { signal })

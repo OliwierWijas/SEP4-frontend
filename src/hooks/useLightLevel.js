@@ -4,7 +4,7 @@ export function useLightLevel() {
     const [lightLevelData, setLightLevelData] = useState(null)
 
     useEffect(() => {
-        const controller = AbortController()
+        const controller = new AbortController()
         const signal = controller.signal
 
         fetch('https://localhost:8080/reading/light', { signal })
