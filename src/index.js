@@ -6,6 +6,8 @@ import About from "./routes/About.js"
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import MyHome from './routes/MyHome.js';
 import HomePage from './routes/HomePage.js';
+import Login from './routes/Login.js';
+import SignUp from './routes/SignUp.js';
 
 const router = createHashRouter([
   {
@@ -14,7 +16,15 @@ const router = createHashRouter([
     children: [
       {
         path: "/",
-        element: <HomePage/>
+        element: <HomePage />
+      },
+            {
+        path: "/SignUp",
+        element: <SignUp />
+      },
+      {
+        path: "/Login",
+        element: <Login />
       },
       {
         path: "/MyHome",

@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
+import BrownBreakline from "./BrownBreakline.js";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-//comment
+
   return (
     <>
-      <nav className="bg-white">
+      <nav className="header bg-white mt-2">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -93,6 +94,7 @@ export default function Header() {
           </div>
         )}
       </nav>
+      <BrownBreakline />
       <Outlet />
     </>
   );
