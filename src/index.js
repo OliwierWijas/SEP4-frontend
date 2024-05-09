@@ -8,6 +8,7 @@ import MyHome from './routes/MyHome.js';
 import HomePage from './routes/HomePage.js';
 import Login from './routes/Login.js';
 import SignUp from './routes/SignUp.js';
+import MyProfile from './routes/MyProfile.js';
 
 const router = createHashRouter([
   {
@@ -29,6 +30,10 @@ const router = createHashRouter([
       {
         path: "/MyHome",
         element: <MyHome />
+      },
+      {
+        path: "/MyProfile",
+        element: <MyProfile />
       },
       {
         path: "/About",
