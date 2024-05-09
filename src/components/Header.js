@@ -95,7 +95,6 @@ export default function Header() {
         )}
       </nav>
       <BrownBreakline />
-      <Outlet />
     </>
   );
 }
