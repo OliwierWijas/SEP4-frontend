@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import TextBox from "../components/SignUp/TextBoxComponent.js"
+import SignUpLogin from "../components/SignUp/SignUpLoginComponent.js";
 
 function SignUp() {
     const textArray1 = [
@@ -39,51 +40,34 @@ function SignUp() {
         "Stay informed with proactive notifications when your home conditions deviate from default settings, giving you peace of mind wherever you are.",
     ];
 
+    const loginTextArray = [
+        "Smart Home", "Smart Living", "Join Now"
+    ]
+
+    const mark = "* In order to sign up, a bought set of house hardware is required."
+    const smallText = "Already have an account?"
+
     return (
-        <>
-            <div className="flex items-center flex-col">
-                <div style={{ border: "2px solid #C4B097" }} className="rounded-md mx-2 my-4 p-2 text-lg text-center expand w-full shadow-sm">
-                    <p className="my-1">Unlock the full potential of your property with our comprehensive suite of smart home solutions.</p>
-                    <p className="my-1">Sign up today to experience seamless control and monitoring of your home's environment like never before.</p>
-                </div>
-                <h style={{color: "#C4B097"}} className="text-6xl text-center font-bold mt-8 mb-10">Your way to be smart</h>
-                <div className="flex flex-wrap justify-evenly">
-                    <TextBox title="Real-Time Monitoring" textArray={textArray1} />
-                    <TextBox title="Remote Control" textArray={textArray2} />
-                    <TextBox title="Enhanced Security" textArray={textArray3} />
-                    <TextBox title="Personalized Accounts" textArray={textArray4} />
-                    <TextBox title="Customizable Settings" textArray={textArray5} />
-                    <TextBox title="Data Visualization" textArray={textArray6} />
-                    <TextBox title="Account Management" textArray={textArray7} />
-                    <TextBox title="Proactive Notifications" textArray={textArray8} />
-                </div>
-                <h style={{color: "#C4B097"}} className="text-2xl text-center font-bold mt-8 ">Join our community of smart homeowners today and take control of your living space like never before</h>
-                <h style={{color: "#C4B097"}} className="text-4xl text-center font-bold mt-8">Sign up now!</h>
-                <div className="brown-gradient w-full flex flex-col lg:flex-row shadow-md rounded-lg my-10">
-                    <div className="h-64 w-full lg:w-2/3 tracking-wider text-white font-bold rounded-lg flex flex-col items-center justify-center lg:mt-12">
-                        <p className="m-2 mr-20 text-4xl lg:text-6xl">Smart Home</p>
-                        <p className="m-2 ml-20 text-4xl lg:text-6xl">Smart Living</p>
-                        <p className="mt-10 text-xl">Join Now</p>
-                    </div>
-                    <div className="bg-white h-96 w-full lg:w-1/3 rounded-b-lg bg-opacity-15 flex items-center justify-center flex-col">
-                        <form action="http://localhost:8080/signup" method="post" className="flex flex-col">
-                            <input className="w-64 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="email" id="email" name="email" placeholder="email" required />
-                            <input className="w-64 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="password" id="password" name="password" placeholder="password" required />
-                            <input className="w-64 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="password" id="repeatpassword" name="repeatpassword" placeholder="repeat password" required />
-                            <input className="w-64 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" id="houseid" name="houseid" placeholder="house id" required />
-                            <button className="bg-light-brown w-64 mx-auto my-1 py-5 rounded-md" type="submit">Sign Up</button>
-                        </form>
-                        <p className="mt-3 mx-5 text-xs font-thin">* In order to sign up, a bought set of house hardware is required.</p>
-                        <div className="flex mt-4 items-center justify-evenly">
-                            <p className="text-xs mx-1 font-thin">Already have an account?</p>
-                            <Link to="/Login">
-                                <button className="bg-light-brown text-xs w-20 mx-auto py-1 rounded-md">Login</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
+        <div className="flex items-center flex-col">
+            <div style={{ border: "2px solid #C4B097" }} className="rounded-md mx-2 my-4 p-2 text-lg text-center expand w-full shadow-sm">
+                <p className="my-1">Unlock the full potential of your property with our comprehensive suite of smart home solutions.</p>
+                <p className="my-1">Sign up today to experience seamless control and monitoring of your home's environment like never before.</p>
             </div>
-        </>
+            <h style={{ color: "#C4B097" }} className="text-6xl text-center font-bold mt-8 mb-10">Your way to be smart</h>
+            <div className="flex flex-wrap justify-evenly">
+                <TextBox title="Real-Time Monitoring" textArray={textArray1} />
+                <TextBox title="Remote Control" textArray={textArray2} />
+                <TextBox title="Enhanced Security" textArray={textArray3} />
+                <TextBox title="Personalized Accounts" textArray={textArray4} />
+                <TextBox title="Customizable Settings" textArray={textArray5} />
+                <TextBox title="Data Visualization" textArray={textArray6} />
+                <TextBox title="Account Management" textArray={textArray7} />
+                <TextBox title="Proactive Notifications" textArray={textArray8} />
+            </div>
+            <h style={{ color: "#C4B097" }} className="text-2xl text-center font-bold mt-8 ">Join our community of smart homeowners today and take control of your living space like never before</h>
+            <h style={{ color: "#C4B097" }} className="text-4xl text-center font-bold mt-8">Sign up now!</h>
+            <SignUpLogin textArrayToDisplay={loginTextArray} emailNeeded passwordNeeded repeatPasswordNeeded houseIdNeeded mainButtonText="Sign Up" mark={mark} smallText={smallText} smallButtonText="Login" />
+        </div>
     )
 }
 
