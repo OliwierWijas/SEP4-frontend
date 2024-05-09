@@ -1,6 +1,8 @@
+import NotificationBoxComponent from "../components/MyProfile/NotificationBoxComponent.js";
+
 function MyProfile() {
     return (
-        <div>MyProfile</div>
+        <NotificationBoxComponent />
     )
 }
 
