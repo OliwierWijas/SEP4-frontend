@@ -47,6 +47,9 @@ export default function Header({ setNotificationOpen }) {
                 My Profile
               </Link>
               <FaRegBell onClick={() => setNotificationOpen(true)} className="hover:text-gray-800 text-gray-600 hover:underline" />
+              <div>
+                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
+              </div>
               <BrownButton
                 text="Log out"
                 className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
