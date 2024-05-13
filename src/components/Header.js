@@ -14,6 +14,12 @@ export default function Header({ setNotificationOpen }) {
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
 };
+
+
+  const handleNavbarItemClick = () => {
+    setIsOpen(false); // Close the navbar whenever an item is clicked
+  };
+
   return (
     <>
       <nav className="header bg-white mt-2">
@@ -23,6 +29,7 @@ export default function Header({ setNotificationOpen }) {
               <Link
                 to="/"
                 className="text-base text-xl md:text-2xl lg:text-4xl xl:text-3xl text-gray-800"
+                onClick={handleNavbarItemClick}
               >
                 <p style={{ color: "#a79277" }}><b>Smart</b> Home</p>
               </Link>
@@ -86,18 +93,21 @@ export default function Header({ setNotificationOpen }) {
               <Link
                 to="/About"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                onClick={handleNavbarItemClick}
               >
                 About
               </Link>
               <Link
                 to="/MyHome"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                onClick={handleNavbarItemClick}
               >
                 My Home
               </Link>
               <Link
                 to="/MyProfile"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                onClick={handleNavbarItemClick}
               >
                 My Profile
               </Link>
@@ -107,7 +117,15 @@ export default function Header({ setNotificationOpen }) {
               >
                 Notifications
               </div>
-              <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> This needs to become a logout function </p>
+              <div
+                onClick={() => handleLocker()}
+                className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+              >
+                {isHouseLocked ? "Lock House" : "Unlock"}
+              </div>
+              <Link to="/Login" onClick={handleNavbarItemClick}>
+              <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
+              </Link>
             </div>
           </div>
         )}
