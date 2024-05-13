@@ -1,12 +1,12 @@
 import React from 'react';
 import Room from './Room.js';
-import CreateRoom from './CreateRoom.js';
+import CreateRoom from './CreateRoomButton.js';
 import '../../../styles/House.css';
 import Triangle from './Triangle.js';
 import { useEffect, useState } from 'react';
 
 
-function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom }) {
+function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom, setCreateRoomOpen }) {
     const [width, setWidth] = useState('')
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom }) {
                     </div>
                 ))}
                 <div className={`flex w-full ${width} px-1 my-1`}>
-                    <CreateRoom />
+                    <CreateRoom setCreateRoomOpen={setCreateRoomOpen} />
                 </div>
             </div>
         </div>
