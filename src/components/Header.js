@@ -50,10 +50,10 @@ export default function Header({ setNotificationOpen }) {
               <div>
                 {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
               </div>
-              <BrownButton
-                text="Log out"
+              <Link to="/Login"><BrownButton
+                text="Login"
                 className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              />
+              /></Link>
             </div>
             <div className="flex items-center md:hidden">
               <button
