@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FaRegBell } from "react-icons/fa";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
 
-export default function Header() {
+export default function Header({ setNotificationOpen }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -17,7 +17,7 @@ export default function Header() {
                 to="/"
                 className="text-base text-xl md:text-2xl lg:text-4xl xl:text-3xl text-gray-800"
               >
-                <p style={{color: "#a79277"}}><b>Smart</b> Home</p>
+                <p style={{ color: "#a79277" }}><b>Smart</b> Home</p>
               </Link>
             </div>
             <div className="hidden md:flex md:items-center md:space-x-4">
@@ -39,12 +39,7 @@ export default function Header() {
               >
                 My Profile
               </Link>
-              <Link
-                to="/MyProfile"
-                className="hover:text-gray-800 text-gray-600 hover:underline"
-              >
-                <FaRegBell />
-              </Link>
+              <FaRegBell onClick={() => setNotificationOpen(true)} className="hover:cursor-pointer focus:cursor-pointer"/>
               <BrownButton
                 text="Log out"
                 className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
@@ -96,12 +91,12 @@ export default function Header() {
               >
                 My Profile
               </Link>
-              <Link
-                to="/MyProfile"
+              <div
+                onClick={() => setNotificationOpen(true)}
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
               >
                 Notifications
-              </Link>
+              </div>
               <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> This needs to become a logout function </p>
             </div>
           </div>
