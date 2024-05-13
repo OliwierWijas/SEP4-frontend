@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { FaRegBell } from "react-icons/fa";
+import { IoLockClosedOutline } from "react-icons/io5";
+import { IoLockOpenOutline } from "react-icons/io5";
 import { Link, Outlet } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHouseLocked, toggleLocker] = useState(false);
 
+
+  const handleLocker = () => {
+    toggleLocker(!isHouseLocked);
+};
   return (
     <>
       <nav className="header bg-white mt-2">
@@ -45,6 +52,7 @@ export default function Header() {
               >
                 <FaRegBell />
               </Link>
+              {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
               <BrownButton
                 text="Log out"
                 className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
