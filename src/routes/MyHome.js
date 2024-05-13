@@ -5,6 +5,8 @@ import House from "../components/MyHome/HouseComponent/House.js";
 import { addDays } from 'date-fns';
 import { useTemperature } from "../hooks/useTemperature.js";
 import roomData from "../dummyData/RoomData.js";
+import PopUp from "../components/PopUp.js";
+import NotificationBoxComponent from "../components/MyProfile/NotificationBoxComponent.js";
 
 function MyHome() {
   const RoomData = roomData
@@ -46,11 +48,14 @@ function MyHome() {
   }, [room])
 
   return (
-    <>
+    <div>
+      <PopUp>
+        <NotificationBoxComponent />
+      </PopUp>
       <House rooms={RoomData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} setRoom={setRoom} />
       <BrownBreakline></BrownBreakline>
       <RoomManagementComponent data={graphData} setData={setGraphData} temperature={temperature} humidity={humidity} lightLevel={lightLevel} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
-    </>
+    </div>
   );
 }
 
