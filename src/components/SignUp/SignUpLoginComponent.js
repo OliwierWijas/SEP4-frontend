@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import FormComponent from "./FormComponent.js"
 
-function SignUpLogin({ textArrayToDisplay, emailNeeded, passwordNeeded, repeatPasswordNeeded, houseIdNeeded, mainButtonText, mark, smallText, smallButtonText }) {
+function SignUpLogin({ textArrayToDisplay, emailNeeded, passwordNeeded, repeatPasswordNeeded, houseIdNeeded, mainButtonText, mark, smallText, smallButtonText, linkTo }) {
     return (
         <div className="brown-gradient w-full flex flex-col lg:flex-row shadow-md rounded-lg my-10">
             {textArrayToDisplay && <div className="h-64 w-full lg:w-2/3 tracking-wider text-white font-bold rounded-lg flex flex-col items-center justify-center lg:mt-12">
