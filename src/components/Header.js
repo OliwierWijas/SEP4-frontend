@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FaRegBell } from "react-icons/fa";
 import { Link, Outlet } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
@@ -37,6 +38,12 @@ export default function Header() {
                 className="hover:text-gray-800 text-gray-600 hover:underline"
               >
                 My Profile
+              </Link>
+              <Link
+                to="/MyProfile"
+                className="hover:text-gray-800 text-gray-600 hover:underline"
+              >
+                <FaRegBell />
               </Link>
               <BrownButton
                 text="Log out"
@@ -88,6 +95,12 @@ export default function Header() {
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
               >
                 My Profile
+              </Link>
+              <Link
+                to="/MyProfile"
+                className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Notifications
               </Link>
               <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> This needs to become a logout function </p>
             </div>
