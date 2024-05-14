@@ -1,3 +1,5 @@
+FROM vlaad08/smart-home:latest
+
 # Use official Node.js image as the base image
 FROM node:16-alpine
 
