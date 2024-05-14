@@ -68,7 +68,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
     return (
         <>
             <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
-                <div style={{ color: "#837058" }} className="text-2xl ml-2 my-3 font-bold opacity-85">{room?.name}</div>
+                <div style={{ color: "#837058" }} className="text-2xl ml-2 my-3 font-bold opacity-85" data-testid="room-name-header">{room?.name}</div>
                 <div className="reading-container flex flex-col lg:flex-row">
                     <DataReadingComponent readingType="Temperature" value={room?.temperature + "°C"} />
                     <DataReadingComponent readingType="Humidity" value={room?.humidity + "%"} />

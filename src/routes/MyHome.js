@@ -4,14 +4,14 @@ import BrownBreakline from "../components/BrownBreakline.js";
 import House from "../components/MyHome/HouseComponent/House.js";
 import { addDays } from 'date-fns';
 import { useTemperature } from "../hooks/useTemperature.js";
-import roomData from "../dummyData/RoomData.js";
 import PopUp from "../components/PopUp.js";
 import CreateEditRoom from "../components/MyHome/HouseComponent/CreateEditRoomPopUp.js";
+import { useRoomData } from "../hooks/useRoomData.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false)
 
-  const RoomData = roomData
+  const RoomData = useRoomData(1)
 
   const [room, setRoom] = useState(RoomData.length > 0 ? RoomData[0] : null);
   const [selectedValue, setSelectedValue] = useState("Temperature");

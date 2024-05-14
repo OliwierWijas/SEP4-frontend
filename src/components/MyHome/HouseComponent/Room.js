@@ -23,6 +23,7 @@ function Room({ room, setTemperature, setHumidity, setLightLevel, setRoom }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
+      data-testid="room"
     >
       {isHovered ? (
         <div className="hover-content">
