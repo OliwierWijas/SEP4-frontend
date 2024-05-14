@@ -79,7 +79,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
                         <DateIntervalPicker interval={interval} setInterval={setInterval} />
                         <DropdownList selectedValue={selectedValue} setSelectedValue={setSelectedValue} />
                     </div>
-                    <div className="graph-container flex w-full lg:w-4/5 m-2">
+                    <div className="graph-container flex w-full lg:w-4/5 m-2" data-testid="graph">
                         <GraphComponent data={data} />
                     </div>
                 </div>

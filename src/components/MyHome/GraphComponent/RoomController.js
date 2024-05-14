@@ -50,7 +50,7 @@ function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setW
 
     return (
         <>
-            <div className="flex justify-between my-7 flex-col lg:flex-row items-center">
+            <div className="flex justify-between my-7 flex-col lg:flex-row items-center" data-testid="room-controller">
                 <div className="flex items-center">
                     <p style={{ color: "#a79277" }} className="font-semibold">Radiator</p>
                     <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementRadiatorStatus}>▲</button>
