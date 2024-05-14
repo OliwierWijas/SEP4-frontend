@@ -1,13 +1,10 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import House from '../../../components/MyHome/HouseComponent/House.js';
+import roomData from '../../../dummyData/RoomData.js';
 
 describe('House component', () => {
-  const rooms = [
-    { name: 'Bedroom1', temperature: '23°C', humidity: '50%', lightLevel: '3%' },
-    { name: 'Bedroom2', temperature: '22°C', humidity: '45%', lightLevel: '4%' },
-    { name: 'Livingroom', temperature: '24°C', humidity: '55%', lightLevel: '2%' },
-  ];
+  const rooms = roomData
 
   const mockSetTemperature = jest.fn();
   const mockSetHumidity = jest.fn();

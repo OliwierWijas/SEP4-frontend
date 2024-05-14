@@ -17,14 +17,19 @@ describe('RoomManagementComponent', () => {
     }],
   };
 
+  const mockData1 = {
+    labels: ['01/02/2024', '01/03/2024', '01/04/2024'],
+    datasets: [{
+      label: 'LightLevel',
+      data: [25, 40, 34],
+    }],
+  };
+
   it('renders RoomManagementComponent correctly', () => {
     render(
       <RoomManagementComponent
         data={mockData}
         setData={() => {}}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
         setInterval={() => {}}
         selectedValue="Temperature"
@@ -43,15 +48,13 @@ describe('RoomManagementComponent', () => {
 
     const { rerender } = render(
       <RoomManagementComponent
-        data={mockData}
+        data={mockData1}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
         setInterval={() => {}}
         selectedValue="Temperature"
         setSelectedValue={setSelectedValueMock}
+        room={{ id: 1, name: "Living Room", temperature: "23", humidity: 35, lightLevel: "100" }}
       />
     );
 
@@ -62,13 +65,11 @@ describe('RoomManagementComponent', () => {
       <RoomManagementComponent
         data={mockData}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
         setInterval={() => {}}
         selectedValue="Humidity"
         setSelectedValue={setSelectedValueMock}
+        room={{ id: 1, name: "Living Room", temperature: "23", humidity: 35, lightLevel: "100" }}
       />
     );
 
@@ -78,15 +79,13 @@ describe('RoomManagementComponent', () => {
     fireEvent.change(selectInput, { target: { value: 'Light Level' } });
     rerender(
       <RoomManagementComponent
-        data={mockData}
+        data={mockData1}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
         setInterval={() => {}}
         selectedValue="Light Level"
         setSelectedValue={setSelectedValueMock}
+        room={{ id: 1, name: "Living Room", temperature: "23", humidity: 35, lightLevel: "100" }}
       />
     );
 

@@ -10,7 +10,7 @@ import { useHumidity } from "../../../hooks/useHumidity.js"
 import { useLightLevel } from "../../../hooks/useLightLevel.js"
 import { parse, format } from 'date-fns';
 
-function RoomManagementComponent({ data, setData, temperature, humidity, lightLevel, interval, setInterval, selectedValue, setSelectedValue, room }) {
+function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
     const [radiatorStatus, setRadiatorStatus] = useState(0)
     const [windowsStatus, setWindowsStatus] = useState(0)
     const [lightStatus, setLightStatus] = useState(0)
@@ -70,9 +70,9 @@ function RoomManagementComponent({ data, setData, temperature, humidity, lightLe
             <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
                 <div style={{ color: "#837058" }} className="text-2xl ml-2 my-3 font-bold opacity-85">{room?.name}</div>
                 <div className="reading-container flex flex-col lg:flex-row">
-                    <DataReadingComponent readingType="Temperature" value={temperature} />
-                    <DataReadingComponent readingType="Humidity" value={humidity} />
-                    <DataReadingComponent readingType="Light Level" value={lightLevel} />
+                    <DataReadingComponent readingType="Temperature" value={room?.temperature + "°C"} />
+                    <DataReadingComponent readingType="Humidity" value={room?.humidity + "%"} />
+                    <DataReadingComponent readingType="Light Level" value={room?.lightLevel + "%"} />
                 </div>
                 <div className="graph-filter flex flex-col lg:flex-row-reverse">
                     <div className="datepicker-container flex w-full lg:w-1/3 m-2 flex flex-col flex-end">

@@ -14,12 +14,7 @@ function MyHome() {
   const RoomData = roomData
 
   const [room, setRoom] = useState(RoomData.length > 0 ? RoomData[0] : null);
-  const [temperature, setTemperature] = useState("0°C")
-  const [humidity, setHumidity] = useState("0%")
-  const [lightLevel, setLightLevel] = useState("0%")
-
   const [selectedValue, setSelectedValue] = useState("Temperature");
-
   const [interval, setInterval] = useState([
     {
       startDate: new Date(),
@@ -43,20 +38,14 @@ function MyHome() {
     setRoom(RoomData && RoomData ? RoomData[0] : null)
   }, [RoomData])
 
-  useEffect(() => {
-    setTemperature(room?.temperature + "°C")
-    setHumidity(room?.humidity + "%")
-    setLightLevel(room?.lightLevel + "%")
-  }, [room])
-
   return (
     <div>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
         <CreateEditRoom title="CREATE ROOM" buttonText="Create" />
       </PopUp>
-      <House rooms={RoomData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen}/>
+      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen}/>
       <BrownBreakline />
-      <RoomManagementComponent data={graphData} setData={setGraphData} temperature={temperature} humidity={humidity} lightLevel={lightLevel} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
+      <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
     </div>
   );
 }
