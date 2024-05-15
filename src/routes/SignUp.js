@@ -65,7 +65,8 @@ function SignUp() {
             </div>
             <h style={{ color: "#C4B097" }} className="text-2xl text-center font-bold mt-8 ">Join our community of smart homeowners today and take control of your living space like never before</h>
             <h style={{ color: "#C4B097" }} className="text-4xl text-center font-bold mt-8">Sign up now!</h>
-            <SignUpLogin textArrayToDisplay={loginTextArray} emailNeeded passwordNeeded repeatPasswordNeeded houseIdNeeded mainButtonText="Sign Up" mark={mark} smallText={smallText} smallButtonText="Login" />
+            {/* remember to add in action hook signup */}
+            <SignUpLogin textArrayToDisplay={loginTextArray} emailNeeded passwordNeeded repeatPasswordNeeded houseIdNeeded mainButtonText="Sign Up" mark={mark} smallText={smallText} smallButtonText="Login" action={null} />
         </div>
     )
 }
