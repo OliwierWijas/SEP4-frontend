@@ -9,28 +9,64 @@ jest.mock('react-chartjs-2', () => ({
 }));
 
 describe('RoomManagementComponent', () => {
-  const mockData = {
-    labels: ['01/01/2024', '01/02/2024', '01/03/2024'],
-    datasets: [{
-      label: 'Temperature',
-      data: [20, 22, 21],
-    }],
+  const roomData = {
+    id: 1,
+    name: 'Living Room',
+    temperature: 25,
+    humidity: 50,
+    lightLevel: 75
   };
 
-  it('renders RoomManagementComponent correctly', () => {
-    render(
-      <RoomManagementComponent
-        data={mockData}
-        setData={() => {}}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
-        interval={[{ startDate: new Date(), endDate: new Date() }]}
-        setInterval={() => {}}
-        selectedValue="Temperature"
-        setSelectedValue={() => {}}
-      />
-    );
+  const data = {
+    labels: ['01/01/2024', '01/02/2024'],
+    datasets: [{
+      label: 'Temperature',
+      data: [25, 26]
+    }]
+  };
+
+  const mockTemperatureData = [{ date: '2024-01-01', value: 25 }, { date: '2024-01-02', value: 26 }];
+  const mockHumidityData = [{ date: '2024-01-01', value: 50 }, { date: '2024-01-02', value: 55 }];
+  const mockLightData = [{ date: '2024-01-01', value: 75 }, { date: '2024-01-02', value: 80 }];
+
+  beforeEach(() => {
+    jest.spyOn(global, 'fetch').mockResolvedValueOnce({
+      json: async () => mockTemperatureData
+    }).mockResolvedValueOnce({
+      json: async () => mockHumidityData
+    }).mockResolvedValueOnce({
+      json: async () => mockLightData
+    });
+  });
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  const setDataMock = jest.fn();
+  const setIntervalMock = jest.fn();
+  const setSelectedValueMock = jest.fn();
+
+  it('renders RoomManagementComponent with provided data', async () => {
+    render(<RoomManagementComponent 
+      data={data} 
+      setData={setDataMock} 
+      interval={[{ startDate: new Date(), endDate: new Date() }]} 
+      setInterval={setIntervalMock} 
+      selectedValue="Temperature" 
+      setSelectedValue={setSelectedValueMock} 
+      room={roomData} />);
+    
+    expect(screen.getByText('Living Room')).toBeInTheDocument();
+
+    expect(screen.getByText('25°C')).toBeInTheDocument();
+    expect(screen.getByText('50%')).toBeInTheDocument();
+    expect(screen.getByText('75%')).toBeInTheDocument();
+
+    expect(screen.getByTestId('graph')).toBeInTheDocument();
+    expect(screen.getByTestId('date-interval-picker')).toBeInTheDocument();
+    expect(screen.getByTestId('dropdown-list')).toBeInTheDocument();
+    expect(screen.getByTestId('room-controller')).toBeInTheDocument();
 
     expect(screen.getByText('Temperature')).toBeInTheDocument();
     expect(screen.getByText('Humidity')).toBeInTheDocument();
@@ -38,37 +74,30 @@ describe('RoomManagementComponent', () => {
   });
 
   it('updates data correctly when selectedValue changes', () => {
-    const setDataMock = jest.fn();
-    const setSelectedValueMock = jest.fn();
-
     const { rerender } = render(
       <RoomManagementComponent
-        data={mockData}
+        data={data}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
-        setInterval={() => {}}
+        setInterval={setIntervalMock}
         selectedValue="Temperature"
         setSelectedValue={setSelectedValueMock}
+        room={roomData}
       />
     );
 
     const selectInput = screen.getByTestId('dropdown-list');
-
     fireEvent.change(selectInput, { target: { value: 'Humidity' } });
+
     rerender(
       <RoomManagementComponent
-        data={mockData}
+        data={data}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
-        setInterval={() => {}}
+        setInterval={setIntervalMock}
         selectedValue="Humidity"
         setSelectedValue={setSelectedValueMock}
+        room={roomData}
       />
     );
 
@@ -78,15 +107,13 @@ describe('RoomManagementComponent', () => {
     fireEvent.change(selectInput, { target: { value: 'Light Level' } });
     rerender(
       <RoomManagementComponent
-        data={mockData}
+        data={data}
         setData={setDataMock}
-        temperature={20}
-        humidity={50}
-        lightLevel={80}
         interval={[{ startDate: new Date(), endDate: new Date() }]}
-        setInterval={() => {}}
+        setInterval={setIntervalMock}
         selectedValue="Light Level"
         setSelectedValue={setSelectedValueMock}
+        room={roomData}
       />
     );
 

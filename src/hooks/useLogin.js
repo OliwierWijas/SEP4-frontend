@@ -9,7 +9,25 @@ export async function useLogin(user) {
             const authString = response.headers.get("Authorization")
             const token = authString?.split(" ")[1]
             localStorage.setItem("jwt", token)
+            console.log(localStorage.getItem("jwt"))
+
+            const claims = decodeJWT(token)
+            localStorage.setItem("claims", claims)
+            console.log(localStorage.getItem("claims"))
         }
+    }
+
+    function decodeJWT(token) {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+            atob(base64)
+                .split("")
+                .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+                .join("")
+        );
+    
+        return JSON.parse(jsonPayload);
     }
 
     await login()

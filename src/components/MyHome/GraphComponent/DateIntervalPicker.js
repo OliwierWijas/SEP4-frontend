@@ -9,7 +9,7 @@ function DateIntervalPicker({ interval, setInterval }) {
   }
 
   return (
-    <div className='mx-auto'>
+    <div className='mx-auto' data-testid="date-interval-picker">
       <DateRangePicker
         onChange={handleDateChange}
         showSelectionPreview={true}

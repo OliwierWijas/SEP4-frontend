@@ -1,18 +1,19 @@
 import BrownButton from "../components/BrownButton.js";
 import imageFile from "../images/homepage1.png"
 import videoFile from "../images/homepage2.mp4"
+import { Link } from "react-router-dom";
 
 function HomePage() {
   return (
     <>
       <h1 className="flex justify-center text-2xl md:text-3xl lg:text-4xl mt-10 md:mt-16 mb-10">Smart living starts here . . .</h1>
-      <div className="flex justify-center"><BrownButton text={"Start now"} /></div>
+      <Link to="/Signup"><div className="flex justify-center"><BrownButton text={"Start now"} /></div></Link>
       <div className="flex mt-10 mb-20">
-        <div className="w-1/2 lg:w-1/3 mr-5 lg:mr-10 mx-auto">
+        <div className="w-1/2 lg:w-1/3 mr-5 lg:mr-10 mx-auto photo">
           <img src={imageFile} alt="Your Alt Text" />
           <div className="md:text-justify mt-5 text-xs md:text-sm lg:text-lg"><b>Smart Home</b> - Redefining modern living with intuitive technology and uncompromising quality.</div>
         </div>
-        <div className="w-1/2 lg:w-1/3 ml-5 lg:ml-10 mx-auto">
+        <div className="w-1/2 lg:w-1/3 ml-5 lg:ml-10 mx-auto video">
           <video autoPlay loop muted>
             <source src={videoFile} type="video/mp4" />
           </video>
