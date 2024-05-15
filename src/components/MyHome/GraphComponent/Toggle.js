@@ -1,10 +1,8 @@
-import React from "react";
-
 export default function Toggle({ status, setStatus }) {
 
   const ToggleChange = () => {
-    setStatus(!status);
-  };
+    setStatus(!status)
+  }
 
   return (
     <div className="relative">
@@ -26,5 +24,5 @@ export default function Toggle({ status, setStatus }) {
         </div>
       </label>
     </div>
-  );
+  )
 }
