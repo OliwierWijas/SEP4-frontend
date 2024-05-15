@@ -1,26 +1,10 @@
 import { useState, useEffect } from "react";
-import { LightData } from "../dummyData/LightData.js";
-import { TemperatureData } from "../dummyData/Temperature.js";
 
 export function useLightLevel(roomId, interval) {
     const [lightLevelData, setLightLevelData] = useState(null)
 
-    function mockFetch(url, options) {
-        const dummyResponse = {
-            status: 200,
-            headers: {
-                'Content-type': 'application/json'
-            },
-            json: () => Promise.resolve({ message: LightData })
-        };
-
-        return Promise.resolve(dummyResponse);
-    }
-
-    window.fetch = mockFetch
-
     useEffect(() => {
-        if (roomId < 0) {
+        if (roomId > 0) {
             const controller = new AbortController()
             const signal = controller.signal
 
@@ -36,10 +20,6 @@ export function useLightLevel(roomId, interval) {
             return () => {
                 controller.abort()
             }
-        } else if (roomId === 1) {
-            setLightLevelData(TemperatureData)
-        } else {
-            setLightLevelData(LightData)
         }
     }, [roomId])
 

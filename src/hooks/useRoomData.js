@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import roomData from '../dummyData/RoomData.js';
 
 export function useRoomData({ houseId }) {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
-        const controller = new AbortController();
-        const signal = controller.signal;
+        if (houseId > 0) {
+            const controller = new AbortController();
+            const signal = controller.signal;
 
-        if (houseId < 0) {
             fetch(`https://localhost:8080/rooms?houseId=${houseId}`, { signal })
                 .then(response => response.json())
                 .then(data => setRooms(data))
@@ -17,14 +16,13 @@ export function useRoomData({ houseId }) {
                         console.log(`Error fetching room data: ${error}`);
                     }
                 });
-        } else {
-            setRooms(roomData)
-        }
 
-        return () => {
-            controller.abort();
-        };
-    }, []);
+
+            return () => {
+                controller.abort();
+            }
+        }
+    }, [houseId]);
 
     return rooms;
 }

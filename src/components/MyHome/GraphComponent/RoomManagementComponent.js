@@ -5,9 +5,9 @@ import DateIntervalPicker from "./DateIntervalPicker.js"
 import GraphComponent from "./GraphComponent.js"
 import DropdownList from "./DropdownList.js"
 import RoomController from "./RoomController.js"
-import { useTemperature } from "../../../hooks/useTemperature.js"
-import { useHumidity } from "../../../hooks/useHumidity.js"
-import { useLightLevel } from "../../../hooks/useLightLevel.js"
+import { useTemperature } from "../../../hooks/mocks/useTemperatureMock.js"
+import { useHumidity } from "../../../hooks/mocks/useHumidityMock.js"
+import { useLightLevel } from "../../../hooks/mocks/useLightLevelMock.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
@@ -15,9 +15,9 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
     const [windowsStatus, setWindowsStatus] = useState(0)
     const [lightStatus, setLightStatus] = useState(0)
 
-    const TemperatureData = useTemperature(room?.id, interval[0])
-    const HumidityData = useHumidity(room?.id, interval[0])
-    const LightData = useLightLevel(room?.id, interval[0])
+    const TemperatureData = useTemperature({ roomId: room?.id, interval: interval[0] })
+    const HumidityData = useHumidity({ roomId: room?.id, interval: interval[0] })
+    const LightData = useLightLevel({ roomId: room?.id, interval: interval[0] })    
 
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {

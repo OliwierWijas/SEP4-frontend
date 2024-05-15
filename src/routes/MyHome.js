@@ -3,10 +3,10 @@ import RoomManagementComponent from "../components/MyHome/GraphComponent/RoomMan
 import BrownBreakline from "../components/BrownBreakline.js";
 import House from "../components/MyHome/HouseComponent/House.js";
 import { addDays } from 'date-fns';
-import { useTemperature } from "../hooks/useTemperature.js";
+import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
 import CreateEditRoom from "../components/MyHome/HouseComponent/CreateEditRoomPopUp.js";
-import { useRoomData } from "../hooks/useRoomData.js";
+import { useRoomData } from "../hooks/mocks/useRoomDataMock.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false)
