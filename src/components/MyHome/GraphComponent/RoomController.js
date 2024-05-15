@@ -4,9 +4,9 @@ import { useManageWindow } from '../../../hooks/useManageWindow.js';
 import { useManageLight } from '../../../hooks/useManageLight.js';
 
 function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setWindowsStatus, lightStatus, setLightStatus }) {
-    //useManageTemperature(radiatorStatus)
-    //useManageWindow(windowsStatus)
-    //useManageLight(lightStatus)
+    useManageTemperature(radiatorStatus)
+    useManageWindow(windowsStatus)
+    useManageLight(lightStatus)
 
     const incrementRadiatorStatus = () => {
         setRadiatorStatus(prevState => {
@@ -53,19 +53,19 @@ function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setW
             <div className="flex justify-between my-7 flex-col lg:flex-row items-center" data-testid="room-controller">
                 <div className="flex items-center">
                     <p style={{ color: "#a79277" }} className="font-semibold">Radiator</p>
-                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementRadiatorStatus}>▲</button>
+                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementRadiatorStatus} data-testid="radiator-up">▲</button>
                     <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{radiatorStatus}</div>
-                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementRadiatorStatus}>▼</button>
+                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementRadiatorStatus} data-testid="radiator-down">▼</button>
                 </div>
                 <div className='flex items-center mt-8 lg:mt-0'>
                     <p style={{ color: "#a79277" }} className="font-semibold mx-2">Windows</p>
-                    <Toggle windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus}></Toggle>
+                    <Toggle status={windowsStatus} setStatus={setWindowsStatus}></Toggle>
                 </div>
                 <div className="flex items-center mt-8 lg:mt-0">
                     <p style={{ color: "#a79277" }} className="font-semibold">Light level</p>
-                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementLightStatus}>▲</button>
+                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementLightStatus} data-testid="lights-up">▲</button>
                     <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{lightStatus}</div>
-                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementLightStatus}>▼</button>
+                    <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementLightStatus} data-testid="lights-down">▼</button>
                 </div>
             </div>
         </>
