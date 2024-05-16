@@ -6,7 +6,7 @@ import Triangle from './Triangle.js';
 import { useEffect, useState } from 'react';
 
 
-function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom, setCreateRoomOpen }) {
+function House({ rooms, setRoom, setCreateRoomOpen }) {
     const [width, setWidth] = useState('')
 
     useEffect(() => {
@@ -37,7 +37,7 @@ function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom, set
             <div className="house w-4/5 flex flex-wrap justify-between mx-auto">
                 {rooms && rooms[0] && rooms?.map((room) => (
                     <div key={room.id} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center'>
-                        <Room room={room} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} setRoom={setRoom} />
+                        <Room room={room} setRoom={setRoom} />
                     </div>
                 ))}
                 <div className={`flex w-full ${width} px-1 my-1`}>

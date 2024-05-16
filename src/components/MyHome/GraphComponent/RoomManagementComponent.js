@@ -8,16 +8,22 @@ import RoomController from "./RoomController.js"
 import { useTemperature } from "../../../hooks/mocks/useTemperatureMock.js"
 import { useHumidity } from "../../../hooks/mocks/useHumidityMock.js"
 import { useLightLevel } from "../../../hooks/mocks/useLightLevelMock.js"
+import { useGetTemperature } from "../../../hooks/mocks/useGetTemperatureLevelMock.js"
+import { useGetWindowStatus } from "../../../hooks/mocks/useGetWindowStatusMock.js"
+import { useGetLight } from "../../../hooks/mocks/useGetLightLevelMock.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
+    const radiator = useGetTemperature({ deviceId: room?.id })
+    console.log(radiator)
+
     const [radiatorStatus, setRadiatorStatus] = useState(0)
-    const [windowsStatus, setWindowsStatus] = useState(0)
+    const [windowsStatus, setWindowsStatus] = useState(false)
     const [lightStatus, setLightStatus] = useState(0)
 
     const TemperatureData = useTemperature({ roomId: room?.id, interval: interval[0] })
     const HumidityData = useHumidity({ roomId: room?.id, interval: interval[0] })
-    const LightData = useLightLevel({ roomId: room?.id, interval: interval[0] })    
+    const LightData = useLightLevel({ roomId: room?.id, interval: interval[0] })
 
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {
@@ -84,7 +90,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
                     </div>
                 </div>
                 <div>
-                    <RoomController radiatorStatus={radiatorStatus} setRadiatorStatus={setRadiatorStatus} windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus} lightStatus={lightStatus} setLightStatus={setLightStatus} />
+                    <RoomController roomId={room?.id} radiatorStatus={radiatorStatus} setRadiatorStatus={setRadiatorStatus} windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus} lightStatus={lightStatus} setLightStatus={setLightStatus} />
                 </div>
             </div>
         </>
