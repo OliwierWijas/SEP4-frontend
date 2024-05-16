@@ -39,14 +39,16 @@ function MyHome() {
   }, [RoomData])
 
   return (
-    <div>
-      <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
-        <CreateEditRoom title="CREATE ROOM" buttonText="Create" />
-      </PopUp>
-      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen}/>
-      <BrownBreakline />
-      <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
-    </div>
+    localStorage.getItem("jwt") && (
+      <div>
+        <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
+          <CreateEditRoom title="CREATE ROOM" buttonText="Create" />
+        </PopUp>
+        <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} />
+        <BrownBreakline />
+        <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
+      </div>
+    )
   );
 }
 

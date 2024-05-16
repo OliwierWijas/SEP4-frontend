@@ -10,14 +10,12 @@ export default function Header({ setNotificationOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseLocked, toggleLocker] = useState(false);
 
-
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
-};
-
+  };
 
   const handleNavbarItemClick = () => {
-    setIsOpen(false); // Close the navbar whenever an item is clicked
+    setIsOpen(false);
   };
 
   return (
@@ -55,7 +53,7 @@ export default function Header({ setNotificationOpen }) {
               </Link>
               <FaRegBell onClick={() => setNotificationOpen(true)} className="hover:text-gray-800 text-gray-600 hover:underline" />
               <div>
-                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
+                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker} /> : <IoLockOpenOutline onClick={handleLocker} />}
               </div>
               <Link to="/Login"><BrownButton
                 text="Login"
@@ -123,9 +121,15 @@ export default function Header({ setNotificationOpen }) {
               >
                 {isHouseLocked ? "Lock House" : "Unlock"}
               </div>
-              <Link to="/Login" onClick={handleNavbarItemClick}>
-              <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
-              </Link>
+              {localStorage.getItem("jwt") ? (
+                <div onClick={handleNavbarItemClick}>
+                  <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium" onClick={() => localStorage.clear()}>Logout</p>
+                </div>
+              ) : (
+                <Link to="/Login" onClick={handleNavbarItemClick}>
+                  <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium">Login</p>
+                </Link>
+              )}
             </div>
           </div>
         )}
