@@ -15,9 +15,8 @@ export default function Header({ setNotificationOpen }) {
     toggleLocker(!isHouseLocked);
 };
 
-
   const handleNavbarItemClick = () => {
-    setIsOpen(false); // Close the navbar whenever an item is clicked
+    setIsOpen(false);
   };
 
   return (
@@ -35,12 +34,6 @@ export default function Header({ setNotificationOpen }) {
               </Link>
             </div>
             <div className="hidden md:flex md:items-center md:space-x-4">
-              <Link
-                to="/About"
-                className="hover:text-gray-800 text-gray-600 hover:underline"
-              >
-                About
-              </Link>
               <Link
                 to="/MyHome"
                 className="hover:text-gray-800 text-gray-600 hover:underline"
@@ -90,13 +83,6 @@ export default function Header({ setNotificationOpen }) {
         {isOpen && (
           <div className="md:hidden bg-gray-100">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link
-                to="/About"
-                className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
-                onClick={handleNavbarItemClick}
-              >
-                About
-              </Link>
               <Link
                 to="/MyHome"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
