@@ -22,7 +22,6 @@ describe('FormComponent', () => {
         emailNeeded={true} 
         passwordNeeded={true} 
         repeatPasswordNeeded={true} 
-        houseIdNeeded={true} 
         action={mockAction} 
         buttonText="Submit" 
       />
@@ -31,17 +30,15 @@ describe('FormComponent', () => {
     const emailInput = screen.getByPlaceholderText('email')
     const passwordInput = screen.getByPlaceholderText('password')
     const repeatPasswordInput = screen.getByPlaceholderText('repeat password')
-    const houseIdInput = screen.getByPlaceholderText('house id')
     const submitButton = screen.getByText('Submit')
 
     fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
     fireEvent.change(passwordInput, { target: { value: 'password123' } })
     fireEvent.change(repeatPasswordInput, { target: { value: 'password123' } })
-    fireEvent.change(houseIdInput, { target: { value: '123' } })
 
     fireEvent.click(submitButton)
 
-    expect(mockAction).toHaveBeenCalledWith('test@example.com', 'password123', '123')
+    expect(mockAction).toHaveBeenCalledWith('test@example.com', 'password123')
   })
 
   it('throws an alert when email was not entered', () => {
@@ -86,31 +83,6 @@ describe('FormComponent', () => {
     const submitButton = screen.getByText('Submit')
 
     fireEvent.change(passwordInput, { target: { value: '' } })
-
-    fireEvent.click(submitButton)
-
-    expect(mockAlert).toHaveBeenCalledWith('Please fill in all required fields.')
-    expect(mockAction).not.toHaveBeenCalled()
-
-    mockAlert.mockRestore()
-  })
-
-  it('throws an alert when house id was not entered', () => {
-    const mockAction = jest.fn();
-    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
-    render(
-      <FormComponent 
-        houseIdNeeded={true}
-        buttonText="Submit"
-        action={mockAction}
-      />
-    );
-
-    const houseIdInput = screen.getByPlaceholderText('house id')
-    const submitButton = screen.getByText('Submit')
-
-    fireEvent.change(houseIdInput, { target: { value: 0 } })
 
     fireEvent.click(submitButton)
 
