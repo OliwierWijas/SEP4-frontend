@@ -2,7 +2,7 @@ import { useState } from "react"
 import close from "../images/close.png"
 
 function PopUp({ children }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
 
     const handleCloseClick = () => {
         setIsOpen(false);

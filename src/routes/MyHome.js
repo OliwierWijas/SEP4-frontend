@@ -7,6 +7,7 @@ import { useTemperature } from "../hooks/useTemperature.js";
 import roomData from "../dummyData/RoomData.js";
 import PopUp from "../components/PopUp.js";
 import NotificationBoxComponent from "../components/MyProfile/NotificationBoxComponent.js";
+import LockerPopUp from "../components/LockerPopUp.js"
 
 function MyHome() {
   const RoomData = roomData
@@ -50,7 +51,7 @@ function MyHome() {
   return (
     <div>
       <PopUp>
-        <NotificationBoxComponent />
+        <LockerPopUp/>
       </PopUp>
       <House rooms={RoomData} setTemperature={setTemperature} setHumidity={setHumidity} setLightLevel={setLightLevel} setRoom={setRoom} />
       <BrownBreakline></BrownBreakline>
