@@ -2,8 +2,10 @@ import { useState } from "react";
 import EditDeleteAccount from "../components/MyProfile/EditDeleteAccount.js";
 import PopUp from "../components/PopUp.js";
 import ConfirmDelete from "../components/MyProfile/ConfirmDelete.js";
+import HouseMembersBoxComponent from "../components/MyProfile/HouseMembersBoxComponent.js";
+import AddHouseMember from "../components/MyProfile/AddHouseMemberComponent.js";
 
-export default function MyProfile() {
+function MyProfile() {
     const [editProfileOpen, setEditProfileOpen] = useState(false);
     const [confirmationStatus, setConfirmationStatus] = useState(false);
 
@@ -23,6 +25,12 @@ export default function MyProfile() {
                 </div>
             </PopUp>
             <EditDeleteAccount setEditProfileOpen={setEditProfileOpen} confirmationStatus={confirmationStatus} />
+            
+            <HouseMembersBoxComponent />
+        
         </>
     );
 }
+
+
+export default MyProfile
