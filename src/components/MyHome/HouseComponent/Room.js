@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { FaRegEdit } from "react-icons/fa";
+import { IoTrashOutline } from 'react-icons/io5';
 import '../../../styles/Room.css';
 
-function Room({ room, setTemperature, setHumidity, setLightLevel, setRoom }) {
+function Room({ room, setTemperature, setHumidity, setLightLevel, setRoom, onDelete }) {
   const { name, temperature, humidity, lightLevel } = room;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -19,12 +21,16 @@ function Room({ room, setTemperature, setHumidity, setLightLevel, setRoom }) {
 
   return (
     <div
-      className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded"
+      className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded relative" 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       data-testid="room"
     >
+      <div className="edit-icon-wrapper absolute top-4 right-4 flex items-center">
+        <FaRegEdit className="text-white mr-2" /> 
+        <IoTrashOutline className="text-white" onClick={() => onDelete(room.id)} /> 
+      </div>
       {isHovered ? (
         <div className="hover-content">
           <p className="font-bold text-white">Temperature: {temperature}</p>
