@@ -5,7 +5,6 @@ import House from "../components/MyHome/HouseComponent/House.js";
 import { addDays } from 'date-fns';
 import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
-import NotificationBoxComponent from "../components/MyProfile/NotificationBoxComponent.js";
 import LockerPopUp from "../components/LockerPopUp.js"
 import CreateEditRoom from "../components/MyHome/HouseComponent/CreateEditRoomPopUp.js";
 import { useRoomData } from "../hooks/mocks/useRoomDataMock.js";
