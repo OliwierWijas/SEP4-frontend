@@ -61,7 +61,7 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
         </div>
         <div className="w-full flex flex-col">
           <div className="m-3 p-2 bg-white">
-            Username:{" "}
+            Username:
             {isEditing ? (
               <input className="w-auto" placeholder={inputs[0]} onChange={(e) => setName(e.target.value)}/>
             ) : (
@@ -69,9 +69,9 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
             )}
           </div>
           <div className="m-3 p-2 bg-white">
-            Email:{" "}
+            Email:
             {isEditing ? (
-              <input className="w-auto" placeholder={inputs[1]} onChange={(e) => setEmail(e.target.value)}/>
+              <input type="email" className="w-8/9" placeholder={inputs[1]} onChange={(e) => setEmail(e.target.value)}/>
             ) : (
               ` ${inputs[1]}`
             )}
@@ -80,9 +80,9 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
             className="relative m-3 p-2 bg-white border"
             style={{ border: "0.5px solid #C4B098" }}
           >
-            Password:{" "}
+            Password:  
             {isEditing ? (
-              <input className="w-auto" placeholder={inputs[2]} onChange={(e) => setPassword(e.target.validationMessage)}/>
+              <input className="w-8/9" type="password" placeholder={inputs[2]} onChange={(e) => setPassword(e.target.value)}/>
             ) : (
               <>
                 {isVisible ? inputs[2] : "*".repeat(passwordSize)}
