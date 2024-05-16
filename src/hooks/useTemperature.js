@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export function useTemperature(roomId, interval) {
+export function useTemperature({ deviceId, interval }) {
     const [temperatureData, setTemperatureData] = useState(null)
 
     useEffect(() => {
-        if (roomId > 0) {
+        if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`https://localhost:8080/temperature/history/${roomId}`, { signal })
+            fetch(`http://localhost:8080/temperature/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.dateTo}`, { signal })
                 .then(response => response.json())
                 .then(data => setTemperatureData(data))
                 .catch(error => {
@@ -21,7 +21,7 @@ export function useTemperature(roomId, interval) {
                 controller.abort()
             }
         }
-    }, [roomId])
+    }, [deviceId, interval])
 
     return temperatureData
 }

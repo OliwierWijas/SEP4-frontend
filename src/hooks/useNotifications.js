@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 
-export function useNotifications({ houseId }) {
+export function useNotifications({ homeId }) {
     const [notificationsData, setNotificationsData] = useState(null)
 
     useEffect(() => {
-        if (houseId > 0) {
+        if (homeId > 0) {
             const controller = new AbortController()
             const signal = controller.signal
 
             const fetchData = () => {
-                fetch('http://localhost:8080/notifications', { signal })
+                fetch(`http://localhost:8080/notifications?homeId=${homeId}`, { signal })
                     .then(response => response.json())
                     .then(data => {
                         setNotificationsData(data)
-                        console.log(data)
                     })
                     .catch(error => {
                         if (error.name !== "AbortError") {
@@ -28,13 +27,13 @@ export function useNotifications({ houseId }) {
 
             fetchData()
 
-            const interval = setInterval(fetchData, 5 * 1000)
+            const interval = setInterval(fetchData, 5 * 60 * 1000)
 
             return () => {
                 clearInterval(interval)
             }
         }
-    }, [houseId])
+    }, [homeId])
 
     return notificationsData
 }

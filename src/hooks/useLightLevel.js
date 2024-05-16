@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export function useLightLevel(roomId, interval) {
+export function useLightLevel({ deviceId, interval }) {
     const [lightLevelData, setLightLevelData] = useState(null)
 
     useEffect(() => {
-        if (roomId > 0) {
+        if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`https://localhost:8080/light/history/${roomId}`, { signal })
+            fetch(`http://localhost:8080/light/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, { signal })
                 .then(response => response.json())
                 .then(data => setLightLevelData(data))
                 .catch(error => {
@@ -21,7 +21,7 @@ export function useLightLevel(roomId, interval) {
                 controller.abort()
             }
         }
-    }, [roomId])
+    }, [deviceId, interval])
 
     return lightLevelData
 }

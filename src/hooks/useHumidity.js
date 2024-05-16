@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-export function useHumidity(roomId, interval) {
+export function useHumidity({ deviceId, interval }) {
     const [humidityData, setHumidityData] = useState(null)
 
     useEffect(() => {
-        if (roomId > 0) {
+        if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`https://localhost:8080/humidity/history/${roomId}`, { signal })
+            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, { signal })
                 .then(response => response.json())
                 .then(data => setHumidityData(data))
                 .catch(error => {
@@ -21,7 +21,7 @@ export function useHumidity(roomId, interval) {
                 controller.abort()
             }
         }
-    }, [roomId])
+    }, [deviceId, interval])
 
     return humidityData
 }

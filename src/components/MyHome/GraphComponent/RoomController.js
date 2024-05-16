@@ -1,7 +1,4 @@
 import Toggle from './Toggle.js';
-import { useManageTemperature } from '../../../hooks/useManageTemperature.js';
-import { useManageWindow } from '../../../hooks/useManageWindow.js';
-import { useManageLight } from '../../../hooks/useManageLight.js';
 
 function RoomController({ radiatorStatus, setRadiatorStatus, windowsStatus, setWindowsStatus, lightStatus, setLightStatus }) {
     //useManageTemperature(radiatorStatus)

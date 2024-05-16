@@ -6,7 +6,7 @@ import { addDays } from 'date-fns';
 import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
 import CreateEditRoom from "../components/MyHome/HouseComponent/CreateEditRoomPopUp.js";
-import { useRoomData } from "../hooks/mocks/useRoomDataMock.js";
+import { useRoomData } from "../hooks/mocks/useRoomsMock.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false)
