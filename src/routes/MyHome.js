@@ -12,6 +12,7 @@ import { useRoomData } from "../hooks/mocks/useRoomDataMock.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false)
+  const [lockerOpen, setLockerOpen] = useState(false)
 
   const RoomData = useRoomData(1)
 
@@ -42,12 +43,10 @@ function MyHome() {
 
   return (
     <div>
-     
-        <LockerPopUp/>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
         <CreateEditRoom title="CREATE ROOM" buttonText="Create" />
       </PopUp>
-      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen}/>
+      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} />
       <BrownBreakline />
       <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
     </div>

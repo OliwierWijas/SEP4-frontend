@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
 
-export default function Header({ setNotificationOpen }) {
+export default function Header({ setNotificationOpen, setLockerOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseLocked, toggleLocker] = useState(false);
 
-
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
-};
+    setLockerOpen(true); // Call setLockerOpen function when clicking on the lock icon
+  };
 
   const handleNavbarItemClick = () => {
     setIsOpen(false);
@@ -48,7 +48,7 @@ export default function Header({ setNotificationOpen }) {
               </Link>
               <FaRegBell onClick={() => setNotificationOpen(true)} className="hover:text-gray-800 text-gray-600 hover:underline" />
               <div>
-                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
+                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker} /> : <IoLockOpenOutline onClick={handleLocker} />}
               </div>
               <Link to="/Login"><BrownButton
                 text="Login"
@@ -110,7 +110,7 @@ export default function Header({ setNotificationOpen }) {
                 {isHouseLocked ? "Lock House" : "Unlock"}
               </div>
               <Link to="/Login" onClick={handleNavbarItemClick}>
-              <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
+                <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
               </Link>
             </div>
           </div>
