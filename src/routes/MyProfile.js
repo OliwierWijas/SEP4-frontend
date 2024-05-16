@@ -1,8 +1,12 @@
-import NotificationBoxComponent from "../components/MyProfile/NotificationBoxComponent.js";
+import HouseMembersBoxComponent from "../components/MyProfile/HouseMembersBoxComponent.js";
+import AddHouseMember from "../components/MyProfile/AddHouseMemberComponent.js";
 
 function MyProfile() {
     return (
-        <NotificationBoxComponent />
+        <>
+        <HouseMembersBoxComponent />
+        </>
+
     )
 }
 
