@@ -55,7 +55,7 @@ describe('myHome Component Tests', () => {
     expect(popupChild).toHaveClass('z-0')
   })
 
-  /*it('edit room pop-up opens and closes', async () => {
+  it('edit room pop-up opens and closes', async () => {
     render(<MyHome />)
     const editButton = (await screen.findAllByTestId('edit-room-button'))[0]
     expect(editButton).toBeInTheDocument()
@@ -65,12 +65,12 @@ describe('myHome Component Tests', () => {
     expect(popupChild).toBeInTheDocument()
     expect(popupChild).toHaveClass('z-10')
 
-    const close = (await screen.findAllByTestId('close-popup'))[1]
+    const close = (await screen.findAllByTestId('close-popup'))[0]
     expect(close).toBeInTheDocument()
     fireEvent.click(close)
 
     expect(popupChild).toHaveClass('z-0')
-  })*/
+  })
 
   it('graph data updates correctly with multiple temperature data points', async () => {
     jest.mock('../../hooks/useTemperature.js', () => ({
