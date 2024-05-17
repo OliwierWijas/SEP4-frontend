@@ -23,7 +23,7 @@ describe('HouseMembersBoxComponent', () => {
     expect(member).toBeInTheDocument();
   });
 
-  /*test('deletes a member correctly', async () => {
+  test('deletes a member correctly', async () => {
     render(<HouseMembersBoxComponent />);
 
     const members = await screen.findAllByTestId("house-member")
@@ -35,6 +35,6 @@ describe('HouseMembersBoxComponent', () => {
     fireEvent.click(deleteButton)
 
     expect(member).not.toBeInTheDocument()
-  });*/
+  });
 
 });
