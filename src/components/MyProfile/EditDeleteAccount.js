@@ -103,10 +103,11 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
         </div>
         <div className="m-3 p-2 w-9/10 flex justify-center">
           <button
+            data-testid="savedelete"
             className="text-white w-1/3 py-2 px-4 rounded mt-4"
             style={{ backgroundColor: isEditing ? "#a79277" : "red" }}
             onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
-            datatest-id="savedelete"
+            
           >
             {isEditing ? "Save" : "Delete account"}
           </button>

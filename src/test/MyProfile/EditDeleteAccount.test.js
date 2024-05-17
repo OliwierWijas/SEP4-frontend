@@ -8,6 +8,8 @@ describe('Edit/Delete Account', () =>{
         expect(screen.getByTestId("email-div")).toBeInTheDocument();
         expect(screen.getByTestId("password-div")).toBeInTheDocument();
         expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
+        expect(screen.getByTestId("savedelete")).toBeInTheDocument();
+        expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
 
         const usernameDiv = screen.getByTestId("username-div")
         const emailDiv = screen.getByTestId("email-div")
@@ -16,7 +18,6 @@ describe('Edit/Delete Account', () =>{
         expect(usernameDiv).toHaveTextContent("John");
         expect(emailDiv).toHaveTextContent("john@dummy.com");
         expect(passwordDiv).toHaveTextContent("******");
-
       });
 
       it('clicking on eye makes the password visible/hidden', ()=>{
@@ -70,5 +71,13 @@ describe('Edit/Delete Account', () =>{
         expect(usernameDiv).toHaveTextContent("Jane")
         expect(emailDiv).toHaveTextContent("jane@dummy.com")
         expect(passwordDiv).toHaveTextContent("456456")
-      });
+      })
+
+      test('check delete buttons changes the state', ()=>{
+        const MockSetEditProfile = jest.fn()
+        render(<EditDeleteAccount setEditProfileOpen={MockSetEditProfile}/>);
+        fireEvent.click(screen.getByTestId("savedelete"));
+        expect(MockSetEditProfile).toHaveBeenCalled();
+
+      })
 })
