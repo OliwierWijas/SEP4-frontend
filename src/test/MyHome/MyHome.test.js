@@ -40,6 +40,21 @@ describe('myHome Component Tests', () => {
     expect(await screen.findByText('25')).toBeInTheDocument()
   })
 
+  it('edit room pop-up opens and closes', async () => {
+    render(<MyHome />)
+    fireEvent.click((await screen.findAllByTestId('edit-room-button'))[0])
+
+    const popupChild = await screen.findByTestId('edit-room-popup')
+    expect(popupChild).toBeInTheDocument()
+    expect(popupChild).toHaveClass('z-10')
+
+    const close = (await screen.findAllByTestId('close-popup'))[0]
+    expect(close).toBeInTheDocument()
+    fireEvent.click(close)
+
+    expect(popupChild).toHaveClass('z-0')
+  })
+
   it('create room pop-up opens and closes', async () => {
     render(<MyHome />)
     fireEvent.click(await screen.findByTestId('create-room-button'))
