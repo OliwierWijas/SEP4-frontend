@@ -14,7 +14,7 @@ export function useGetTemperature({ deviceId }) {
             console.log(deviceId)
             console.log(room)
             console.log(room.radiatorLevel)
-            setTemperature(room.radiatorLevel)
+            setTemperature(5)
         }
     }, [deviceId])
 

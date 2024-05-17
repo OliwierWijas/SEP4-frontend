@@ -15,9 +15,9 @@ import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
     const radiator = useGetTemperature({ deviceId: room?.id })
-    console.log(radiator)
+    console.log("radiator level " + radiator)
 
-    const [radiatorStatus, setRadiatorStatus] = useState(0)
+    const [radiatorStatus, setRadiatorStatus] = useState(radiator)
     const [windowsStatus, setWindowsStatus] = useState(false)
     const [lightStatus, setLightStatus] = useState(0)
 
