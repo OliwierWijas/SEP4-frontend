@@ -30,6 +30,7 @@ function HouseMembersBoxComponent() {
                             <HouseMembersComponent
                                 member={member} 
                                 onDeleteMember={() => handleDeleteMember(index)}
+                                data-testid="house-member"
                             />
                         </div>
                     ))}
