@@ -18,11 +18,13 @@ export default function MyProfile() {
                 <ConfirmDelete handleConfirmation={handleConfirmation} />
             </PopUp>
             <PopUp isOpen={confirmationStatus} setIsOpen={setConfirmationStatus}>
-                <div className="h-30 w-100 text-white">
-                    Account is deleted
-                </div>
+                
             </PopUp>
             <EditDeleteAccount setEditProfileOpen={setEditProfileOpen} confirmationStatus={confirmationStatus} />
+
+            <HouseMembersBoxComponent />
+        
+
         </>
     );
 }
