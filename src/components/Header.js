@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
 
-export default function Header({ setNotificationOpen }) {
+export default function Header({ setNotificationOpen, setLockerOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseLocked, toggleLocker] = useState(false);
 
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
+    setLockerOpen(true);
   };
 
   const handleNavbarItemClick = () => {
@@ -34,12 +35,6 @@ export default function Header({ setNotificationOpen }) {
             </div>
             <div className="hidden md:flex md:items-center md:space-x-4">
               <Link
-                to="/About"
-                className="hover:text-gray-800 text-gray-600 hover:underline"
-              >
-                About
-              </Link>
-              <Link
                 to="/MyHome"
                 className="hover:text-gray-800 text-gray-600 hover:underline"
               >
@@ -55,10 +50,22 @@ export default function Header({ setNotificationOpen }) {
               <div>
                 {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker} /> : <IoLockOpenOutline onClick={handleLocker} />}
               </div>
-              <Link to="/Login"><BrownButton
-                text="Login"
-                className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-              /></Link>
+              {localStorage.getItem("jwt") ? (
+                <div onClick={handleNavbarItemClick}>
+                  <BrownButton
+                    onClick={() => localStorage.clear()}
+                    text="Logout"
+                    className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                  />
+                </div>
+              ) : (
+                <Link to="/Login" onClick={handleNavbarItemClick}>
+                  <BrownButton
+                    text="Login"
+                    className="hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                  />
+                </Link>
+              )}
             </div>
             <div className="flex items-center md:hidden">
               <button
@@ -88,13 +95,6 @@ export default function Header({ setNotificationOpen }) {
         {isOpen && (
           <div className="md:hidden bg-gray-100">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link
-                to="/About"
-                className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
-                onClick={handleNavbarItemClick}
-              >
-                About
-              </Link>
               <Link
                 to="/MyHome"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"

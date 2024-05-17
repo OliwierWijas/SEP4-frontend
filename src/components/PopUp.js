@@ -15,7 +15,7 @@ function PopUp({ children, isOpen, setIsOpen }) {
                 {isOpen && children}
             </div>
         </div>
-    )
+    );
 }
 
-export default PopUp
+export default PopUp;
