@@ -6,18 +6,17 @@ import { Link } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
 
-export default function Header({ setNotificationOpen }) {
+export default function Header({ setNotificationOpen, setLockerOpen }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseLocked, toggleLocker] = useState(false);
 
-
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
-};
-
+    setLockerOpen(true); // Call setLockerOpen function when clicking on the lock icon
+  };
 
   const handleNavbarItemClick = () => {
-    setIsOpen(false); // Close the navbar whenever an item is clicked
+    setIsOpen(false);
   };
 
   return (
@@ -36,12 +35,6 @@ export default function Header({ setNotificationOpen }) {
             </div>
             <div className="hidden md:flex md:items-center md:space-x-4">
               <Link
-                to="/About"
-                className="hover:text-gray-800 text-gray-600 hover:underline"
-              >
-                About
-              </Link>
-              <Link
                 to="/MyHome"
                 className="hover:text-gray-800 text-gray-600 hover:underline"
               >
@@ -55,7 +48,7 @@ export default function Header({ setNotificationOpen }) {
               </Link>
               <FaRegBell onClick={() => setNotificationOpen(true)} className="hover:text-gray-800 text-gray-600 hover:underline" />
               <div>
-                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker}/> : <IoLockOpenOutline onClick={handleLocker}/> }
+                {isHouseLocked ? <IoLockClosedOutline onClick={handleLocker} /> : <IoLockOpenOutline onClick={handleLocker} />}
               </div>
               <Link to="/Login"><BrownButton
                 text="Login"
@@ -91,13 +84,6 @@ export default function Header({ setNotificationOpen }) {
           <div className="md:hidden bg-gray-100">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link
-                to="/About"
-                className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
-                onClick={handleNavbarItemClick}
-              >
-                About
-              </Link>
-              <Link
                 to="/MyHome"
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
                 onClick={handleNavbarItemClick}
@@ -124,7 +110,7 @@ export default function Header({ setNotificationOpen }) {
                 {isHouseLocked ? "Lock House" : "Unlock"}
               </div>
               <Link to="/Login" onClick={handleNavbarItemClick}>
-              <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
+                <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>
               </Link>
             </div>
           </div>

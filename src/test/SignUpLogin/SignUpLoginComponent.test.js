@@ -15,7 +15,6 @@ describe('SignUpLogin component', () => {
                     emailNeeded={true}
                     passwordNeeded={true}
                     repeatPasswordNeeded={true}
-                    houseIdNeeded={true}
                     mainButtonText={mainButtonText}
                     action={action}
                 />
@@ -36,7 +35,6 @@ describe('SignUpLogin component', () => {
         const emailNeeded = true
         const passwordNeeded = true
         const repeatPasswordNeeded = true
-        const houseIdNeeded = true
 
         render(
             <Router>
@@ -44,7 +42,6 @@ describe('SignUpLogin component', () => {
                     emailNeeded={emailNeeded}
                     passwordNeeded={passwordNeeded}
                     repeatPasswordNeeded={repeatPasswordNeeded}
-                    houseIdNeeded={houseIdNeeded}
                     mainButtonText="Submit"
                     action={action}
                 />
@@ -54,15 +51,13 @@ describe('SignUpLogin component', () => {
         const emailInput = screen.getByPlaceholderText('email')
         const passwordInput = screen.getByPlaceholderText('password')
         const repeatPasswordInput = screen.getByPlaceholderText('repeat password')
-        const houseIdInput = screen.getByPlaceholderText('house id')
         const submitButton = screen.getByText('Submit')
 
         fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
         fireEvent.change(passwordInput, { target: { value: 'password123' } })
         fireEvent.change(repeatPasswordInput, { target: { value: 'password123' } })
-        fireEvent.change(houseIdInput, { target: { value: '12345' } })
         fireEvent.click(submitButton)
 
-        expect(action).toHaveBeenCalledWith('test@example.com', 'password123', '12345')
+        expect(action).toHaveBeenCalledWith('test@example.com', 'password123')
     })
 })
