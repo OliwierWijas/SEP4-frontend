@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import FormComponent from "./FormComponent.js"
 
-function SignUpLogin({ textArrayToDisplay, emailNeeded, passwordNeeded, repeatPasswordNeeded, mainButtonText, mark, smallText, smallButtonText, action }) {
+function SignUpLogin({ textArrayToDisplay, emailNeeded, passwordNeeded, repeatPasswordNeeded, mainButtonText, mark, smallText, smallButtonText, action, linkTo }) {
     return (
         <div className="brown-gradient w-full flex flex-col lg:flex-row shadow-md rounded-lg my-10">
             {textArrayToDisplay && <div className="h-64 w-full lg:w-2/3 tracking-wider text-white font-bold rounded-lg flex flex-col items-center justify-center lg:mt-12">
@@ -14,7 +14,7 @@ function SignUpLogin({ textArrayToDisplay, emailNeeded, passwordNeeded, repeatPa
                 {mark && <p className="mt-3 mx-5 text-xs font-thin">{mark}</p>}
                 <div className="flex mt-4 items-center justify-evenly">
                     {smallText && <p className="text-xs mx-1 font-thin">{smallText}</p>}
-                    <Link to="/Login">
+                    <Link to={linkTo}>
                         {smallButtonText && <button className="bg-light-brown text-xs w-20 mx-auto py-1 rounded-md">{smallButtonText}</button>}
                     </Link>
                 </div>
