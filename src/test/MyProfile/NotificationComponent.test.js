@@ -6,11 +6,11 @@ describe('NotificationComponent', () => {
   it('renders notifications correctly', () => {
     const notificationArray = [
       { 
-        dateString: '2024-05-15T08:30:00Z', // Sample date string
+        dateString: '2024-05-15T08:30:00Z',
         text: 'Notification 1' 
       },
       { 
-        dateString: '2024-05-16T10:45:00Z', // Sample date string
+        dateString: '2024-05-16T10:45:00Z',
         text: 'Notification 2' 
       },
     ];

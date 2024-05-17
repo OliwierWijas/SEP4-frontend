@@ -12,7 +12,7 @@ import { useRoomData } from "../hooks/mocks/useRoomsMock.js";
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const [editRoomOpen, setEditRoomOpen] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState(null); // State to hold selected room details
+  const [selectedRoom, setSelectedRoom] = useState(null);
 
 
   const RoomData = useRoomData(1);
@@ -42,10 +42,9 @@ function MyHome() {
     setRoom(RoomData && RoomData ? RoomData[0] : null);
   }, [RoomData]);
 
-  // Function to handle edit room
   const handleEditRoom = (room) => {
-    setSelectedRoom(room); // Set the selected room details
-    setEditRoomOpen(true); // Open the edit room popup
+    setSelectedRoom(room);
+    setEditRoomOpen(true);
   };
 
   return (

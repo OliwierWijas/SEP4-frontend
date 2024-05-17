@@ -3,7 +3,7 @@ import Room from './Room.js';
 import CreateRoom from './CreateRoomButton.js';
 import Triangle from './Triangle.js';
 
-function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
+function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
     const [width, setWidth] = useState('');
     const [roomsList, setRoomsList] = useState(rooms);
 
@@ -42,9 +42,6 @@ function House({ rooms, setTemperature, setHumidity, setLightLevel, setRoom, set
                     <div key={room.id} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center'>
                         <Room
                             room={room}
-                            setTemperature={setTemperature}
-                            setHumidity={setHumidity}
-                            setLightLevel={setLightLevel}
                             setRoom={setRoom}
                             setEditRoomOpen={() => setEditRoomOpen(room)}
                             onDelete={() => handleDeleteRoom(room.id)}

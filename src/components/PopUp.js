@@ -11,7 +11,7 @@ function PopUp({ children, isOpen, setIsOpen, testId }) {
                 onClick={handleCloseClick}
                 className="w-12 h-auto absolute top-10 right-10 hover:cursor-pointer focus:cursor-pointer"
                 data-testid="close-popup" />
-            <div className="w-4/5 flex justify-center items-center" data-testid="popup-children">
+            <div className="w-4/5 flex justify-center items-center">
                 {isOpen && children}
             </div>
         </div>
