@@ -13,7 +13,7 @@ describe('myHome Component Tests', () => {
   it('renders without crashing', async () => {
     render(<MyHome />)
     expect(await screen.findByText('Temperature')).toBeInTheDocument()
-    expect(await screen.findByTestId('popup-children')).toBeInTheDocument()
+    expect(await screen.findByTestId('create-room-popup')).toBeInTheDocument()
   })
 
   it('room selection updates state', async () => {
@@ -44,18 +44,15 @@ describe('myHome Component Tests', () => {
     render(<MyHome />)
     fireEvent.click(await screen.findByTestId('create-room-button'))
 
-    const popupChild = await screen.findByTestId('popup-children')
+    const popupChild = await screen.findByTestId('create-room-popup')
     expect(popupChild).toBeInTheDocument()
+    expect(popupChild).toHaveClass('z-10')
 
-    const popup = await screen.findByTestId('popup')
-    expect(popup).toBeInTheDocument()
-    expect(popup).toHaveClass('z-10')
-
-    const close = await screen.findByTestId('close-popup')
+    const close = (await screen.findAllByTestId('close-popup'))[1]
     expect(close).toBeInTheDocument()
     fireEvent.click(close)
 
-    expect(popup).toHaveClass('z-0')
+    expect(popupChild).toHaveClass('z-0')
   })
 
   it('graph data updates correctly with multiple temperature data points', async () => {

@@ -50,10 +50,10 @@ function MyHome() {
 
   return (
     <div>
-      <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen}>
+      <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen} testId="edit-room-popup">
         <EditRoom room={selectedRoom} />
       </PopUp>
-      <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
+      <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen} testId="create-room-popup">
         <CreateRoom />
       </PopUp>
       <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} setEditRoomOpen={handleEditRoom} />
