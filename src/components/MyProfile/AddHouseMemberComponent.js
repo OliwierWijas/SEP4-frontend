@@ -5,9 +5,9 @@ function AddHouseMember({ onAddMember }) {
     const [username, setUsername] = useState('');
 
     const handleAdd = () => {
-        if (username.trim() !== '') { // Check if username is not empty
-            onAddMember(username); // Call the onAddMember function with the username
-            setUsername(''); // Clear the input field after adding the member
+        if (username.trim() !== '') { 
+            onAddMember(username); 
+            setUsername('');
         }
     };
 
@@ -20,11 +20,12 @@ function AddHouseMember({ onAddMember }) {
                 name="username" 
                 placeholder="Enter the username..." 
                 value={username}
-                onChange={(e) => setUsername(e.target.value)} // Update username state on input change
+                onChange={(e) => setUsername(e.target.value)} 
                 required 
+                data-testid="username-input"
             />
             <div className="mx-2">
-                <BrownButton text="Add" className="text-bold" onClick={handleAdd} /> {/* Call handleAdd function */}
+                <BrownButton text="Add" className="text-bold" onClick={handleAdd}/> 
             </div>
         </div>
     );
