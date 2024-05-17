@@ -20,7 +20,7 @@ export default function Toggle({ status, setStatus }) {
         style={{border: "0.5px solid #C4B098" }}
         >
         <div style={{backgroundColor: "rgb(167, 146, 119)"}} className={`absolute top-1 left-1 md:top-2 md:left-2 flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 lg:w-10 lg:h-10 bg-white rounded-full transition-transform duration-250 text-white transform ${status ? "translate-x-full" : ""}`}>
-          {status ? "C" : "O"}
+          {status ? "O" : "C"}
         </div>
       </label>
     </div>

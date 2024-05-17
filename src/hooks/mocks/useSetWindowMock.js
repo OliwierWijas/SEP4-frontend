@@ -6,8 +6,9 @@ export function useSetWindow({ deviceId, windowStatus }) {
         if (deviceId === undefined || deviceId === null || windowStatus === undefined || windowStatus === null) {
             return
         }
-        roomData.find(r => r.id === deviceId).window = windowStatus
-        console.log(`Window of room ${deviceId} set to ${windowStatus}.`)
+        if (roomData.find(r => r.id === deviceId)) {
+            roomData.find(r => r.id === deviceId).window = windowStatus
+        }
 
         return () => { }
     }, [deviceId, windowStatus])
