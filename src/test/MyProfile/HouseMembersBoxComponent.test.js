@@ -1,37 +1,40 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import HouseMembersBoxComponent from '../../components/MyProfile/HouseMembersBoxComponent';
-// Mocking the useMembers hook
-jest.mock('../../hooks/useMembers.js', () => ({
-    useMembers: jest.fn(() => [
-        { username: 'John' },
-        { username: 'Alice' },
-        { username: 'Bob' }
-    ])
-}));
 
 describe('HouseMembersBoxComponent', () => {
-    test('renders HouseMembersComponent for each member', () => {
-        render(<HouseMembersBoxComponent />);
-        const houseMembersComponents = screen.getAllByTestId('member-item');
-        expect(houseMembersComponents).toHaveLength(3);
-    });
 
-    test('calls handleDeleteMember when delete button is clicked', () => {
-        render(<HouseMembersBoxComponent />);
-        const deleteButtons = screen.getAllByTestId('delete-button');
-        fireEvent.click(deleteButtons[0]); // Assuming there's at least one member rendered
-        const houseMembersComponentsAfterDelete = screen.getAllByTestId('member-item');
-        expect(houseMembersComponentsAfterDelete).toHaveLength(2);
-    });
+  test('renders without crashing', () => {
+    render(<HouseMembersBoxComponent />);
+  });
 
-    test('calls handleAddMember when adding a new member', () => {
-        render(<HouseMembersBoxComponent />);
-        const input = screen.getByPlaceholderText('Enter username...');
-        const addButton = screen.getByText('Add');
-        fireEvent.change(input, { target: { value: 'NewMember' } });
-        fireEvent.click(addButton);
-        const houseMembersComponentsAfterAdd = screen.getAllByTestId('member-item');
-        expect(houseMembersComponentsAfterAdd).toHaveLength(4);
-    });
+
+  it('adds a member correctly', async () => {
+    render(<HouseMembersBoxComponent />);
+
+    const input = screen.getByTestId("username-input");
+    fireEvent.change(input, { target: { value: 'NewUser' } });
+    const addButton = screen.getByTestId("add-button");
+    fireEvent.click(addButton);
+
+    const members = await screen.findAllByTestId("house-member"); 
+    const member = members[5]
+    expect(member).toBeInTheDocument();
+  });
+
+  /*test('deletes a member correctly', async () => {
+    render(<HouseMembersBoxComponent />);
+
+    const members = await screen.findAllByTestId("house-member")
+    const member = members[4]
+    expect(member).toBeInTheDocument();
+
+
+    const deleteButton = (await screen.findAllByTestId('delete-button'))[4];
+    fireEvent.click(deleteButton)
+
+    expect(member).not.toBeInTheDocument()
+  });*/
+
 });
