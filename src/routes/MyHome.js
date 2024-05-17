@@ -5,7 +5,7 @@ import House from "../components/MyHome/HouseComponent/House.js";
 import { addDays } from 'date-fns';
 import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
-import CreateEditRoom from "../components/MyHome/HouseComponent/CreateEditRoomPopUp.js";
+import CreateRoom from "../components/MyHome/HouseComponent/CreateRoomPopUp.js";
 import EditRoom from "../components/MyHome/HouseComponent/EditRoomPopUp.js";
 import { useRoomData } from "../hooks/mocks/useRoomDataMock.js";
 
@@ -50,10 +50,10 @@ function MyHome() {
   return (
     <div>
       <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen}>
-        <EditRoom title="EDIT ROOM" buttonText="Update" room={selectedRoom} />
+        <EditRoom room={selectedRoom} />
       </PopUp>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen}>
-        <CreateEditRoom title="CREATE ROOM" buttonText="Create" />
+        <CreateRoom />
       </PopUp>
       <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} setEditRoomOpen={handleEditRoom} />
       <BrownBreakline />
