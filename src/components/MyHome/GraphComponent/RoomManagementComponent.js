@@ -14,12 +14,31 @@ import { useGetLight } from "../../../hooks/mocks/useGetLightLevelMock.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
-    const radiator = useGetTemperature({ deviceId: room?.id })
-    console.log("radiator level " + radiator)
+    let radiator = useGetTemperature({ deviceId: room?.id })
+    let window = useGetWindowStatus({ deviceId: room?.id })
+    let light = useGetLight({ deviceId: room?.id })
 
-    const [radiatorStatus, setRadiatorStatus] = useState(radiator)
-    const [windowsStatus, setWindowsStatus] = useState(false)
-    const [lightStatus, setLightStatus] = useState(0)
+    const [radiatorStatus, setRadiatorStatus] = useState(null)
+    const [windowsStatus, setWindowsStatus] = useState(null)
+    const [lightStatus, setLightStatus] = useState(null)
+
+    useEffect(() => {
+        if (radiator !== null) {
+            setRadiatorStatus(radiator)
+        }
+    }, [radiator, room])
+
+    useEffect(() => {
+        if (window !== null) {
+            setWindowsStatus(window)
+        }
+    }, [window, room])
+
+    useEffect(() => {
+        if (light !== null) {
+            setLightStatus(light)
+        }
+    }, [light, room])
 
     const TemperatureData = useTemperature({ roomId: room?.id, interval: interval[0] })
     const HumidityData = useHumidity({ roomId: room?.id, interval: interval[0] })

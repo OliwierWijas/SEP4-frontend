@@ -6,7 +6,6 @@ export function useGetWindowStatus({ deviceId }) {
 
     useEffect(() => {
         if (deviceId === undefined) {
-            console.log("window roomId not defined")
             return
         }
         const room = roomData.find(r => r.id === deviceId)

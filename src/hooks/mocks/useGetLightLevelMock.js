@@ -6,7 +6,6 @@ export function useGetLight({ deviceId }) {
 
     useEffect(() => {
         if (deviceId === undefined) {
-            console.log("light roomId not defined")
             return
         }
         const room = roomData.find(r => r.id === deviceId)

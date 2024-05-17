@@ -2,11 +2,20 @@ import Toggle from './Toggle.js';
 import { useSetTemperature } from '../../../hooks/mocks/useSetTemperatureLevelMock.js';
 import { useSetWindow } from '../../../hooks/mocks/useSetWindowMock.js';
 import { useSetLightLevel } from '../../../hooks/mocks/useSetLightLevelMock.js';
+import { useEffect, useState } from 'react';
 
 function RoomController({ roomId, radiatorStatus, setRadiatorStatus, windowsStatus, setWindowsStatus, lightStatus, setLightStatus }) {
-    useSetTemperature( { deviceId: roomId, radiatorLevel: radiatorStatus })
-    useSetWindow({ deviceId: roomId, windowStatus: windowsStatus })
-    useSetLightLevel({ deviceId: roomId, lightLevel: lightStatus })
+    const [selectedRoomId, setSelectedRoomId] = useState(roomId)
+
+    useEffect(() => {
+        setSelectedRoomId(roomId)
+        setRadiatorStatus(null)
+    }, [roomId, setRadiatorStatus]);
+
+    useSetTemperature( { deviceId: selectedRoomId, radiatorLevel: radiatorStatus })
+    useSetWindow({ deviceId: selectedRoomId, windowStatus: windowsStatus })
+    useSetLightLevel({ deviceId: selectedRoomId, lightLevel: lightStatus })
+
 
     const incrementRadiatorStatus = () => {
         setRadiatorStatus(prevState => {
