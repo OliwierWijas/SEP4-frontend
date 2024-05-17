@@ -29,10 +29,11 @@ function LockerPopUp() {
                             value={password} 
                             onChange={(e) => setPassword(e.target.value)} 
                             className="h-14 w-full p-4 rounded-md text-center pr-12" 
-                            placeholder="Enter password..." 
+                            placeholder="Enter password..."
+                            data-testid="password-input" // Test ID added
                         />
                         <div className="absolute top-0 right-0 h-full flex items-center pr-4">
-                            <div onClick={handleVisible} className="hover:cursor-pointer">
+                            <div onClick={handleVisible} className="hover:cursor-pointer" data-testid="visibility-button"> {/* Test ID added */}
                                 {isVisible ? <FaRegEyeSlash/> : <FaRegEye />}
                             </div>
                         </div>
