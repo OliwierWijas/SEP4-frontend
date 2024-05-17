@@ -60,8 +60,9 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
           </div>
         </div>
         <div className="w-full flex flex-col">
-        Username:
-          <div className="m-3 p-2 bg-white" data-testid="username-div">
+        
+        <p className="ml-3">Username:</p>  
+          <div className="ml-3 mr-3 mb-3 p-2 bg-white" data-testid="username-div">
             
             {isEditing ? (
               <input className="w-auto" placeholder={inputs[0]} data-testid="username-input" onChange={(e) => setName(e.target.value)}/>
@@ -69,8 +70,8 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
               ` ${inputs[0]}`
             )}
           </div>
-          Email:
-          <div className="m-3 p-2 bg-white" data-testid="email-div">
+          <p className="ml-3">Email:</p>  
+          <div className="ml-3 mr-3 mb-3 p-2 bg-white" data-testid="email-div">
             
             {isEditing ? (
               <input type="email" className="w-8/9" placeholder={inputs[1]} data-testid="email-input" onChange={(e) => setEmail(e.target.value)}/>
@@ -78,9 +79,9 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
               ` ${inputs[1]}`
             )}
           </div>
-          Password:  
+          <p className="ml-3">Password:</p>  
           <div
-            className="relative m-3 p-2 bg-white border" 
+            className="relative ml-3 mr-3 mb-3 p-2 bg-white border" 
             style={{ border: "0.5px solid #C4B098" }}
             data-testid="password-div"
           >
@@ -105,7 +106,7 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
           <button
             data-testid="savedelete"
             className="text-white w-1/3 py-2 px-4 rounded mt-4"
-            style={{ backgroundColor: isEditing ? "#a79277" : "red" }}
+            style={{ backgroundColor: isEditing ? "#a79277" : "#df4520" }}
             onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
             
           >
