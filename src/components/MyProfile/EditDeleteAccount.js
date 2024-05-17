@@ -48,49 +48,53 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
     <>
       <div className="relative w-full h-auto shadow-lg rounded-md flex flex-col brown-gradient">
         <div className="h-auto w-full flex">
-          <div className="h-auto w-2/3 flex justify-beginning m-3">
+          <div className="h-auto w-2/3 flex justify-beginning m-3" data-testid="state-info">
             {isEditing ? "Edit" : "My Info"}
           </div>
           <div className="h-auto w-1/3 flex justify-end m-3">
             {!isEditing ? (
-              <FaRegEdit onClick={handleEditing} />
+              <FaRegEdit onClick={handleEditing} data-testid="toggleEditing"/>
             ) : (
-              <IoClose onClick={handleEditing} />
+              <IoClose onClick={handleEditing} data-testid="closeEditing"/>
             )}
           </div>
         </div>
         <div className="w-full flex flex-col">
-          <div className="m-3 p-2 bg-white">
-            Username:
+        Username:
+          <div className="m-3 p-2 bg-white" data-testid="username-div">
+            
             {isEditing ? (
-              <input className="w-auto" placeholder={inputs[0]} onChange={(e) => setName(e.target.value)}/>
+              <input className="w-auto" placeholder={inputs[0]} data-testid="username-input" onChange={(e) => setName(e.target.value)}/>
             ) : (
               ` ${inputs[0]}`
             )}
           </div>
-          <div className="m-3 p-2 bg-white">
-            Email:
+          Email:
+          <div className="m-3 p-2 bg-white" data-testid="email-div">
+            
             {isEditing ? (
-              <input type="email" className="w-8/9" placeholder={inputs[1]} onChange={(e) => setEmail(e.target.value)}/>
+              <input type="email" className="w-8/9" placeholder={inputs[1]} data-testid="email-input" onChange={(e) => setEmail(e.target.value)}/>
             ) : (
               ` ${inputs[1]}`
             )}
           </div>
+          Password:  
           <div
-            className="relative m-3 p-2 bg-white border"
+            className="relative m-3 p-2 bg-white border" 
             style={{ border: "0.5px solid #C4B098" }}
+            data-testid="password-div"
           >
-            Password:  
+            
             {isEditing ? (
-              <input className="w-8/9" type="password" placeholder={inputs[2]} onChange={(e) => setPassword(e.target.value)}/>
+              <input className="w-8/9" type="password" placeholder={inputs[2]} data-testid="password-input" onChange={(e) => setPassword(e.target.value)}/>
             ) : (
               <>
-                {isVisible ? inputs[2] : "*".repeat(passwordSize)}
+                {isVisible ? ` ${inputs[2]}` : "*".repeat(passwordSize)}
                 <div className="absolute top-3 right-2">
                   {isVisible ? (
-                    <FaRegEye onClick={handleVisible} />
+                    <FaRegEye onClick={handleVisible} data-testid="makevisible"/>
                   ) : (
-                    <FaRegEyeSlash onClick={handleVisible} />
+                    <FaRegEyeSlash onClick={handleVisible} data-testid="makeinvisible"/>
                   )}
                 </div>
               </>
@@ -99,9 +103,11 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
         </div>
         <div className="m-3 p-2 w-9/10 flex justify-center">
           <button
+            data-testid="savedelete"
             className="text-white w-1/3 py-2 px-4 rounded mt-4"
             style={{ backgroundColor: isEditing ? "#a79277" : "red" }}
             onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
+            
           >
             {isEditing ? "Save" : "Delete account"}
           </button>
