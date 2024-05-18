@@ -7,15 +7,14 @@ import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
 import CreateRoom from "../components/MyHome/HouseComponent/CreateRoomPopUp.js";
 import EditRoom from "../components/MyHome/HouseComponent/EditRoomPopUp.js";
-import { useRoomData } from "../hooks/mocks/useRoomsMock.js";
+import { useRoomData } from "../hooks/room/useRooms.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const [editRoomOpen, setEditRoomOpen] = useState(false);
-  const [selectedRoom, setSelectedRoom] = useState(null);
-
-
-  const RoomData = useRoomData(1);
+  const [selectedRoom, setSelectedRoom] = useState(null)
+  
+  const RoomData = useRoomData(localStorage.getItem("houseId"))
 
   const [room, setRoom] = useState(RoomData.length > 0 ? RoomData[0] : null);
   const [selectedValue, setSelectedValue] = useState("Temperature");

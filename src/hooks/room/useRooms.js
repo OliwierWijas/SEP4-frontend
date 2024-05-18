@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useRoomData({ houseId }) {
+export function useRoomData(houseId) {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {

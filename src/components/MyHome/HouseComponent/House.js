@@ -5,16 +5,14 @@ import Triangle from './Triangle.js';
 
 function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
     const [width, setWidth] = useState('');
-    const [roomsList, setRoomsList] = useState(rooms);
 
     const handleDeleteRoom = (roomId) => {
-        const updatedRoomsArray = roomsList.filter(room => room.id !== roomId);
-        setRoomsList(updatedRoomsArray);
+        const updatedRoomsArray = rooms.filter(room => room.id !== roomId);
     };
 
     useEffect(() => {
-        const restOfRooms2 = roomsList.length % 2;
-        const restOfRooms3 = roomsList.length % 3;
+        const restOfRooms2 = rooms.length % 2;
+        const restOfRooms3 = rooms.length % 3;
         let newWidth = '';
 
         if (restOfRooms2 === 1) {
@@ -30,7 +28,7 @@ function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
         }
 
         setWidth(newWidth);
-    }, [roomsList]);
+    }, [rooms]);
 
     return (
         <div className="house-container mb-10" data-testid="house-container">
@@ -38,8 +36,8 @@ function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
                 <Triangle />
             </div>
             <div className="house w-4/5 max-h-[478px] md:max-h-full flex flex-wrap justify-between mx-auto mt-1 pb-3 overflow-y-auto md:overflow-y-none scrollbar">
-                {roomsList && roomsList.length > 0 && roomsList.map((room) => (
-                    <div key={room.id} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center'>
+                {rooms && rooms.length > 0 && rooms.map((room) => (
+                    <div key={room?.id} className='roomDiv flex w-full md:w-1/2 lg:w-1/3 px-1 my-1 justify-center'>
                         <Room
                             room={room}
                             setRoom={setRoom}

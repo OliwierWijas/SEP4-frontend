@@ -4,7 +4,6 @@ import { IoTrashOutline } from 'react-icons/io5';
 import '../../../styles/Room.css';
 
 function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
-  const { name, temperature, humidity, lightLevel } = room;
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -33,12 +32,12 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
       </div>
       {isHovered ? (
         <div className="hover-content">
-          <p className="font-bold text-white">Temperature: {temperature}</p>
-          <p className="font-bold text-white">Humidity: {humidity}</p>
-          <p className="font-bold text-white">Light Level: {lightLevel}</p>
+          <p className="font-bold text-white">Temperature: {room?.temperature}</p>
+          <p className="font-bold text-white">Humidity: {room?.humidity}</p>
+          <p className="font-bold text-white">Light Level: {room?.lightLevel}</p>
         </div>
       ) : (
-        <p className="font-bold text-white text-2xl">{name}</p>
+        <p className="font-bold text-white text-2xl">{room?.name}</p>
       )}
     </div>
   );
