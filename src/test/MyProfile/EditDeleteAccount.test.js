@@ -5,18 +5,15 @@ describe('Edit/Delete Account', () =>{
     it('renders component with the initial value', ()=>{
         render(<EditDeleteAccount setEditProfileOpen={jest.fn()}/>);
         expect(screen.getByTestId("username-div")).toBeInTheDocument();
-        expect(screen.getByTestId("email-div")).toBeInTheDocument();
         expect(screen.getByTestId("password-div")).toBeInTheDocument();
         expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
         expect(screen.getByTestId("savedelete")).toBeInTheDocument();
         expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
 
         const usernameDiv = screen.getByTestId("username-div")
-        const emailDiv = screen.getByTestId("email-div")
         const passwordDiv = screen.getByTestId("password-div")
 
         expect(usernameDiv).toHaveTextContent("John");
-        expect(emailDiv).toHaveTextContent("john@dummy.com");
         expect(passwordDiv).toHaveTextContent("******");
       });
 
@@ -37,7 +34,7 @@ describe('Edit/Delete Account', () =>{
     it('transition to and from editing state', ()=>{
         render(<EditDeleteAccount setEditProfileOpen={jest.fn()}/>)
         fireEvent.click(screen.getByTestId("toggleEditing"));
-        expect(screen.getByText("Edit")).toBeInTheDocument();
+        expect(screen.getByText("EDIT")).toBeInTheDocument();
         expect(screen.getByTestId("password-input")).toBeInTheDocument();
         expect(screen.getByTestId("username-input")).toBeInTheDocument();
         expect(screen.getByTestId("email-input")).toBeInTheDocument();
@@ -57,7 +54,6 @@ describe('Edit/Delete Account', () =>{
         fireEvent.click(screen.getByTestId("toggleEditing"));
         
         fireEvent.change(screen.getByTestId("username-input"), { target: { value: 'Jane' } });
-        fireEvent.change(screen.getByTestId("email-input"), { target: { value: 'jane@dummy.com' } });
         fireEvent.change(screen.getByTestId("password-input"), { target: { value: '456456' } });
       
         fireEvent.click(screen.getByText("Save"));

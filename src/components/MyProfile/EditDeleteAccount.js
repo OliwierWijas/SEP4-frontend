@@ -4,7 +4,7 @@ import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
 
-export default function EditDeleteAccount({ setEditProfileOpen}) {
+export default function EditDeleteAccount({ setEditProfileOpen }) {
   const [inputs, setInputs] = useState(["John", "john@dummy.com", "123123"]);
   const passwordSize = inputs[2].length;
 
@@ -46,72 +46,89 @@ export default function EditDeleteAccount({ setEditProfileOpen}) {
 
   return (
     <>
-      <div className="relative w-full h-auto shadow-lg rounded-md flex flex-col brown-gradient">
-        <div className="h-auto w-full flex">
-          <div className="h-auto w-2/3 flex justify-beginning m-3" data-testid="state-info">
-            {isEditing ? "Edit" : "My Info"}
-          </div>
-          <div className="h-auto w-1/3 flex justify-end m-3">
+      <div className="brown-gradient-y h-400 w-full flex flex-col rounded-md shadow-md mb-10">
+        <div
+          className="min-h-24 w-full flex items-center justify-between text-2xl lg:text-4xl font-bold text-white"
+          data-testid="state-info"
+        >
+          <div className="ml-5">{isEditing ? "EDIT" : "MY INFO"}</div>
+          <div className="mr-5">
             {!isEditing ? (
-              <FaRegEdit onClick={handleEditing} data-testid="toggleEditing"/>
+              <FaRegEdit onClick={handleEditing} data-testid="toggleEditing" />
             ) : (
-              <IoClose onClick={handleEditing} data-testid="closeEditing"/>
+              <IoClose onClick={handleEditing} data-testid="closeEditing" />
             )}
           </div>
         </div>
-        <div className="w-full flex flex-col">
-        
-        <p className="ml-3">Username:</p>  
-          <div className="ml-3 mr-3 mb-3 p-2 bg-white" data-testid="username-div">
-            
-            {isEditing ? (
-              <input className="w-auto" placeholder={inputs[0]} data-testid="username-input" onChange={(e) => setName(e.target.value)}/>
-            ) : (
-              ` ${inputs[0]}`
-            )}
+        <div className="bg-white mb-2 bg-opacity-15 h-full w-full text-xs md:text-sm lg:text-base flex flex-col justify-start rounded-md overflow-y-auto">
+          <div className="w-full flex flex-col">
+            <div className="flex flex-row mt-3 mb-3 items-center">
+              <div className="ml-2 flex p-1.5 w-1/8">
+              Username:
+              </div>
+              <div
+                className="w-full bg-white p-2 mr-2 ml-2"
+                data-testid="username-div"
+              >
+                {isEditing ? (
+                  <input
+                    className="w-auto"
+                    placeholder={inputs[0]}
+                    data-testid="username-input"
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                ) : (
+                  ` ${inputs[0]}`
+                )}
+              </div>
+            </div>
+            <div className="flex flex-row items-center">
+            <div className="ml-2 flex p-2 w-1/8">
+              Password:
+              </div>
+              <div
+                className="relative p-2 mr-2 ml-2 w-full bg-white"
+                data-testid="password-div"
+              >
+                {isEditing ? (
+                  <input
+                    className="w-auto"
+                    type="password"
+                    placeholder={inputs[2]}
+                    data-testid="password-input"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                ) : (
+                  <>
+                    {isVisible ? ` ${inputs[2]}` : "*".repeat(passwordSize)}
+                    <div className="absolute top-3 right-2">
+                      {isVisible ? (
+                        <FaRegEye
+                          onClick={handleVisible}
+                          data-testid="makevisible"
+                        />
+                      ) : (
+                        <FaRegEyeSlash
+                          onClick={handleVisible}
+                          data-testid="makeinvisible"
+                        />
+                      )}
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          <p className="ml-3">Email:</p>  
-          <div className="ml-3 mr-3 mb-3 p-2 bg-white" data-testid="email-div">
-            
-            {isEditing ? (
-              <input type="email" className="w-8/9" placeholder={inputs[1]} data-testid="email-input" onChange={(e) => setEmail(e.target.value)}/>
-            ) : (
-              ` ${inputs[1]}`
-            )}
+          <div className="m-3 p-2 w-9/10 flex justify-center">
+            <button
+              data-testid="savedelete"
+              className="text-white w-1/4 py-2 px-4 rounded mt-4"
+              style={{ backgroundColor: isEditing ? "#a79277" : "#FFA7A7" }}
+              onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
+            >
+              {isEditing ? "SAVE" : "DELETE ACCOUNT"}
+            </button>
           </div>
-          <p className="ml-3">Password:</p>  
-          <div
-            className="relative ml-3 mr-3 mb-3 p-2 bg-white border" 
-            style={{ border: "0.5px solid #C4B098" }}
-            data-testid="password-div"
-          >
-            
-            {isEditing ? (
-              <input className="w-8/9" type="password" placeholder={inputs[2]} data-testid="password-input" onChange={(e) => setPassword(e.target.value)}/>
-            ) : (
-              <>
-                {isVisible ? ` ${inputs[2]}` : "*".repeat(passwordSize)}
-                <div className="absolute top-3 right-2">
-                  {isVisible ? (
-                    <FaRegEye onClick={handleVisible} data-testid="makevisible"/>
-                  ) : (
-                    <FaRegEyeSlash onClick={handleVisible} data-testid="makeinvisible"/>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-        <div className="m-3 p-2 w-9/10 flex justify-center">
-          <button
-            data-testid="savedelete"
-            className="text-white w-1/3 py-2 px-4 rounded mt-4"
-            style={{ backgroundColor: isEditing ? "#a79277" : "#df4520" }}
-            onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
-            
-          >
-            {isEditing ? "Save" : "Delete account"}
-          </button>
         </div>
       </div>
     </>
