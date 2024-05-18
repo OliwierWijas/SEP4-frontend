@@ -3,7 +3,7 @@ import EditDeleteAccount from "../components/MyProfile/EditDeleteAccount.js";
 import PopUp from "../components/PopUp.js";
 import ConfirmDelete from "../components/MyProfile/ConfirmDelete.js";
 import HouseMembersBoxComponent from "../components/MyProfile/HouseMembersBoxComponent.js";
-import AddHouseMember from "../components/MyProfile/AddHouseMemberComponent.js";
+import EditLockPassword from "../components/MyProfile/EditLockPasswordComponent.js";
 
 function MyProfile() {
     const [editProfileOpen, setEditProfileOpen] = useState(false);
@@ -27,6 +27,7 @@ function MyProfile() {
             <EditDeleteAccount setEditProfileOpen={setEditProfileOpen} confirmationStatus={confirmationStatus} />
             
             <HouseMembersBoxComponent />
+            <EditLockPassword/>
         
         </>
     );
