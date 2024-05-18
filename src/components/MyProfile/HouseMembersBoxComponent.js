@@ -37,7 +37,7 @@ function HouseMembersBoxComponent() {
                 <div className="bg-white mb-2 bg-opacity-15 h-full w-full text-xs md:text-sm lg:text-base flex flex-col justify-start rounded-md overflow-y-auto scrollbar">
                     <div className="flex flex-wrap">
                         {membersData && membersData.map((member, index) => (
-                            <div key={index} className={`w-1/2 p-2 ${index === membersData.length - 1 && membersData.length % 2 !== 0 ? 'self-start' : ''}`} data-testid="house-member">
+                            <div key={index} className={`w-full lg:w-1/2 p-2 ${index === membersData.length - 1 && membersData.length % 2 !== 0 ? 'self-start' : ''}`} data-testid="house-member">
                                 <HouseMembersComponent
                                     member={member}
                                     //onDeleteMember={() => handleDeleteMember(index)}
