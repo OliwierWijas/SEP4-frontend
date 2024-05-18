@@ -1,4 +1,4 @@
-import { useRegister } from "../../hooks/useRegister.js"
+import { useRegister } from "../../../hooks/auth/useRegister.js"
 
 global.alert = jest.fn()
 

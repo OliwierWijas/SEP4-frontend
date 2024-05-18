@@ -7,10 +7,10 @@ import HouseMembersBoxComponent from "../components/MyProfile/HouseMembersBoxCom
 function MyProfile() {
   const [editProfileOpen, setEditProfileOpen] = useState(false);
   const [confirmationStatus, setConfirmationStatus] = useState(false);
-
+  
   const handleConfirmation = (status) => {
-    setConfirmationStatus(status);
-    setEditProfileOpen(false);
+    setConfirmationStatus(status)
+    setEditProfileOpen(false)
   };
 
   return (

@@ -1,6 +1,6 @@
 import TextBox from "../components/SignUp/TextBoxComponent.js"
 import SignUpLogin from "../components/SignUp/SignUpLoginComponent.js";
-import { useRegister } from "../hooks/useRegister.js";
+import { useRegister } from "../hooks/auth/useRegister.js";
 
 function SignUp() {
     const textArray1 = [
