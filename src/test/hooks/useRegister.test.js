@@ -8,7 +8,7 @@ describe('useRegister integration test', () => {
     })
 
     it('should create an account successfully', async () => {
-        const username = 'testUser2'
+        const username = 'testUser'
         const password = 'testPassword'
 
         await useRegister(username, password)
@@ -17,7 +17,7 @@ describe('useRegister integration test', () => {
     })
 
     it('should handle registration failure', async () => {
-        const username = 'testUser2'
+        const username = 'testUser'
         const password = 'testPassword'
 
         await useRegister(username, password)
