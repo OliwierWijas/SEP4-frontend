@@ -9,9 +9,10 @@ export default function ConfirmWithPassword({ isEditing, handleSave, handlePassw
           <div className="ml-3 mr-3">
             {isEditing ? "Old" : ""} password:
           </div>
-          <input type="password" onChange={handlePasswordChange} />
+          <input type="password" data-testid="passwordConfirmInput" onChange={handlePasswordChange} />
         </div>
         <button
+          data-testid="confirmPasswordButton"
           className="text-white py-2 px-4 rounded mt-10"
           style={{ backgroundColor: "#FFA7A7" }}
           onClick={handleSave}

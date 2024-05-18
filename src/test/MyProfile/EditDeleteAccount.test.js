@@ -1,9 +1,15 @@
 import { render, fireEvent, screen, getByTestId } from '@testing-library/react'
 import EditDeleteAccount from '../../components/MyProfile/EditDeleteAccount.js'
+import { BrowserRouter } from 'react-router-dom';
+
+const renderWithRouter = (ui, { route = '/' } = {}) => {
+  window.history.pushState({}, 'Test page', route);
+  return render(ui, { wrapper: BrowserRouter });
+};
 
 describe('Edit/Delete Account', () =>{
     it('renders component with the initial value', ()=>{
-        render(<EditDeleteAccount setEditProfileOpen={jest.fn()}/>);
+        renderWithRouter(<EditDeleteAccount/>);
         expect(screen.getByTestId("username-div")).toBeInTheDocument();
         expect(screen.getByTestId("password-div")).toBeInTheDocument();
         expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
@@ -18,7 +24,7 @@ describe('Edit/Delete Account', () =>{
       });
 
       it('clicking on eye makes the password visible/hidden', ()=>{
-        render(<EditDeleteAccount setEditProfileOpen={jest.fn()}/>);
+        renderWithRouter(<EditDeleteAccount/>);
 
         const passwordDiv = screen.getByTestId("password-div")
         const password = passwordDiv.textContent;
@@ -32,7 +38,7 @@ describe('Edit/Delete Account', () =>{
 
 
     it('transition to and from editing state', ()=>{
-        render(<EditDeleteAccount setEditProfileOpen={jest.fn()}/>)
+        renderWithRouter(<EditDeleteAccount/>)
         fireEvent.click(screen.getByTestId("toggleEditing"));
         expect(screen.getByText("EDIT")).toBeInTheDocument();
         expect(screen.getByTestId("password-input")).toBeInTheDocument();
@@ -48,7 +54,7 @@ describe('Edit/Delete Account', () =>{
         expect(screen.getByText("DELETE ACCOUNT")).toBeInTheDocument();
     })
     test('handles input changes correctly', () => {
-        render(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
+        renderWithRouter(<EditDeleteAccount/>);
         fireEvent.click(screen.getByTestId("toggleEditing"));
         
         fireEvent.change(screen.getByTestId("username-input"), { target: { value: 'Jane' } });
@@ -59,17 +65,14 @@ describe('Edit/Delete Account', () =>{
         const usernameDiv = screen.getByTestId("username-div")
         const passwordDiv = screen.getByTestId("password-div")
 
+        expect(screen.getByTestId("passwordConfirmInput")).toBeInTheDocument();
+
+        fireEvent.change(screen.getByTestId("passwordConfirmInput"), { target: { value: '123123' } });
+        fireEvent.click(screen.getByTestId("confirmPasswordButton"));
+        
         fireEvent.click(screen.getByTestId("makeinvisible"));
 
         expect(usernameDiv).toHaveTextContent("Jane")
         expect(passwordDiv).toHaveTextContent("456456")
-      })
-
-      test('check delete buttons changes the state', ()=>{
-        const MockSetEditProfile = jest.fn()
-        render(<EditDeleteAccount setEditProfileOpen={MockSetEditProfile}/>);
-        fireEvent.click(screen.getByTestId("savedelete"));
-        expect(MockSetEditProfile).toHaveBeenCalled();
-
-      })
+      });
 })
