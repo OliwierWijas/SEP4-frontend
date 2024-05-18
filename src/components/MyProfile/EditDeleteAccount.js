@@ -61,9 +61,9 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
           </div>
         </div>
         <div className="bg-white mb-2 bg-opacity-15 h-full w-full text-xs md:text-sm lg:text-base flex flex-col justify-start rounded-md overflow-y-auto">
-          <div className="w-full flex flex-col">
+          <div className="w-full flex flex-col mt-2">
             <div className="flex flex-row mt-3 mb-3 items-center">
-              <div className="ml-2 flex p-1.5 w-1/8">
+              <div className="ml-2 flex w-1/7">
               Username:
               </div>
               <div
@@ -82,8 +82,8 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
                 )}
               </div>
             </div>
-            <div className="flex flex-row items-center">
-            <div className="ml-2 flex p-2 w-1/8">
+            <div className="flex flex-row mt-3 mb-3 items-center">
+            <div className="ml-2 mr-1 flex w-1/7">
               Password:
               </div>
               <div
