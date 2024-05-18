@@ -3,7 +3,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { IoTrashOutline } from 'react-icons/io5';
 import '../../../styles/Room.css';
 
-function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
+function Room({ room, setRoom, onDelete, setEditRoomOpen, setDeleteRoomOpen }) {
   const { name, temperature, humidity, lightLevel } = room;
   const [isHovered, setIsHovered] = useState(false);
 
@@ -15,7 +15,7 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
     setIsHovered(false);
   };
 
-  const onClick = () => {
+  const onClickEdit = () => {
     setRoom(room)
   }
 
@@ -24,12 +24,12 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
       className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded relative" 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={onClick}
+      onClick={onClickEdit}
       data-testid="room"
     >
       <div className="edit-icon-wrapper absolute top-4 right-4 flex items-center">
         <FaRegEdit className="text-white mr-2" onClick={() => setEditRoomOpen(true)} data-testid="edit-room-button"/> 
-        <IoTrashOutline className="text-white" onClick={onDelete}/> 
+        <IoTrashOutline className="text-white" onClick={() => setDeleteRoomOpen(true)} data-testid="delete-room-button"/> 
       </div>
       {isHovered ? (
         <div className="hover-content">

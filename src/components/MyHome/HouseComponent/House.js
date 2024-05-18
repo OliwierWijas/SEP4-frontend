@@ -3,7 +3,7 @@ import Room from './Room.js';
 import CreateRoom from './CreateRoomButton.js';
 import Triangle from './Triangle.js';
 
-function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
+function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen, setDeleteRoomOpen }) {
     const [width, setWidth] = useState('');
     const [roomsList, setRoomsList] = useState(rooms);
 
@@ -44,7 +44,7 @@ function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
                             room={room}
                             setRoom={setRoom}
                             setEditRoomOpen={() => setEditRoomOpen(room)}
-                            onDelete={() => handleDeleteRoom(room.id)}
+                            setDeleteRoomOpen={() => setDeleteRoomOpen(true)}
                         />
                     </div>
                 ))}

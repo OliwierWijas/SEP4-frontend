@@ -7,11 +7,13 @@ import { useTemperature } from "../hooks/mocks/useTemperatureMock.js";
 import PopUp from "../components/PopUp.js";
 import CreateRoom from "../components/MyHome/HouseComponent/CreateRoomPopUp.js";
 import EditRoom from "../components/MyHome/HouseComponent/EditRoomPopUp.js";
+import DeleteRoom from "../components/MyHome/HouseComponent/ConfirmDeleteRoomPopUp.js";
 import { useRoomData } from "../hooks/mocks/useRoomsMock.js";
 
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false);
   const [editRoomOpen, setEditRoomOpen] = useState(false);
+  const [deleteRoomOpen, setDeleteRoomOpen] = useState(false);
   const [selectedRoom, setSelectedRoom] = useState(null);
 
 
@@ -47,6 +49,8 @@ function MyHome() {
     setEditRoomOpen(true);
   };
 
+
+
   return (
     <div>
       <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen} testId="edit-room-popup">
@@ -54,8 +58,11 @@ function MyHome() {
       </PopUp>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen} testId="create-room-popup">
         <CreateRoom />
+      </PopUp >
+      <PopUp isOpen={deleteRoomOpen} setIsOpen={setDeleteRoomOpen} testId="delete-room-popup">
+        <DeleteRoom/>
       </PopUp>
-      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} setEditRoomOpen={handleEditRoom} />
+      <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} setEditRoomOpen={handleEditRoom} setDeleteRoomOpen={setDeleteRoomOpen} />
       <BrownBreakline />
       <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} />
     </div>
