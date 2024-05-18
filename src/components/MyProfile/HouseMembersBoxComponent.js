@@ -30,7 +30,7 @@ function HouseMembersBoxComponent() {
                 <div className="min-h-24 w-full flex justify-between items-center p-5">
                     <div className=" ml-5 text-2xl lg:text-4xl font-bold text-white ">HOUSE MEMBERS
                     </div>
-                    <AddHouseMember onAddMember={handleAddMember} />
+                    <AddHouseMember /*onAddMember={handleAddMember}*/ />
                 </div>
 
 
