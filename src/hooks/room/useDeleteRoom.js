@@ -3,8 +3,12 @@ import { useEffect } from "react"
 export function useDeleteRoom({ deviceId }) {
     useEffect(() => {
         const deleteRoom = async () => {
-            const response = await fetch(`http://localhost:8080/rooms?id=${deviceId}`, {
-                headers: { "Content-Type": "application/json" },
+            const token = localStorage.getItem("jwt")
+            const response = await fetch(`http://localhost:8080/rooms/${deviceId}`, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
                 method: "DELETE"
             })
             if (response.ok) {

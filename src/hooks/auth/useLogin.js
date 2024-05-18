@@ -16,6 +16,7 @@ export async function useLogin(user) {
             const houseId = claims.HouseId;
 
             localStorage.setItem("username", username)
+            localStorage.setItem("password", user?.password)
             localStorage.setItem("role", role)
             localStorage.setItem("houseId", houseId)
         } else {
