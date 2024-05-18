@@ -21,9 +21,9 @@ function EditLockPassword() {
             <div className="brown-gradient-y h-400 w-full flex flex-col rounded-md shadow-md mb-10" data-testid="member-box">
                 <div className="min-h-24 w-full flex justify-between items-center p-5">
                     <div className="ml-5 text-2xl lg:text-4xl font-bold text-white">HOME LOCKER</div>
-                    <div className="flex w-full lg:w-auto mr-2">
+                    <div className="flex w-full lg:w-1/2 flex-row">
                         <div className="relative mr-2 flex-grow">
-                            <input className="w-full lg:w-96 h-8 p-1 mt-1 rounded-md shadow-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75 border border-brown-500"
+                            <input className="w-full h-8 p-1 mt-1 rounded-md shadow-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75 border border-brown-500"
                                 type={isVisible ? "text" : "password"}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
