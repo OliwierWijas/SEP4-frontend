@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useLightLevel } from '../../hooks/useLightLevel.js';
+import { useLightLevel } from '../../hooks/conditions/useLightLevelHistory.js';
 
 describe('useLightLevel', () => {
   afterEach(() => {

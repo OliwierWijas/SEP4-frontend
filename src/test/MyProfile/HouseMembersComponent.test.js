@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import HouseMembersComponent from '../../components/MyProfile/HouseMembersComponent.js';
-import { useDeleteMember } from '../../hooks/auth/useDeleteMember.js';
+import { useDeleteMember } from '../../hooks/home/useDeleteMember.js';
 
 jest.mock('../../hooks/useDeleteMember.js');
 

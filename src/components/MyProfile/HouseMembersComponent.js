@@ -1,5 +1,5 @@
 import { IoTrashOutline } from 'react-icons/io5';
-import { useDeleteMember } from '../../hooks/auth/useDeleteMember.js';
+import { useDeleteMember } from '../../hooks/home/useDeleteMember.js';
 
 function HouseMembersComponent({ member, onDeleteMember }) {
     const { deleteMember } = useDeleteMember();

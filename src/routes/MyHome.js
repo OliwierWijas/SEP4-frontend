@@ -8,15 +8,15 @@ import PopUp from "../components/PopUp.js";
 import CreateRoom from "../components/MyHome/HouseComponent/CreateRoomPopUp.js";
 import EditRoom from "../components/MyHome/HouseComponent/EditRoomPopUp.js";
 import { useRoomData } from "../hooks/room/useRooms.js";
+import { useLatestTemperature } from "../hooks/room/useLatestTemperature.js";
+import { useLatestHumidity } from "../hooks/room/useLatestHumidity.js";
+import { useLatestLightLevel } from "../hooks/room/useLatestLightLevel.js";
 
 function MyHome() {
-  const [createRoomOpen, setCreateRoomOpen] = useState(false);
-  const [editRoomOpen, setEditRoomOpen] = useState(false);
+  const [createRoomOpen, setCreateRoomOpen] = useState(false)
+  const [editRoomOpen, setEditRoomOpen] = useState(false)
   const [selectedRoom, setSelectedRoom] = useState(null)
-  
-  const RoomData = useRoomData(localStorage.getItem("houseId"))
-
-  const [room, setRoom] = useState(RoomData.length > 0 ? RoomData[0] : null);
+  const [room, setRoom] = useState(null);
   const [selectedValue, setSelectedValue] = useState("Temperature");
   const [interval, setInterval] = useState([
     {
@@ -25,9 +25,41 @@ function MyHome() {
       key: 'selection'
     }
   ]);
+  
+  const RoomData = useRoomData(localStorage.getItem("houseId"))
 
-  const TemperatureData = useTemperature(room?.id, interval[0]);
+  const defaultDeviceId = RoomData.length > 0 ? RoomData[0]?.deviceId : null;
+  const latestTemperature = useLatestTemperature(defaultDeviceId);
+  const latestHumidity = useLatestHumidity(defaultDeviceId);
+  const latestLightLevel = useLatestLightLevel(defaultDeviceId);
 
+  useEffect(() => {
+    const defaultRoomId = RoomData.length > 0 ? RoomData[0]?.id : null
+    const defaultName = RoomData.length > 0 ? RoomData[0]?.name : null
+    const defaultPreferedTemperature = RoomData.length > 0 ? RoomData[0]?.preferedTemperature : null
+    const defaultPreferedHumidity = RoomData.length > 0 ? RoomData[0]?.preferedHumidity : null
+    const defaultRadiatorState = RoomData.length > 0 ? RoomData[0]?.radiatorState : null
+  
+    const defaultRoom = {
+      deviceId : defaultDeviceId,
+      id: defaultRoomId,
+      name: defaultName,
+      preferedTemperature: defaultPreferedTemperature,
+      preferedHumidity: defaultPreferedHumidity,
+      radiatorState: defaultRadiatorState,
+      latestTemperature: latestTemperature === undefined ? latestTemperature : 0,
+      latestHumidity : latestHumidity === undefined ? latestHumidity : 0,
+      latestLightLevel : latestLightLevel === undefined ? latestLightLevel : 0
+    }
+
+    setRoom(defaultRoom);
+  }, [RoomData, defaultDeviceId, latestTemperature, latestHumidity, latestLightLevel]);
+
+
+  console.log(room)
+
+  //const TemperatureData = useTemperature(room?.deviceId, interval[0]);
+  const TemperatureData = []
   const [graphData, setGraphData] = useState({
     labels: TemperatureData && TemperatureData[0] ? TemperatureData.map((data) => data.date) : [],
     datasets: [{
@@ -36,10 +68,6 @@ function MyHome() {
       borderColor: '#C4B097'
     }]
   });
-
-  useEffect(() => {
-    setRoom(RoomData && RoomData ? RoomData[0] : null);
-  }, [RoomData]);
 
   const handleEditRoom = (room) => {
     setSelectedRoom(room);

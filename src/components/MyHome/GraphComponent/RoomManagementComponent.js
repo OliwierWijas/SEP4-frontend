@@ -14,9 +14,9 @@ import { useGetLight } from "../../../hooks/mocks/useGetLightLevelMock.js"
 import { parse, format } from 'date-fns';
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room }) {
-    let radiator = useGetTemperature({ deviceId: room?.id })
-    let window = useGetWindowStatus({ deviceId: room?.id })
-    let light = useGetLight({ deviceId: room?.id })
+    let radiator = useGetTemperature({ deviceId: room?.deviceId })
+    let window = useGetWindowStatus({ deviceId: room?.deviceId })
+    let light = useGetLight({ deviceId: room?.deviceId })
 
     const [radiatorStatus, setRadiatorStatus] = useState(null)
     const [windowsStatus, setWindowsStatus] = useState(null)
@@ -40,9 +40,9 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
         }
     }, [light, room])
 
-    const TemperatureData = useTemperature({ roomId: room?.id, interval: interval[0] })
-    const HumidityData = useHumidity({ roomId: room?.id, interval: interval[0] })
-    const LightData = useLightLevel({ roomId: room?.id, interval: interval[0] })
+    const TemperatureData = useTemperature({ roomId: room?.deviceId, interval: interval[0] })
+    const HumidityData = useHumidity({ roomId: room?.deviceId, interval: interval[0] })
+    const LightData = useLightLevel({ roomId: room?.deviceId, interval: interval[0] })
 
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {
@@ -95,9 +95,9 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
             <div className="w-full md:w-4/5 flex flex-col justify-center mx-auto">
                 <div style={{ color: "#837058" }} className="text-2xl ml-2 my-3 font-bold opacity-85" data-testid="room-name-header">{room?.name}</div>
                 <div className="reading-container flex flex-col lg:flex-row">
-                    <DataReadingComponent readingType="Temperature" value={room?.temperature + "°C"} />
-                    <DataReadingComponent readingType="Humidity" value={room?.humidity + "%"} />
-                    <DataReadingComponent readingType="Light Level" value={room?.lightLevel + "%"} />
+                    <DataReadingComponent readingType="Temperature" value={room?.latestTemperature + "°C"} />
+                    <DataReadingComponent readingType="Humidity" value={room?.latestHumidity + "%"} />
+                    <DataReadingComponent readingType="Light Level" value={room?.latestLightLevel + "%"} />
                 </div>
                 <div className="graph-filter flex flex-col lg:flex-row-reverse">
                     <div className="datepicker-container flex w-full lg:w-1/3 m-2 flex flex-col flex-end">
@@ -109,7 +109,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
                     </div>
                 </div>
                 <div>
-                    <RoomController roomId={room?.id} radiatorStatus={radiatorStatus} setRadiatorStatus={setRadiatorStatus} windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus} lightStatus={lightStatus} setLightStatus={setLightStatus} />
+                    <RoomController roomId={room?.deviceId} radiatorStatus={radiatorStatus} setRadiatorStatus={setRadiatorStatus} windowsStatus={windowsStatus} setWindowsStatus={setWindowsStatus} lightStatus={lightStatus} setLightStatus={setLightStatus} />
                 </div>
             </div>
         </>
