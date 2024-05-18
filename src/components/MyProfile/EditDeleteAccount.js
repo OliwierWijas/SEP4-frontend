@@ -3,37 +3,44 @@ import { useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import PopUp from "../PopUp.js";
+import { useNavigate } from "react-router-dom";
+import ConfirmWithPassword from "./ConfirmWithPassword.js";
 
-export default function EditDeleteAccount({ setEditProfileOpen }) {
+export default function EditDeleteAccount() {
   const [inputs, setInputs] = useState(["John", "john@dummy.com", "123123"]);
+  const navigate = useNavigate();
   const passwordSize = inputs[2].length;
 
   const [isVisible, toggleVisible] = useState(false);
   const [isEditing, toggleEditing] = useState(false);
+  const [isPopup, togglePopup] = useState(false);
 
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirm password
 
   const handleSave = () => {
-    const newinputs = [...inputs];
+    if (isEditing) {
+      const newinputs = [...inputs];
 
-    if (name.trim() !== "") {
-      newinputs[0] = name.trim();
+      if (name.trim() !== "") {
+        newinputs[0] = name.trim();
+      }
+
+      if (password.trim() !== "") {
+        newinputs[2] = password.trim();
+      }
+
+      setInputs(newinputs);
+      handleEditing();
+      // needs the hook of sending update info for profile
+    } else {
+      navigate("/");
+      // needs hook for deleting the profile
     }
 
-    if (email.trim() !== "") {
-      newinputs[1] = email.trim();
-    }
-
-    if (password.trim() !== "") {
-      newinputs[2] = password.trim();
-    }
-
-    setInputs(newinputs);
-    handleEditing();
-
-    //needs the hook of sending update info for profile
+    handlePopup();
   };
 
   const handleVisible = () => {
@@ -42,6 +49,24 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
 
   const handleEditing = () => {
     toggleEditing(!isEditing);
+  };
+
+  const handlePopup = () => {
+    togglePopup(!isPopup);
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value);
+  };
+
+  const handleConfirmSave = () => {
+    // Logic to compare passwords or other actions before calling handleSave
+    if (confirmPassword === inputs[2]) {
+      handleSave();
+    } else {
+      // Handle incorrect password case
+      alert("Incorrect password");
+    }
   };
 
   return (
@@ -63,9 +88,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
         <div className="bg-white mb-2 bg-opacity-15 h-full w-full text-xs md:text-sm lg:text-base flex flex-col justify-start rounded-md overflow-y-auto">
           <div className="w-full flex flex-col mt-2">
             <div className="flex flex-row mt-3 mb-3 items-center">
-              <div className="ml-2 flex w-1/7">
-              Username:
-              </div>
+              <div className="ml-2 flex w-1/7">Username:</div>
               <div
                 className="w-full bg-white p-2 mr-2 ml-2"
                 data-testid="username-div"
@@ -83,9 +106,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
               </div>
             </div>
             <div className="flex flex-row mt-3 mb-3 items-center">
-            <div className="ml-2 mr-1 flex w-1/7">
-              Password:
-              </div>
+              <div className="ml-2 mr-1 flex w-1/7">Password:</div>
               <div
                 className="relative p-2 mr-2 ml-2 w-full bg-white"
                 data-testid="password-div"
@@ -94,7 +115,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
                   <input
                     className="w-auto"
                     type="password"
-                    placeholder={inputs[2]}
+                    placeholder="Password"
                     data-testid="password-input"
                     onChange={(e) => setPassword(e.target.value)}
                   />
@@ -124,13 +145,20 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
               data-testid="savedelete"
               className="text-white w-1/4 py-2 px-4 rounded mt-4"
               style={{ backgroundColor: isEditing ? "#a79277" : "#FFA7A7" }}
-              onClick={isEditing ? handleSave : () => setEditProfileOpen(true)}
+              onClick={handlePopup}
             >
               {isEditing ? "SAVE" : "DELETE ACCOUNT"}
             </button>
           </div>
         </div>
       </div>
+      <PopUp isOpen={isPopup} setIsOpen={togglePopup}>
+        <ConfirmWithPassword
+          isEditing={isEditing}
+          handleSave={handleConfirmSave}
+          handlePasswordChange={handleConfirmPasswordChange}
+        />
+      </PopUp>
     </>
   );
 }
