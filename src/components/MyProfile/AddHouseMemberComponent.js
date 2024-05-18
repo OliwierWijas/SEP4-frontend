@@ -12,9 +12,9 @@ function AddHouseMember({ onAddMember }) {
     };
 
     return (
-        <div className="flex w-full lg:w-1/2 flex-row my-8">
+        <div className="flex w-full lg:w-1/2 flex-row">
             <input 
-                className="w-full h-8 p-1 rounded-md shadow-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75 border border-brown-500" 
+                className="w-full h-8 p-1 mt-1 rounded-md shadow-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75 border border-brown-500" 
                 type="text" 
                 id="username" 
                 name="username" 
