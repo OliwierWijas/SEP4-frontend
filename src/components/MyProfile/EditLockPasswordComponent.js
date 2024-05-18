@@ -32,7 +32,7 @@ function EditLockPassword() {
                             />
                             <div className="absolute top-0 right-0 h-full flex items-center pr-2">
                                 <div onClick={handleVisible} className="hover:cursor-pointer" data-testid="visibility-button">
-                                    {isVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+                                    {isVisible ? <FaRegEyeSlash data-testid="eye-slash-icon" /> : <FaRegEye data-testid="eye-icon" />}
                                 </div>
                             </div>
                         </div>
