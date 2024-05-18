@@ -9,7 +9,6 @@ describe('HouseMembersBoxComponent', () => {
     render(<HouseMembersBoxComponent />);
   });
 
-
   it('adds a member correctly', async () => {
     render(<HouseMembersBoxComponent />);
 
