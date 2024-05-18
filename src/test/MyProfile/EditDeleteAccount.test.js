@@ -37,17 +37,15 @@ describe('Edit/Delete Account', () =>{
         expect(screen.getByText("EDIT")).toBeInTheDocument();
         expect(screen.getByTestId("password-input")).toBeInTheDocument();
         expect(screen.getByTestId("username-input")).toBeInTheDocument();
-        expect(screen.getByTestId("email-input")).toBeInTheDocument();
         expect(screen.getByTestId("closeEditing")).toBeInTheDocument();
-        expect(screen.getByText("Save")).toBeInTheDocument();
+        expect(screen.getByText("SAVE")).toBeInTheDocument();
 
         fireEvent.click(screen.getByTestId("closeEditing"));
-        expect(screen.getByText("My Info")).toBeInTheDocument();
+        expect(screen.getByText("MY INFO")).toBeInTheDocument();
         expect(screen.queryByTestId("password-input")).not.toBeInTheDocument();
         expect(screen.queryByTestId("username-input")).not.toBeInTheDocument();
-        expect(screen.queryByTestId("email-input")).not.toBeInTheDocument();
         expect(screen.getByTestId("toggleEditing")).toBeInTheDocument();
-        expect(screen.getByText("Delete account")).toBeInTheDocument();
+        expect(screen.getByText("DELETE ACCOUNT")).toBeInTheDocument();
     })
     test('handles input changes correctly', () => {
         render(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
@@ -56,16 +54,14 @@ describe('Edit/Delete Account', () =>{
         fireEvent.change(screen.getByTestId("username-input"), { target: { value: 'Jane' } });
         fireEvent.change(screen.getByTestId("password-input"), { target: { value: '456456' } });
       
-        fireEvent.click(screen.getByText("Save"));
+        fireEvent.click(screen.getByText("SAVE"));
         
         const usernameDiv = screen.getByTestId("username-div")
-        const emailDiv = screen.getByTestId("email-div")
         const passwordDiv = screen.getByTestId("password-div")
 
         fireEvent.click(screen.getByTestId("makeinvisible"));
 
         expect(usernameDiv).toHaveTextContent("Jane")
-        expect(emailDiv).toHaveTextContent("jane@dummy.com")
         expect(passwordDiv).toHaveTextContent("456456")
       })
 
