@@ -16,13 +16,8 @@ export default function MyProfile() {
         <>
             <PopUp isOpen={editProfileOpen} setIsOpen={setEditProfileOpen} confirmationStatus={confirmationStatus}>   
                 <ConfirmDelete handleConfirmation={handleConfirmation} />
-            </PopUp>
-            <PopUp isOpen={confirmationStatus} setIsOpen={setConfirmationStatus}>
-                
-            </PopUp>
+                </PopUp>
             <EditDeleteAccount setEditProfileOpen={setEditProfileOpen} confirmationStatus={confirmationStatus} />
-
-            <HouseMembersBoxComponent />
         
 
         </>
