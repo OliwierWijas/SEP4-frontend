@@ -26,12 +26,13 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
     }
 
     const editedPassword ={
+      username: currentUsername,
       oldPassword: currentPassword,
       newPassword
     }
 
-    if (currentUsername !== newUsername) 
-      editUsername(currentUsername, editedUsername && newUsername !== '')
+    if (currentUsername !== newUsername  && newUsername !== '') 
+      editUsername(currentUsername, editedUsername)
     if (currentPassword !== newPassword && newPassword !== '')
       editPassword(currentUsername, editedPassword)
   }

@@ -1,8 +1,6 @@
 export function useEditUsername() {
     const editUsername = async (username, editedAccount) => {
         try {
-            console.log(username)
-            console.log(editedAccount)
             if (username !== undefined && username !== null && username !== '' && editedAccount !== null && editedAccount !== undefined) {
                 const token = localStorage.getItem("jwt")
 
