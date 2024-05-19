@@ -9,14 +9,14 @@ export function useNotifications({ homeId }) {
             const signal = controller.signal
 
             const fetchData = () => {
-                fetch(`http://localhost:8080/notifications?homeId=${homeId}`, { signal })
+                fetch(`http://localhost:8080/notifications/${homeId}`, { signal })
                     .then(response => response.json())
                     .then(data => {
                         setNotificationsData(data)
                     })
                     .catch(error => {
                         if (error.name !== "AbortError") {
-                            console.log(`Error fetching notifications: ${error}`)
+                            alert(`Error fetching notifications: ${error}`)
                         }
                     })
 

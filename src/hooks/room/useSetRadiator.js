@@ -3,20 +3,17 @@ export function useSetRadiator() {
         try {
             const deviceId = room?.deviceId
             const level = room?.radiatorState
-            console.log("setting radiator")
-            console.log(deviceId)
-            console.log(level)
             if (deviceId > 0 && level !== undefined) {
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}/radiator/set`, {
                     headers: { "Content-Type": "application/json" },
                     method: "POST",
                     body: JSON.stringify(level),
-                })
+                }).catch(error => alert(`Error setting radiator level: ${error}`))
                 if (response) {
-                    const responseBody = await response.text();
-                    const errorResponse = JSON.parse(responseBody);
-                    const errorMessage = errorResponse.title;
-                    alert(errorMessage);
+                    const responseBody = await response.text()
+                    const errorResponse = JSON.parse(responseBody)
+                    const errorMessage = errorResponse.title
+                    alert(errorMessage)
                 } else {
                     alert("Error while setting changing radiator level.")
                 }
