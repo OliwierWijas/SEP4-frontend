@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useNotifications({ homeId }) {
+export function useNotifications(homeId) {
     const [notificationsData, setNotificationsData] = useState(null)
 
     useEffect(() => {

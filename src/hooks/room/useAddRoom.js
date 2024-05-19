@@ -1,5 +1,5 @@
-export function useAddRoom(room) {
-    const addRoom = async () => {
+export function useAddRoom() {
+    const addRoom = async (room) => {
         try {
             if (room !== undefined && room !== null) {
                 const token = localStorage.getItem("jwt")

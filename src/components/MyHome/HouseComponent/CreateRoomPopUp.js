@@ -4,16 +4,10 @@ import { useAddRoom } from "../../../hooks/room/useAddRoom.js";
 function CreateRoom() {
     const [roomName, setRoomName] = useState('');
     const [deviceId, setDeviceId] = useState('');
-    const [preferedTemperature, setPreferredTemperature] = useState('');
-    const [preferedHumidity, setPreferredHumidity] = useState('');
+    const [preferredTemperature, setPreferredTemperature] = useState('');
+    const [preferredHumidity, setPreferredHumidity] = useState('');
 
-    const addRoom = useAddRoom({
-        name: roomName,
-        deviceId,
-        homeId: localStorage.getItem("houseId"),
-        preferedTemperature,
-        preferedHumidity
-    });
+    const addRoom = useAddRoom();
 
     const handleAddRoom = (event) => {
         event.preventDefault();
@@ -21,12 +15,18 @@ function CreateRoom() {
             alert("Room name cannot be empty.")
         } else if (deviceId === '') {
             alert("Device id cannot be empty.")
-        } else if (preferedTemperature === '') {
+        } else if (preferredTemperature === '') {
             alert("Temperature cannot be empty.")
-        } else if (preferedHumidity === '') {
+        } else if (preferredHumidity === '') {
             alert ("Humidity cannot be empty.")
         }
-        addRoom()
+        addRoom({
+            name: roomName,
+            deviceId,
+            homeId: localStorage.getItem("houseId"),
+            preferredTemperature,
+            preferredHumidity
+        })
         clear()
     }
 
@@ -44,8 +44,8 @@ function CreateRoom() {
                 <form className="flex flex-col w-2/3 my-5">
                     <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="text" value={roomName} onChange={(e) => setRoomName(e.target.value)} name="roomName" placeholder="room name" required />
                     <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" value={deviceId} onChange={(e) => setDeviceId(e.target.value)} name="hardwareId" placeholder="device id" required />
-                    <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" value={preferedTemperature} onChange={(e) => setPreferredTemperature(e.target.value)} name="temperature" placeholder="preferred temperature (°C)" min="5" max="40" required />
-                    <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" value={preferedHumidity} onChange={(e) => setPreferredHumidity(e.target.value)} name="humidity" placeholder="preferred humidity (%)" min="0" max="100" required />
+                    <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" value={preferredTemperature} onChange={(e) => setPreferredTemperature(e.target.value)} name="temperature" placeholder="preferred temperature (°C)" min="5" max="40" required />
+                    <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" value={preferredHumidity} onChange={(e) => setPreferredHumidity(e.target.value)} name="humidity" placeholder="preferred humidity (%)" min="0" max="100" required />
                     <p className="mt-2 md:text-sm text-justify">*In order to create a room, a set of bought and installed hardware is required.</p>
                     <button className="bg-light-brown text-base w-64 h-16 mx-auto mt-5 py-5 rounded-md" onClick={handleAddRoom}>Create</button>
                 </form>

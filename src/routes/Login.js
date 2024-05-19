@@ -12,7 +12,7 @@ export default function Login() {
     <>
     {/* Gotta make this smaller */}
     <Carousel images={images}></Carousel>
-    <SignUpLogin textArrayToDisplay={["Welcome back", "to your smart home", "Log in now"]} emailNeeded passwordNeeded mainButtonText="Login" smallButtonText="Sign up" smallText={smallText} linkTo={"/Signup"}></SignUpLogin>
+    <SignUpLogin textArrayToDisplay={["Welcome back", "to your smart home", "Log in now"]} usernameNeeded passwordNeeded mainButtonText="Login" smallButtonText="Sign up" smallText={smallText} linkTo={"/Signup"}></SignUpLogin>
     </>
   );
 }

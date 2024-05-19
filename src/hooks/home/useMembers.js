@@ -1,30 +1,29 @@
 import { useState, useEffect } from "react";
 
-// useMembers.js
-export function useMembers(houseId) {
+export function useMembers(homeId) {
     const [membersData, setMembersData] = useState([]);
 
     useEffect(() => {
-        if (houseId > 0) {
-            const controller = new AbortController();
-            const signal = controller.signal;
+        if (homeId > 0) {
+            const controller = new AbortController()
+            const signal = controller.signal
 
-            fetch('http://localhost:8080/members', { signal })
+            fetch(`http://localhost:8080/home/${homeId}/members`, { signal })
                 .then(response => response.json())
                 .then(data => {
-                    setMembersData(data);
+                    setMembersData(data)
                 })
                 .catch(error => {
                     if (error.name !== "AbortError") {
-                        console.log(`Error fetching members: ${error}`);
+                        alert(`Error fetching members: ${error}`)
                     }
-                });
+                })
 
             return () => {
-                controller.abort();
-            };
+                controller.abort()
+            }
         }
-    }, [houseId]);
+    }, [homeId]);
 
     return membersData;
 }
