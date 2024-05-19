@@ -1,25 +1,29 @@
-import { useEffect } from "react"
-
-export function useSwitchWindow({ deviceId, status }) {
-    useEffect(() => {
-        if (deviceId > 0 && status !== undefined) {
-            const switchWindow = async () => {
-                const response = await fetch(`http://localhost:8080/window?deviceId=${deviceId}/switch`, {
+export function useSwitchWindow() {
+    const switchWindow = async (room) => {
+        try {
+            const deviceId = room?.deviceId
+            const state = room?.isWindowOpen
+            console.log("setting window")
+            console.log(deviceId)
+            console.log(state)
+            if (deviceId > 0 && state !== undefined) {
+                const response = await fetch(`http://localhost:8080/rooms/${deviceId}/window/set`, {
                     headers: { "Content-Type": "application/json" },
-                    method: "POST"
+                    method: "POST",
+                    body: JSON.stringify(state),
                 })
-                if (response.ok) {
-                    if (status) {
-                        return "Window has been opened."
-                    } else {
-                        return "Window has been closed."
-                    }
-                }
-                else {
-                    return "Error while changing the status of window."
+                if (response) {
+                    const responseBody = await response.text();
+                    const errorResponse = JSON.parse(responseBody);
+                    const errorMessage = errorResponse.title;
+                    alert(errorMessage);
+                } else {
+                    alert("Error while changing the status of window.")
                 }
             }
-            switchWindow()
+        } catch (error) {
+            alert("Error while changing the status of window.")
         }
-    }, [deviceId, status])
+    }
+    return switchWindow
 }

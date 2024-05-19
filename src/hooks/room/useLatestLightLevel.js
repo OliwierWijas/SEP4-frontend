@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+//not used
 export function useLatestLightLevel(deviceId) {
     const [latestLightLevel, setLatestLightLevel] = useState([]);
 
@@ -10,7 +11,7 @@ export function useLatestLightLevel(deviceId) {
             const controller = new AbortController();
             const signal = controller.signal;
 
-            fetch(`http://localhost:8080/light/${deviceId}/latest`, {
+            /*fetch(`http://localhost:8080/light/${deviceId}/latest`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
@@ -23,7 +24,7 @@ export function useLatestLightLevel(deviceId) {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching latest light level data: ${error}`);
                     }
-                });
+                });*/
 
 
             return () => {
@@ -32,5 +33,5 @@ export function useLatestLightLevel(deviceId) {
         }
     }, [deviceId]);
 
-    return latestLightLevel;
+    return 1;
 }

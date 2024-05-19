@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+//not used
 export function useLatestTemperature(deviceId) {
     const [latestTemperature, setLatestTemperature] = useState([]);
 
@@ -10,7 +11,7 @@ export function useLatestTemperature(deviceId) {
             const controller = new AbortController();
             const signal = controller.signal;
 
-            fetch(`http://localhost:8080/humidity/${deviceId}/latest`, {
+            /*fetch(`http://localhost:8080/temperature/${deviceId}/latest`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
@@ -23,7 +24,7 @@ export function useLatestTemperature(deviceId) {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching latest temperature data: ${error}`);
                     }
-                });
+                });*/
 
 
             return () => {
@@ -32,5 +33,5 @@ export function useLatestTemperature(deviceId) {
         }
     }, [deviceId]);
 
-    return latestTemperature;
+    return 2;
 }

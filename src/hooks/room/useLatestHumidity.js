@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+//not used
 export function useLatestHumidity(deviceId) {
     const [latestHumidity, setLatestHumidity] = useState([]);
 
@@ -10,7 +11,7 @@ export function useLatestHumidity(deviceId) {
             const controller = new AbortController();
             const signal = controller.signal;
 
-            fetch(`http://localhost:8080/humidity/${deviceId}/latest`, {
+            /*fetch(`http://localhost:8080/humidity/${deviceId}/latest`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
@@ -23,7 +24,7 @@ export function useLatestHumidity(deviceId) {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching latest humidity data: ${error}`);
                     }
-                });
+                });*/
 
 
             return () => {
@@ -32,5 +33,5 @@ export function useLatestHumidity(deviceId) {
         }
     }, [deviceId]);
 
-    return latestHumidity;
+    return 3;
 }

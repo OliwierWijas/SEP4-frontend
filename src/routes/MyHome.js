@@ -23,9 +23,9 @@ function MyHome() {
     }
   );
 
-  localStorage.setItem("jwt", "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJKV1RTZXJ2aWNlQWNjZXNzVG9rZW4iLCJqdGkiOiJlYTkyMmUzOS1kOGU0LTQyOTItOGI5OS1iNTRhYmEzYWQ2YWQiLCJpYXQiOiIwNS8xOS8yMDI0IDA2OjAxOjQwIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6InRlc3RVc2VyIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiTWVtYmVyIiwiSG91c2VJZCI6IiIsImV4cCI6MTcxNjEwMjEwMCwiaXNzIjoiSldUQXV0aGVudGljYXRpb25TZXJ2ZXIiLCJhdWQiOiJKV1RTZXJ2aWNlQmxhem9yV2FzbUNsaWVudCJ9.dh2uu4OKy006GAVAgtanMoY3W3s3MrpVwtrU5hOO-u7jn5CsVKVrUnf-fb614MGWOQowGzF6oBC7SYULQV4tJw")
-
   const RoomData = useRoomData(localStorage.getItem("houseId"))
+
+  console.log(RoomData)
 
   useEffect(() => {
     setRoom(RoomData.length > 0 ? RoomData[0] : null);
