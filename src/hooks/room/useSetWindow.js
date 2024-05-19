@@ -4,8 +4,12 @@ export function useSwitchWindow() {
             const deviceId = room?.deviceId
             const state = room?.isWindowOpen
             if (deviceId > 0 && state !== undefined) {
+                const token = localStorage.getItem("jwt")
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}/window/set`, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     method: "POST",
                     body: JSON.stringify(state),
                 }).catch(error => alert(`Error setting window state: ${error}`))

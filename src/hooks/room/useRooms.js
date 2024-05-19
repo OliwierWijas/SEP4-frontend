@@ -7,12 +7,18 @@ export function useRoomData(houseId) {
         if (houseId && houseId > 0) {
             const controller = new AbortController();
             const signal = controller.signal;
+            const token = localStorage.getItem("jwt");
 
-            fetch(`http://localhost:8080/rooms/${houseId}`, { signal })
+            fetch(`http://localhost:8080/rooms/${houseId}`, {
+                signal,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                method: "GET",
+            })
                 .then(response => response.json())
                 .then(async (rooms) => {
-                    const token = localStorage.getItem("jwt");
-
                     const roomDataPromises = rooms.map(async room => {
                         const temperature = await fetchTemperature(room.deviceId, token, signal);
                         const humidity = await fetchHumidity(room.deviceId, token, signal);

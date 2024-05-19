@@ -12,7 +12,7 @@ import { useTemperatureHistory } from "../hooks/conditions/useTemperatureHistory
 function MyHome() {
   const [createRoomOpen, setCreateRoomOpen] = useState(false)
   const [editRoomOpen, setEditRoomOpen] = useState(false)
-  const [selectedRoom, setSelectedRoom] = useState(null)
+  const [editRoom, setEditRoom] = useState(null)
   const [room, setRoom] = useState(null);
   const [selectedValue, setSelectedValue] = useState("Temperature");
   const [interval, setInterval] = useState(
@@ -24,8 +24,6 @@ function MyHome() {
   );
 
   const RoomData = useRoomData(localStorage.getItem("houseId"))
-
-  console.log(RoomData)
 
   useEffect(() => {
     setRoom(RoomData.length > 0 ? RoomData[0] : null);
@@ -42,14 +40,14 @@ function MyHome() {
   });
 
   const handleEditRoom = (room) => {
-    setSelectedRoom(room);
+    setEditRoom(room);
     setEditRoomOpen(true);
   };
 
   return (
     <div>
       <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen} testId="edit-room-popup">
-        <EditRoom room={selectedRoom} />
+        <EditRoom room={editRoom} />
       </PopUp>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen} testId="create-room-popup">
         <CreateRoom />

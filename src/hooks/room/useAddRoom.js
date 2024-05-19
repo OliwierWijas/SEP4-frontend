@@ -10,16 +10,16 @@ export function useAddRoom(room) {
                     },
                     method: "POST",
                     body: JSON.stringify(room),
-                })
-                if (response.ok) {
-                    alert("Room has been added.")
-                }
-                else {
+                }).catch(error => alert(`Error adding room: ${error}`))
+                if (response) {
+                    const responseBody = await response.text()
+                    alert(responseBody)
+                } else {
                     alert("Error while adding room.")
                 }
             }
         } catch (error) {
-            alert(error)
+            alert("Error while adding room.")
         }
     }
     return addRoom

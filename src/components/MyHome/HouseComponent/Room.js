@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
+import { useDeleteRoom } from '../../../hooks/room/useDeleteRoom.js';
 import { FaRegEdit } from "react-icons/fa";
 import { IoTrashOutline } from 'react-icons/io5';
 import '../../../styles/Room.css';
 
-function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
+function Room({ room, setRoom, setEditRoomOpen }) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const deleteRoom = useDeleteRoom()
+
+  const onDelete = () => {
+    deleteRoom(room?.deviceId)
+  }
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -14,21 +21,17 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
     setIsHovered(false);
   }
 
-  const onClick = () => {
-    setRoom(room)
-  }
-
   return (
     <div
       className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded relative" 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      onClick={onClick}
+      onClick={() => setRoom(room)}
       data-testid="room"
     >
       <div className="edit-icon-wrapper absolute top-4 right-4 flex items-center">
         <FaRegEdit className="text-white mr-2" onClick={() => setEditRoomOpen(true)} data-testid="edit-room-button"/> 
-        <IoTrashOutline className="text-white" onClick={onDelete}/> 
+        <IoTrashOutline className="text-white" onClick={() => onDelete()}/> 
       </div>
       {isHovered ? (
         <div className="hover-content">

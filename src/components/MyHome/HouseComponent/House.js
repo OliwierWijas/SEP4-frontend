@@ -6,10 +6,6 @@ import Triangle from './Triangle.js';
 function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
     const [width, setWidth] = useState('');
 
-    const handleDeleteRoom = (roomId) => {
-        const updatedRoomsArray = rooms.filter(room => room.id !== roomId);
-    };
-
     useEffect(() => {
         const restOfRooms2 = rooms.length % 2;
         const restOfRooms3 = rooms.length % 3;
@@ -42,7 +38,6 @@ function House({ rooms, setRoom, setCreateRoomOpen, setEditRoomOpen }) {
                             room={room}
                             setRoom={setRoom}
                             setEditRoomOpen={() => setEditRoomOpen(room)}
-                            onDelete={() => handleDeleteRoom(room.id)}
                         />
                     </div>
                 ))}

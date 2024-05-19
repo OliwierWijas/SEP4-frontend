@@ -4,8 +4,12 @@ export function useSetLightLevel() {
             const deviceId = room?.deviceId
             const level = room?.lightLevel
             if (deviceId > 0 && level !== undefined) {
+                const token = localStorage.getItem("jwt")
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}/light/set`, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
                     method: "POST",
                     body: JSON.stringify(level),
                 }).catch(error => alert(`Error setting light level: ${error}`))
