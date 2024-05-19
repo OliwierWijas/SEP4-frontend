@@ -1,8 +1,6 @@
-import { useEffect } from "react"
-
-export function useDeleteMember({ username }) {
-    useEffect(() => {
-        const deleteMember = async () => {
+export function useDeleteMember() {
+    const deleteMember = async (username) => {
+        if (username) {
             const token = localStorage.getItem("jwt")
             const response = await fetch(`http://localhost:8080/auth/houses/members/${username}`, {
                 headers: {
@@ -25,6 +23,6 @@ export function useDeleteMember({ username }) {
                 }
             }
         }
-        deleteMember()
-    }, [username])
+    }
+    return deleteMember
 }

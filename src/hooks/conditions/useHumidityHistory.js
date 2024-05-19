@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useHumidity({ deviceId, interval }) {
+export function useHumidityHistory(deviceId, interval) {
     const [humidityData, setHumidityData] = useState(null)
 
     useEffect(() => {
@@ -8,7 +8,15 @@ export function useHumidity({ deviceId, interval }) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, { signal })
+            const token = localStorage.getItem("jwt")
+
+            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, {
+                signal, headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                method: "GET"
+            })
                 .then(response => response.json())
                 .then(data => setHumidityData(data))
                 .catch(error => {

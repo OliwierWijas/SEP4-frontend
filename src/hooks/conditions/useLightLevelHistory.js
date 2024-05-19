@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useLightLevel({ deviceId, interval }) {
+export function useLightLevelHistory(deviceId, interval) {
     const [lightLevelData, setLightLevelData] = useState(null)
 
     useEffect(() => {
@@ -8,7 +8,15 @@ export function useLightLevel({ deviceId, interval }) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`http://localhost:8080/light/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, { signal })
+            const token = localStorage.getItem("jwt")
+
+            fetch(`http://localhost:8080/light/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, {
+                signal, headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                method: "GET"
+            })
                 .then(response => response.json())
                 .then(data => setLightLevelData(data))
                 .catch(error => {

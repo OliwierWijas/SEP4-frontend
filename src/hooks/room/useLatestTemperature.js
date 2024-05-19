@@ -7,7 +7,6 @@ export function useLatestTemperature(deviceId) {
         if (deviceId && deviceId > 0) {
             const token = localStorage.getItem("jwt")
 
-            
             const controller = new AbortController();
             const signal = controller.signal;
 

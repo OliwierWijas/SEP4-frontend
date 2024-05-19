@@ -8,11 +8,11 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
 
   const handleMouseEnter = () => {
     setIsHovered(true);
-  };
+  }
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-  };
+  }
 
   const onClick = () => {
     setRoom(room)
@@ -32,15 +32,15 @@ function Room({ room, setRoom, onDelete, setEditRoomOpen }) {
       </div>
       {isHovered ? (
         <div className="hover-content">
-          <p className="font-bold text-white">Temperature: {room?.temperature}</p>
-          <p className="font-bold text-white">Humidity: {room?.humidity}</p>
-          <p className="font-bold text-white">Light Level: {room?.lightLevel}</p>
+          <p className="font-bold text-white">Temperature: {room?.latestTemperature}</p>
+          <p className="font-bold text-white">Humidity: {room?.latestHumidity}</p>
+          <p className="font-bold text-white">Light Level: {room?.latestLightLevel}</p>
         </div>
       ) : (
         <p className="font-bold text-white text-2xl">{room?.name}</p>
       )}
     </div>
-  );
+  )
 }
 
 export default Room;

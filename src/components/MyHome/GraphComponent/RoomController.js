@@ -1,59 +1,44 @@
 import Toggle from './Toggle.js';
-import { useSetTemperature } from '../../../hooks/mocks/useSetTemperatureLevelMock.js';
-import { useSetWindow } from '../../../hooks/mocks/useSetWindowMock.js';
-import { useSetLightLevel } from '../../../hooks/mocks/useSetLightLevelMock.js';
-import { useEffect, useState } from 'react';
+import { useSetTemperature } from '../../../hooks/room/useSetTemperature.js';
+import { useSwitchWindow } from '../../../hooks/room/useSetWindow.js';
+import { useSetLightLevel } from '../../../hooks/room/useSetLightLevel.js';
 
-function RoomController({ roomId, radiatorStatus, setRadiatorStatus, windowsStatus, setWindowsStatus, lightStatus, setLightStatus }) {
-    const [selectedRoomId, setSelectedRoomId] = useState(roomId)
-
-    useEffect(() => {
-        setSelectedRoomId(roomId)
-        setRadiatorStatus(null)
-    }, [roomId, setRadiatorStatus]);
-
-    useSetTemperature( { deviceId: selectedRoomId, radiatorLevel: radiatorStatus })
-    useSetWindow({ deviceId: selectedRoomId, windowStatus: windowsStatus })
-    useSetLightLevel({ deviceId: selectedRoomId, lightLevel: lightStatus })
-
+function RoomController({ room, setRoom}) {
+    useSetTemperature({ deviceId: room?.deviceId, radiatorState: room?.radiatorState });
+    useSwitchWindow({ deviceId: room?.deviceId, isWindowOpen: room?.isWindowOpen })
+    useSetLightLevel({ deviceId: room?.deviceId, lightLevel: room?.lightLevel })
 
     const incrementRadiatorStatus = () => {
-        setRadiatorStatus(prevState => {
-            if (prevState < 6) {
-                return prevState + 1
-            } else {
-                return prevState
-            }
+        setRoom(prevRoom => {
+            const newRadiatorState = Math.min(prevRoom.radiatorState + 1, 6);
+            return { ...prevRoom, radiatorState: newRadiatorState };
         });
     }
 
     const decrementRadiatorStatus = () => {
-        setRadiatorStatus(prevState => {
-            if (prevState > 0) {
-                return prevState - 1
-            } else {
-                return prevState
-            }
+        setRoom(prevRoom => {
+            const newRadiatorState = Math.max(prevRoom.radiatorState - 1, 0);
+            return { ...prevRoom, radiatorState: newRadiatorState };
         });
     }
 
     const incrementLightStatus = () => {
-        setLightStatus(prevState => {
-            if (prevState < 4) {
-                return prevState + 1
-            } else {
-                return prevState
-            }
+        setRoom(prevRoom => {
+            const newLightLevel = Math.min(prevRoom.lightLevel + 1, 4);
+            return { ...prevRoom, lightLevel: newLightLevel };
         });
     }
 
     const decrementLightStatus = () => {
-        setLightStatus(prevState => {
-            if (prevState > 0) {
-                return prevState - 1
-            } else {
-                return prevState
-            }
+        setRoom(prevRoom => {
+            const newLightLevel = Math.max(prevRoom.lightLevel - 1, 0);
+            return { ...prevRoom, lightLevel: newLightLevel };
+        });
+    }
+
+    const switchWindow = () => {
+        setRoom(prevRoom => {
+            return {...prevRoom, isWindowOpen: !prevRoom.isWindowOpen}
         });
     }
 
@@ -63,17 +48,17 @@ function RoomController({ roomId, radiatorStatus, setRadiatorStatus, windowsStat
                 <div className="flex items-center">
                     <p style={{ color: "#a79277" }} className="font-semibold">Radiator</p>
                     <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementRadiatorStatus} data-testid="radiator-up">▲</button>
-                    <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{radiatorStatus}</div>
+                    <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{room?.radiatorState}</div>
                     <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementRadiatorStatus} data-testid="radiator-down">▼</button>
                 </div>
                 <div className='flex items-center mt-8 lg:mt-0'>
                     <p style={{ color: "#a79277" }} className="font-semibold mx-2">Windows</p>
-                    <Toggle status={windowsStatus} setStatus={setWindowsStatus}></Toggle>
+                    <Toggle status={room?.isWindowOpen} setStatus={switchWindow}></Toggle>
                 </div>
                 <div className="flex items-center mt-8 lg:mt-0">
                     <p style={{ color: "#a79277" }} className="font-semibold">Light level</p>
                     <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={incrementLightStatus} data-testid="lights-up">▲</button>
-                    <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{lightStatus}</div>
+                    <div style={{ height: "40px", width: "35px", border: "0.5px solid #C4B098", color: "#C4B098" }} className="flex justify-center items-center font-bold text-xl shadow-md rounded">{room?.lightLevel}</div>
                     <button style={{ background: "#a79277", height: "40px" }} className="block text-white rounded md:border-0 dark:text-white shadow-md px-2 mx-2" onClick={decrementLightStatus} data-testid="lights-down">▼</button>
                 </div>
             </div>
