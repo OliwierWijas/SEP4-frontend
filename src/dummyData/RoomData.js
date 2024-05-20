@@ -1,11 +1,11 @@
 const roomData = [
-    { id: 1, name: "Living Room", temperature: "23", humidity: 35, lightLevel: 4, radiatorLevel: 1, window: true },
-    { id: 2, name: "Hall", temperature: "20", humidity: 67, lightLevel: 2, radiatorLevel: 4, window: true },
-    { id: 3, name: "Kitchen", temperature: "21", humidity: 52, lightLevel: 3, radiatorLevel: 5, window: false },
-    { id: 4, name: "Bathroom", temperature: "27", humidity: 92, lightLevel: 0, radiatorLevel: 3, window: true },
-    { id: 5, name: "Bedroom 1", temperature: "18", humidity: 60, lightLevel: 2, radiatorLevel: 1, window: false },
-    { id: 6, name: "Bedroom 2", temperature: "23", humidity: 61, lightLevel: 0, radiatorLevel: 0, window: true },
-    { id: 7, name: "Toilet", temperature: "18", humidity: 82, lightLevel: 0, radiatorLevel: 6, window: false },
+    { id: 1, deviceId: 1, name: "Living Room", latestTemperature: "23", latestHumidity: 35, latestLightLevel: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 },
+    { id: 2, deviceId: 3, name: "Hall", latestTemperature: "20", latestHumidity: 67, latestLightLevel: 50, radiatorState: 4, isWindowOpen: true, lightLevel: 2 },
+    { id: 3, deviceId: 4, name: "Kitchen", latestTemperature: "21", latestHumidity: 52, latestLightLevel: 75, radiatorState: 5, isWindowOpen: false, lightLevel: 3 },
+    { id: 4, deviceId: 33, name: "Bathroom", latestTemperature: "27", latestHumidity: 92, latestLightLevel: 0, radiatorState: 3, isWindowOpen: true, lightLevel: 0 },
+    { id: 5, deviceId: 21, name: "Bedroom 1", latestTemperature: "18", latestHumidity: 60, latestLightLevel: 50, radiatorState: 1, isWindowOpen: false, lightLevel: 2},
+    { id: 6, deviceId: 18, name: "Bedroom 2", latestTemperature: "23", latestHumidity: 61, latestLightLevel: 25, radiatorState: 0, isWindowOpen: true, lightLevel: 1 },
+    { id: 7, deviceId: 8, name: "Toilet", latestTemperature: "18", latestHumidity: 82, latestLightLevel: 0, radiatorState: 6, isWindowOpen: false, lightLevel: 0 },
   ];
   
   export default roomData;

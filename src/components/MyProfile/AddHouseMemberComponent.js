@@ -1,14 +1,13 @@
 import BrownButton from "../BrownButton.js";
 import { useState } from 'react';
+import { useAddMember } from "../../hooks/home/useAddMember.js";
 
-function AddHouseMember({ onAddMember }) {
+function AddHouseMember() {
     const [username, setUsername] = useState('');
+    const addMember = useAddMember()
 
-    const handleAdd = () => {
-        if (username.trim() !== '') { 
-            onAddMember(username); 
-            setUsername('');
-        }
+    const onAdd = () => {
+        addMember(username)
     };
 
     return (
@@ -25,7 +24,7 @@ function AddHouseMember({ onAddMember }) {
                 data-testid="username-input"
             />
             <div className="mx-2">
-                <BrownButton text="Add" className="text-bold" onClick={handleAdd}/> 
+                <BrownButton text="Add" className="text-bold" onClick={onAdd}/> 
             </div>
         </div>
     );

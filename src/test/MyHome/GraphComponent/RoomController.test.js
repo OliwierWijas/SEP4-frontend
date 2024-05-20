@@ -1,187 +1,86 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 import RoomController from '../../../components/MyHome/GraphComponent/RoomController.js';
 
-describe('RoomController component', () => {
-  it('renders the component with initial values', () => {
-    render(
-      <RoomController
-        roomId={1}
-        radiatorStatus={3}
-        setRadiatorStatus={() => { }}
-        windowsStatus={false}
-        setWindowsStatus={() => { }}
-        lightStatus={2}
-        setLightStatus={() => { }}
-      />
-    );
+jest.mock('../../../hooks/room/useSetRadiator.js', () => ({
+  useSetRadiator: jest.fn(() => jest.fn()),
+}));
 
-    expect(screen.getByTestId('room-controller')).toBeInTheDocument();
-    expect(screen.getByText('Radiator')).toBeInTheDocument();
-    expect(screen.getByText('Windows')).toBeInTheDocument();
-    expect(screen.getByText('Light level')).toBeInTheDocument();
-    expect(screen.getByText('3')).toBeInTheDocument();
-    expect(screen.getByText('2')).toBeInTheDocument();
+jest.mock('../../../hooks/room/useSetWindow.js', () => ({
+  useSwitchWindow: jest.fn(() => jest.fn()),
+}));
+
+jest.mock('../../../hooks/room/useSetLightLevel.js', () => ({
+  useSetLightLevel: jest.fn(() => jest.fn()),
+}));
+
+describe('RoomController', () => {
+    let setRoom;
+    let room;
+    let mockSetRadiator, mockSetWindow, mockSetLight;
+
+    beforeEach(() => {
+      room = { radiatorState: 2, isWindowOpen: false, lightLevel: 2 };
+      setRoom = jest.fn((update) => {
+          if (typeof update === 'function') {
+              room = { ...room, ...update(room) };
+          } else {
+              room = { ...room, ...update };
+          }
+      });
+  
+      mockSetRadiator = require('../../../hooks/room/useSetRadiator.js').useSetRadiator;
+      mockSetWindow = require('../../../hooks/room/useSetWindow.js').useSwitchWindow;
+      mockSetLight = require('../../../hooks/room/useSetLightLevel.js').useSetLightLevel;
+  
+      mockSetRadiator.mockReturnValue(jest.fn());
+      mockSetWindow.mockReturnValue(jest.fn());
+      mockSetLight.mockReturnValue(jest.fn());
   });
 
-  test('increment temperature button increases temperature when clicked', () => {
-    
-    const roomId = 1
-    let radiatorStatus = 0
-    const setRadiatorStatus = jest.fn(status => { console.log(status)})
-    let windowsStatus = true; // Example window status
-    const setWindowsStatus = jest.fn(); // Mock function to set window status
-    let lightStatus = 2; // Example light status
-    const setLightStatus = jest.fn(); // Mock function to set light status
+    it('increments radiator status', () => {
+        render(<RoomController room={room} setRoom={setRoom} />);
 
-    // Render the component with mock data and functions
-    render(
-      <RoomController
-        roomId={roomId}
-        radiatorStatus={radiatorStatus}
-        setRadiatorStatus={setRadiatorStatus}
-        windowsStatus={windowsStatus}
-        setWindowsStatus={setWindowsStatus}
-        lightStatus={lightStatus}
-        setLightStatus={setLightStatus}
-      />
-    );
-
-    // Act: Click on the increment temperature button
-    const incrementButton = screen.getByTestId('radiator-up');
-    fireEvent.click(incrementButton);
-
-    // Assert: Check if the setRadiatorStatus function was called with the incremented value
-    //expect(setRadiatorStatus).toHaveBeenNthCalledWith(2, 1); // Assuming incrementing by 1
-  });
-
-  /*it('increments and decrements radiator status correctly', () => {
-    let radiatorStatus = 3;
-    const setRadiatorStatus = jest.fn(status => {
-      radiatorStatus = status(radiatorStatus);
+        fireEvent.click(screen.getByTestId('radiator-up'));
+        expect(setRoom).toHaveBeenCalled();
+        expect(room.radiatorState).toBe(3);
+        expect(mockSetRadiator()).toHaveBeenCalledWith(room);
     });
 
-    render(
-      <RoomController
-        roomId={1}
-        radiatorStatus={radiatorStatus}
-        setRadiatorStatus={setRadiatorStatus}
-        windowsStatus={false}
-        setWindowsStatus={() => { }}
-        lightStatus={2}
-        setLightStatus={() => { }}
-      />
-    );
+    it('decrements radiator status', () => {
+        render(<RoomController room={room} setRoom={setRoom} />);
 
-    fireEvent.click(screen.getByTestId('radiator-up'));
-    expect(radiatorStatus).toBe(4);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(3);
-  });*/
-
-  /*it('forbids from increasing the radiator status above 6 and below 0', () => {
-    let radiatorStatus = 6;
-    const setRadiatorStatus = jest.fn(newState => {
-      radiatorStatus = newState;
+        fireEvent.click(screen.getByTestId('radiator-down'));
+        expect(setRoom).toHaveBeenCalled();
+        expect(room.radiatorState).toBe(1);
+        expect(mockSetRadiator()).toHaveBeenCalledWith(room);
     });
 
-    render(
-      <RoomController
-        roomId={1}
-        radiatorStatus={radiatorStatus}
-        setRadiatorStatus={setRadiatorStatus}
-        windowsStatus={false}
-        setWindowsStatus={() => { }}
-        lightStatus={2}
-        setLightStatus={() => { }}
-      />
-    );
+    it('increments light level', () => {
+        render(<RoomController room={room} setRoom={setRoom} />);
 
-    fireEvent.click(screen.getByTestId('radiator-up'));
-    expect(radiatorStatus).toBe(6);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(5);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(4);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(3);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(2);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(1);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(0);
-
-    fireEvent.click(screen.getByTestId('radiator-down'));
-    expect(radiatorStatus).toBe(0);
-  });
-
-  it('increments and decrements light status correctly', () => {
-    let lightStatus = 2;
-    const setLightStatus = jest.fn(newState => {
-      lightStatus = newState;
+        fireEvent.click(screen.getByTestId('lights-up'));
+        expect(setRoom).toHaveBeenCalled();
+        expect(room.lightLevel).toBe(3);
+        expect(mockSetLight()).toHaveBeenCalledWith(room);
     });
 
-    render(
-      <RoomController
-        roomId={1}
-        radiatorStatus={3}
-        setRadiatorStatus={() => { }}
-        windowsStatus={false}
-        setWindowsStatus={() => { }}
-        lightStatus={lightStatus}
-        setLightStatus={setLightStatus}
-      />
-    );
+    it('decrements light level', () => {
+        render(<RoomController room={room} setRoom={setRoom} />);
 
-    fireEvent.click(screen.getByTestId('lights-up'));
-    expect(lightStatus).toBe(3);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(2);
-  });
-
-  it('forbids from increasing the light status above 4 and below 0', () => {
-    let lightStatus = 4;
-    const setLightStatus = jest.fn(newState => {
-      lightStatus = newState;
+        fireEvent.click(screen.getByTestId('lights-down'));
+        expect(setRoom).toHaveBeenCalled();
+        expect(room.lightLevel).toBe(1);
+        expect(mockSetLight()).toHaveBeenCalledWith(room);
     });
 
-    render(
-      <RoomController
-        roomId={1}
-        radiatorStatus={3}
-        setRadiatorStatus={() => { }}
-        windowsStatus={false}
-        setWindowsStatus={() => { }}
-        lightStatus={lightStatus}
-        setLightStatus={setLightStatus}
-      />
-    );
+    it('toggles window status', () => {
+        render(<RoomController room={room} setRoom={setRoom} />);
 
-    fireEvent.click(screen.getByTestId('lights-up'));
-    expect(lightStatus).toBe(4);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(3);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(2);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(1);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(0);
-
-    fireEvent.click(screen.getByTestId('lights-down'));
-    expect(lightStatus).toBe(0);
-  });*/
+        fireEvent.click(screen.getByTestId('toggleId'));
+        expect(setRoom).toHaveBeenCalled();
+        expect(room.isWindowOpen).toBe(true);
+        expect(mockSetWindow()).toHaveBeenCalledWith(room);
+    });
 });

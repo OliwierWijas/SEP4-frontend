@@ -5,7 +5,7 @@ import '../../../styles/DateIntervalPicker.css'
 
 function DateIntervalPicker({ interval, setInterval }) {
   const handleDateChange = (item) => {
-    setInterval([item.selection]);
+    setInterval(item.selection);
   }
 
   return (
@@ -15,7 +15,7 @@ function DateIntervalPicker({ interval, setInterval }) {
         showSelectionPreview={true}
         moveRangeOnFirstSelection={false}
         months={1}
-        ranges={interval}
+        ranges={[interval]}
         direction="horizontal"
       />
     </div>

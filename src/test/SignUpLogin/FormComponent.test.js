@@ -3,10 +3,10 @@ import { render, fireEvent, screen } from '@testing-library/react'
 import FormComponent from '../../components/SignUp/FormComponent.js'
 
 describe('FormComponent', () => {
-  it('renders email input field when emailNeeded prop is true', () => {
-    render(<FormComponent emailNeeded={true} />)
-    const emailInput = screen.getByPlaceholderText('email')
-    expect(emailInput).toBeInTheDocument()
+  it('renders username input field when usernameNeeded prop is true', () => {
+    render(<FormComponent usernameNeeded={true} />)
+    const usernameInput = screen.getByPlaceholderText('username')
+    expect(usernameInput).toBeInTheDocument()
   })
 
   it('does not renders password input field when passwordNeeded prop is true', () => {
@@ -18,45 +18,45 @@ describe('FormComponent', () => {
   it('calls action function with input values when submit button is clicked', () => {
     const mockAction = jest.fn()
     render(
-      <FormComponent 
-        emailNeeded={true} 
-        passwordNeeded={true} 
-        repeatPasswordNeeded={true} 
-        action={mockAction} 
-        buttonText="Submit" 
+      <FormComponent
+        usernameNeeded={true}
+        passwordNeeded={true}
+        repeatPasswordNeeded={true}
+        action={mockAction}
+        buttonText="Submit"
       />
     )
 
-    const emailInput = screen.getByPlaceholderText('email')
+    const usernameInput = screen.getByPlaceholderText('username')
     const passwordInput = screen.getByPlaceholderText('password')
     const repeatPasswordInput = screen.getByPlaceholderText('repeat password')
     const submitButton = screen.getByText('Submit')
 
-    fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
+    fireEvent.change(usernameInput, { target: { value: 'testUsername' } })
     fireEvent.change(passwordInput, { target: { value: 'password123' } })
     fireEvent.change(repeatPasswordInput, { target: { value: 'password123' } })
 
     fireEvent.click(submitButton)
 
-    expect(mockAction).toHaveBeenCalledWith('test@example.com', 'password123')
+    expect(mockAction).toHaveBeenCalledWith('testUsername', 'password123')
   })
 
-  it('throws an alert when email was not entered', () => {
+  it('throws an alert when username was not entered', () => {
     const mockAction = jest.fn();
-    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
     render(
-      <FormComponent 
-        emailNeeded={true}
+      <FormComponent
+        usernameNeeded={true}
         buttonText="Submit"
         action={mockAction}
       />
     );
 
-    const emailInput = screen.getByPlaceholderText('email')
+    const usernameInput = screen.getByPlaceholderText('username')
     const submitButton = screen.getByText('Submit')
 
-    fireEvent.change(emailInput, { target: { value: '' } })
+    fireEvent.change(usernameInput, { target: { value: '' } })
 
     fireEvent.click(submitButton)
 
@@ -68,10 +68,10 @@ describe('FormComponent', () => {
 
   it('throws an alert when password was not entered', () => {
     const mockAction = jest.fn();
-    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
     render(
-      <FormComponent 
+      <FormComponent
         passwordNeeded={true}
         repeatPasswordNeeded={true}
         buttonText="Submit"
@@ -95,13 +95,13 @@ describe('FormComponent', () => {
 
   it('throws an alert when passwords do not match', () => {
     const mockAction = jest.fn();
-    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => {});
+    const mockAlert = jest.spyOn(window, 'alert').mockImplementation(() => { });
 
     render(
-      <FormComponent 
-        passwordNeeded={true} 
-        repeatPasswordNeeded={true} 
-        buttonText="Submit" 
+      <FormComponent
+        passwordNeeded={true}
+        repeatPasswordNeeded={true}
+        buttonText="Submit"
         action={mockAction}
       />
     );

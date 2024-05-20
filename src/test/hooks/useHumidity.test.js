@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { useHumidity } from '../../hooks/useHumidity.js';
+import { useHumidity } from '../../hooks/conditions/useHumidityHistory.js';
 
 describe('useHumidity', () => {
   it('fetches humidity data and sets state', async () => {

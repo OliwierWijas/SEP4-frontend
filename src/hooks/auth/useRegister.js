@@ -6,6 +6,7 @@ export async function useRegister(username, password) {
             method: "POST",
             body: JSON.stringify(user),
         })
+        console.log(response.status)
 
         if (!response.ok) {
             if (response.body) {

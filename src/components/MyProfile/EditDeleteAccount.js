@@ -6,50 +6,51 @@ import { IoClose } from "react-icons/io5";
 import PopUp from "../PopUp.js";
 import { useNavigate } from "react-router-dom";
 import ConfirmWithPassword from "./ConfirmWithPassword.js";
+import { useEditUsername } from "../../hooks/auth/useEditUsername.js";
+import { useEditPassword } from "../../hooks/auth/useEditPassword.js";
 
-export default function EditDeleteAccount() {
-  const [inputs, setInputs] = useState(["John", "john@dummy.com", "123123"]);
+export default function EditDeleteAccount({ setEditProfileOpen }) {
   const navigate = useNavigate();
-  const passwordSize = inputs[2].length;
 
-  const [isVisible, toggleVisible] = useState(false);
-  const [isEditing, toggleEditing] = useState(false);
+  const [isVisible, toggleVisible] = useState(false)
+  const [isEditing, toggleEditing] = useState(false)
   const [isPopup, togglePopup] = useState(false);
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // New state for confirm password
+  const [newUsername, setNewUsername] = useState("")
+  const [newPassword, setNewPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSave = () => {
-    if (isEditing) {
-      const newinputs = [...inputs];
+  const editUsername = useEditUsername()
+  const editPassword = useEditPassword()
 
-      if (name.trim() !== "") {
-        newinputs[0] = name.trim();
-      }
+  const onEdit = () => {
+    const currentUsername = localStorage.getItem("username")
+    const currentPassword = localStorage.getItem("password")
 
-      if (password.trim() !== "") {
-        newinputs[2] = password.trim();
-      }
-
-      setInputs(newinputs);
-      handleEditing();
-      // needs the hook of sending update info for profile
-    } else {
-      navigate("/");
-      // needs hook for deleting the profile
+    const editedUsername = {
+      newUsername,
+      password: currentPassword
     }
 
-    handlePopup();
-  };
+    const editedPassword ={
+      username: currentUsername,
+      oldPassword: currentPassword,
+      newPassword
+    }
+
+    if (currentUsername !== newUsername && newUsername !== '') 
+      editUsername(currentUsername, editedUsername)
+    if (currentPassword !== newPassword && newPassword !== '')
+      editPassword(currentUsername, editedPassword)
+  }
 
   const handleVisible = () => {
     toggleVisible(!isVisible);
-  };
+  }
 
   const handleEditing = () => {
     toggleEditing(!isEditing);
-  };
+  }
 
   const handlePopup = () => {
     togglePopup(!isPopup);
@@ -60,11 +61,9 @@ export default function EditDeleteAccount() {
   };
 
   const handleConfirmSave = () => {
-    // Logic to compare passwords or other actions before calling handleSave
-    if (confirmPassword === inputs[2]) {
-      handleSave();
+    if (confirmPassword === localStorage.getItem("password")) {
+      onEdit()
     } else {
-      // Handle incorrect password case
       alert("Incorrect password");
     }
   };
@@ -96,12 +95,12 @@ export default function EditDeleteAccount() {
                 {isEditing ? (
                   <input
                     className="w-auto"
-                    placeholder={inputs[0]}
+                    placeholder={"new username"}
                     data-testid="username-input"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setNewUsername(e.target.value)}
                   />
                 ) : (
-                  ` ${inputs[0]}`
+                  ` ${localStorage.getItem("username")}`
                 )}
               </div>
             </div>
@@ -115,13 +114,13 @@ export default function EditDeleteAccount() {
                   <input
                     className="w-auto"
                     type="password"
-                    placeholder="Password"
+                    placeholder={"new password"}
                     data-testid="password-input"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 ) : (
                   <>
-                    {isVisible ? ` ${inputs[2]}` : "*".repeat(passwordSize)}
+                    {isVisible ? ` ${localStorage.getItem("password")}` : "*".repeat(localStorage.getItem("password")?.length)}
                     <div className="absolute top-3 right-2">
                       {isVisible ? (
                         <FaRegEye
@@ -145,7 +144,10 @@ export default function EditDeleteAccount() {
               data-testid="savedelete"
               className="text-white w-1/4 py-2 px-4 rounded mt-4"
               style={{ backgroundColor: isEditing ? "#a79277" : "#FFA7A7" }}
-              onClick={handlePopup}
+              //onClick={handlePopup}
+              //remember to change here sth idk what
+              //deleted onEdit from here
+              onClick={isEditing ? onEdit : () => setEditProfileOpen(true)}
             >
               {isEditing ? "SAVE" : "DELETE ACCOUNT"}
             </button>
@@ -160,5 +162,5 @@ export default function EditDeleteAccount() {
         />
       </PopUp>
     </>
-  );
+  )
 }

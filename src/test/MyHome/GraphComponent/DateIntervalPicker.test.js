@@ -42,7 +42,7 @@ describe('DateIntervalPicker component', () => {
         });
 
         expect(setIntervalMock).toHaveBeenCalledTimes(2)
-        expect(setIntervalMock).toHaveBeenNthCalledWith(1, [{"endDate": new Date('2024-04-15T00:00:00.000Z')}])
-        expect(setIntervalMock).toHaveBeenNthCalledWith(2, [{"startDate": new Date('2024-04-10T00:00:00.000Z')}])
+        expect(setIntervalMock).toHaveBeenNthCalledWith(1, {"endDate": new Date('2024-04-15T00:00:00.000Z')})
+        expect(setIntervalMock).toHaveBeenNthCalledWith(2, {"startDate": new Date('2024-04-10T00:00:00.000Z')})
     })
 })

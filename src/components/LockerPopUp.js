@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import '../styles/ScrollBar.css';
 import BrownButton from './BrownButton.js';
+import { useDoor } from '../hooks/home/useDoor.js';
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
 
@@ -9,11 +10,15 @@ function LockerPopUp() {
     const [password, setPassword] = useState("");
     const [isVisible, toggleVisible] = useState(false);
 
+    const switchDoor = useDoor()
+
     const handleVisible = () => {
         toggleVisible(!isVisible);
     };
 
     const handleButtonClick = () => {
+        const houseId = localStorage.getItem("houseId")
+        switchDoor(houseId, password, buttonText === "Lock" ? true : false)
         setPassword("");
         setButtonText(buttonText === "Lock" ? "Unlock" : "Lock");
     };

@@ -1,9 +1,9 @@
 import NotificationComponent from "./NotificationComponent.js"
 import '../../styles/ScrollBar.css';
-import { useNotifications } from "../../hooks/mocks/useNotificationsMock.js";
+import { useNotifications } from "../../hooks/home/useNotifications.js";
 
 function NotificationBoxComponent() {
-    const notificationData = useNotifications(1)
+    const notificationData = useNotifications(localStorage.getItem("jwt"))
 
     return (
         <div className="brown-gradient-y h-512 w-full flex flex-col rounded-md shadow-md" data-testid="notification-box">
