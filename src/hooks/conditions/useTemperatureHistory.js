@@ -10,7 +10,7 @@ export function useTemperatureHistory(deviceId, interval) {
             
             const token = localStorage.getItem("jwt")
 
-            fetch(`http://localhost:8080/temperature/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.dateTo}`,  {
+            fetch(`http://localhost:8080/temperature/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`,  {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`

@@ -31,7 +31,7 @@ function Room({ room, setRoom, setEditRoomOpen }) {
     >
       <div className="edit-icon-wrapper absolute top-4 right-4 flex items-center">
         <FaRegEdit className="text-white mr-2" onClick={() => setEditRoomOpen(true)} data-testid="edit-room-button"/> 
-        <IoTrashOutline className="text-white" onClick={() => onDelete()}/> 
+        <IoTrashOutline className="text-white" onClick={() => onDelete()} data-testid="delete-room-button"/> 
       </div>
       {isHovered ? (
         <div className="hover-content">

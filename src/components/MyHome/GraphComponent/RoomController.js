@@ -3,7 +3,7 @@ import { useSetRadiator } from '../../../hooks/room/useSetRadiator.js'
 import { useSwitchWindow } from '../../../hooks/room/useSetWindow.js'
 import { useSetLightLevel } from '../../../hooks/room/useSetLightLevel.js'
 
-function RoomController({ room, setRoom}) {
+function RoomController({ room, setRoom }) {
     const setTemperature = useSetRadiator()
     const setWindow = useSwitchWindow()
     const setLight = useSetLightLevel()
@@ -11,40 +11,45 @@ function RoomController({ room, setRoom}) {
     const incrementRadiatorStatus = () => {
         setRoom(prevRoom => {
             const newRadiatorState = Math.min(prevRoom.radiatorState + 1, 6)
-            return { ...prevRoom, radiatorState: newRadiatorState }
+            const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
+            setTemperature(newRoom)
+            return newRoom
         })
-        setTemperature(room)
     }
 
     const decrementRadiatorStatus = () => {
         setRoom(prevRoom => {
             const newRadiatorState = Math.max(prevRoom.radiatorState - 1, 0)
-            return { ...prevRoom, radiatorState: newRadiatorState }
+            const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
+            setTemperature(newRoom)
+            return newRoom
         })
-        setTemperature(room)
     }
 
     const incrementLightStatus = () => {
         setRoom(prevRoom => {
             const newLightLevel = Math.min(prevRoom.lightLevel + 1, 4)
-            return { ...prevRoom, lightLevel: newLightLevel }
+            const newRoom = { ...prevRoom, lightLevel: newLightLevel }
+            setLight(newRoom)
+            return newRoom
         })
-        setLight(room)
     }
 
     const decrementLightStatus = () => {
         setRoom(prevRoom => {
             const newLightLevel = Math.max(prevRoom.lightLevel - 1, 0)
-            return { ...prevRoom, lightLevel: newLightLevel }
+            const newRoom = { ...prevRoom, lightLevel: newLightLevel }
+            setLight(newRoom)
+            return newRoom
         })
-        setLight(room)
     }
 
     const switchWindow = () => {
         setRoom(prevRoom => {
-            return {...prevRoom, isWindowOpen: !prevRoom.isWindowOpen}
+            const newRoom = { ...prevRoom, isWindowOpen: !prevRoom.isWindowOpen }
+            setWindow(newRoom)
+            return newRoom
         })
-        setWindow(room)
     }
 
     return (
