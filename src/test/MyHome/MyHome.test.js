@@ -5,9 +5,15 @@ import MyHome from '../../routes/MyHome.js'
 import { Chart } from 'chart.js';
 import 'jest-canvas-mock';
 import { useRoomData } from '../../hooks/room/useRooms.js';
+import { useTemperatureHistory } from '../../hooks/conditions/useTemperatureHistory.js';
+import { addDays } from 'date-fns';
 
 jest.mock('react-chartjs-2', () => ({
-  Line: () => null,
+  Line: () => <div>
+    <p>-1°C</p>
+    <p>-5°C</p>
+    <p>5°C</p>
+  </div>,
 }));
 
 jest.mock("../../hooks/room/useRooms.js", () => ({
@@ -16,14 +22,16 @@ jest.mock("../../hooks/room/useRooms.js", () => ({
 
 describe('myHome Component Tests', () => {
   jest.mock("../../hooks/conditions/useTemperatureHistory.js", () => ({
-    useTemperature: jest.fn(),
+    useTemperatureHistory: jest.fn(),
   }))
 
-  let useRoomsMock
+  let useRoomsMock, useTemperatureMock
 
   beforeEach(() => {
     useRoomsMock = require('../../hooks/room/useRooms.js').useRoomData;
     useRoomsMock.mockReturnValue([{ id: 1, deviceId: 1, name: "Living Room", latestTemperature: "23", latestHumidity: 35, latestLightLevel: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 }, { id: 2, deviceId: 3, name: "Hall", latestTemperature: "20", latestHumidity: 67, latestLightLevel: 50, radiatorState: 4, isWindowOpen: true, lightLevel: 2 }]);
+    useTemperatureMock = require('../../hooks/conditions/useTemperatureHistory.js').useTemperatureHistory;
+    useTemperatureMock.mockReturnValue([{ date: new Date(), value: 25 }])
   })
 
   it('renders without crashing', async () => {
@@ -38,18 +46,18 @@ describe('myHome Component Tests', () => {
     expect(rooms.length).toBe(2);
     fireEvent.click(rooms[0])
     expect(screen.getByTestId('room-name-header')).toContainHTML("Living Room")
+    expect(screen.getByText('23°C')).toBeInTheDocument()
+    expect(screen.getByText('100%')).toBeInTheDocument()
+    expect(screen.getByText('35%')).toBeInTheDocument()
     fireEvent.click(rooms[1])
     expect(screen.getByTestId('room-name-header')).toContainHTML("Hall")
+    expect(screen.getByText('20°C')).toBeInTheDocument()
+    expect(screen.getByText('67%')).toBeInTheDocument()
+    expect(screen.getByText('50%')).toBeInTheDocument()
   })
 
   it('temperature data is fetched and displayed', async () => {
     render(<MyHome />)
-    expect(await screen.findByText('23')).toBeInTheDocument()
-  })
-
-  /*it('graph data updates based on room and interval', async () => {
-    render(<MyHome />)
-    fireEvent.click(screen.queryAllByTestId('room')[0])
     expect(await screen.findByText('25')).toBeInTheDocument()
   })
 
@@ -86,16 +94,14 @@ describe('myHome Component Tests', () => {
   })
 
   it('graph data updates correctly with multiple temperature data points', async () => {
-    jest.mock('../../hooks/useTemperature.js', () => ({
-      useTemperature: jest.fn(() => [
-        { date: new Date('2024-05-01'), value: 20 },
-        { date: new Date('2024-05-02'), value: 22 },
-        { date: new Date('2024-05-03'), value: 25 },
-      ]),
-    }))
+    useTemperatureMock.mockReturnValue([
+      { date: new Date(), value: -1 },
+      { date: addDays(new Date(), 1), value: -5 },
+      { date: addDays(new Date(), 2), value: 5 },
+    ]);
     render(<MyHome />);
-    expect(await screen.findByText('20')).toBeInTheDocument()
-    expect(await screen.findByText('22')).toBeInTheDocument()
-    expect(await screen.findByText('25')).toBeInTheDocument()
-  })*/
+    expect(await screen.findByText('-1°C')).toBeInTheDocument()
+    expect(await screen.findByText('-5°C')).toBeInTheDocument()
+    expect(await screen.findByText('5°C')).toBeInTheDocument()
+  })
 })

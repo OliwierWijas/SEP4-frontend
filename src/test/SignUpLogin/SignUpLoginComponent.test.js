@@ -12,7 +12,7 @@ describe('SignUpLogin component', () => {
             <Router>
                 <SignUpLogin 
                     textArrayToDisplay={textArrayToDisplay}
-                    emailNeeded={true}
+                    usernameNeeded={true}
                     passwordNeeded={true}
                     repeatPasswordNeeded={true}
                     mainButtonText={mainButtonText}
@@ -32,14 +32,14 @@ describe('SignUpLogin component', () => {
 
     it('calls action function with correct parameters when form is submitted', () => {
         const action = jest.fn()
-        const emailNeeded = true
+        const usernameNeeded = true
         const passwordNeeded = true
         const repeatPasswordNeeded = true
 
         render(
             <Router>
                 <SignUpLogin 
-                    emailNeeded={emailNeeded}
+                    usernameNeeded={usernameNeeded}
                     passwordNeeded={passwordNeeded}
                     repeatPasswordNeeded={repeatPasswordNeeded}
                     mainButtonText="Submit"
@@ -48,16 +48,16 @@ describe('SignUpLogin component', () => {
             </Router>
         )
 
-        const emailInput = screen.getByPlaceholderText('email')
+        const usernameInput = screen.getByPlaceholderText('username')
         const passwordInput = screen.getByPlaceholderText('password')
         const repeatPasswordInput = screen.getByPlaceholderText('repeat password')
         const submitButton = screen.getByText('Submit')
 
-        fireEvent.change(emailInput, { target: { value: 'test@example.com' } })
+        fireEvent.change(usernameInput, { target: { value: 'testUsername' } })
         fireEvent.change(passwordInput, { target: { value: 'password123' } })
         fireEvent.change(repeatPasswordInput, { target: { value: 'password123' } })
         fireEvent.click(submitButton)
 
-        expect(action).toHaveBeenCalledWith('test@example.com', 'password123')
+        expect(action).toHaveBeenCalledWith('testUsername', 'password123')
     })
 })

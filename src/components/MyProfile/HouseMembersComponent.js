@@ -5,7 +5,6 @@ function HouseMembersComponent({ member }) {
     const deleteMember = useDeleteMember();
 
     const handleDelete = async () => {
-        console.log(member.username)
         deleteMember(member.username);
     };
 

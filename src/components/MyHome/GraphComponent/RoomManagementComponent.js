@@ -50,7 +50,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
                     ...prevData,
                     labels: newData && newData[0] && newData.map(data => format(parse(data.date, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy')),
                     datasets: [{
-                        ...prevData.datasets[0],
+                        ...prevData?.datasets[0],
                         label: selectedValue,
                         data: newData && newData[0] && newData.map(data => data.value),
                     }]

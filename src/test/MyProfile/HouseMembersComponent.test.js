@@ -4,41 +4,36 @@ import '@testing-library/jest-dom/extend-expect';
 import HouseMembersComponent from '../../components/MyProfile/HouseMembersComponent.js';
 import { useDeleteMember } from '../../hooks/home/useDeleteMember.js';
 
-jest.mock('../../hooks/useDeleteMember.js');
+jest.mock('../../hooks/home/useDeleteMember.js', () => ({
+  useDeleteMember: jest.fn(() => jest.fn())
+}))
 
 describe('HouseMembersComponent', () => {
+  let useDeleteMemberMock
   const member = { houseId: 1, username: 'TestUser' };
-  const onDeleteMember = jest.fn();
 
   beforeEach(() => {
-    useDeleteMember.mockReturnValue({
-      deleteMember: jest.fn().mockResolvedValue(),
-    });
+    useDeleteMemberMock = require('../../hooks/home/useDeleteMember.js').useDeleteMember
+    useDeleteMemberMock.mockReturnValue(jest.fn())
   });
 
   test('renders member username correctly', () => {
-    render(<HouseMembersComponent member={member} onDeleteMember={onDeleteMember} />);
+    render(<HouseMembersComponent member={member} />);
     expect(screen.getByText('TestUser')).toBeInTheDocument();
   });
 
   test('calls deleteMember function when delete button is clicked', async () => {
-    const deleteMemberMock = jest.fn().mockResolvedValueOnce();
-    useDeleteMember.mockReturnValue({
-      deleteMember: deleteMemberMock,
-    });
-  
-    const onDeleteMemberMock = jest.fn();
-    render(<HouseMembersComponent member={member} onDeleteMember={onDeleteMemberMock} />);
+    render(<HouseMembersComponent member={member}/>);
+    
+    const deleteMember = useDeleteMember()
     
     const deleteButton = screen.getByTestId('delete-button');
     fireEvent.click(deleteButton);
     
-    expect(deleteMemberMock).toHaveBeenCalledWith({ houseId: 1, username: 'TestUser' });
+    expect(deleteMember).toHaveBeenCalledWith('TestUser');
   
     await waitFor(() => {
-      expect(onDeleteMemberMock).toHaveBeenCalled();
+      expect(useDeleteMemberMock).toHaveBeenCalled();
     });
   });
-  
-  
 });
