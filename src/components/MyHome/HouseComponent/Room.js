@@ -24,7 +24,6 @@ function Room({ room, setRoom, setEditRoomOpen, setDeleteRoomOpen }) {
     >
       <div className="edit-icon-wrapper absolute top-4 right-4 flex items-center">
         <FaRegEdit className="text-white mr-2" onClick={() => setEditRoomOpen(true)} data-testid="edit-room-button"/> 
-        {/* this will not work, delte should happen on confirmation */}
         <IoTrashOutline className="text-white" onClick={() => setDeleteRoomOpen(true)} data-testid="delete-room-button"/> 
       </div>
       {isHovered ? (

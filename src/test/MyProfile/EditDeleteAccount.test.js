@@ -12,7 +12,7 @@ describe('Edit/Delete Account', () => {
     localStorage.setItem("username", "username")
     localStorage.setItem("password", "password")
 
-    render(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
+    renderWithRouter(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
     expect(screen.getByTestId("username-div")).toBeInTheDocument();
     expect(screen.getByTestId("password-div")).toBeInTheDocument();
     expect(screen.getByTestId("makeinvisible")).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('Edit/Delete Account', () => {
   });
 
   it('clicking on eye makes the password visible/hidden', () => {
-    render(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
+    renderWithRouter(<EditDeleteAccount setEditProfileOpen={jest.fn()} />);
 
     const passwordDiv = screen.getByTestId("password-div")
     const password = passwordDiv.textContent;
@@ -41,7 +41,7 @@ describe('Edit/Delete Account', () => {
 
 
   it('transition to and from editing state', () => {
-    render(<EditDeleteAccount setEditProfileOpen={jest.fn()} />)
+    renderWithRouter(<EditDeleteAccount setEditProfileOpen={jest.fn()} />)
     fireEvent.click(screen.getByTestId("toggleEditing"));
     expect(screen.getByText("EDIT")).toBeInTheDocument();
     expect(screen.getByTestId("password-input")).toBeInTheDocument();
@@ -77,7 +77,7 @@ describe('Edit/Delete Account', () => {
 
   it('check delete buttons changes the state', () => {
     const MockSetEditProfile = jest.fn()
-    render(<EditDeleteAccount setEditProfileOpen={MockSetEditProfile} />);
+    renderWithRouter(<EditDeleteAccount setEditProfileOpen={MockSetEditProfile} />);
     fireEvent.click(screen.getByTestId("savedelete"));
     expect(MockSetEditProfile).toHaveBeenCalled();
 

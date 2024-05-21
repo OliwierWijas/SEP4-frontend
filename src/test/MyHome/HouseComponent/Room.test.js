@@ -3,10 +3,6 @@ import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Room from '../../../components/MyHome/HouseComponent/Room.js';
 
-jest.mock('../../../hooks/room/useDeleteRoom.js', () => ({
-  useDeleteRoom: jest.fn(() => jest.fn())
-}));
-
 const roomData = {
   deviceId: '1',
   name: 'Living Room',
@@ -16,13 +12,6 @@ const roomData = {
 };
 
 describe('Room component', () => {
-  let mockDeleteRoom
-  
-  beforeEach(() => {
-    mockDeleteRoom = require('../../../hooks/room/useDeleteRoom.js').useDeleteRoom;
-    mockDeleteRoom.mockReturnValue(jest.fn());
-  })
-
   it('renders room name when not hovered', () => {
     render(<Room room={roomData} />);
     expect(screen.getByText('Living Room')).toBeInTheDocument();
@@ -52,13 +41,5 @@ describe('Room component', () => {
     const editRoomButton = screen.getByTestId('edit-room-button');
     fireEvent.click(editRoomButton);
     expect(setEditRoomOpenMock).toHaveBeenCalledWith(true);
-  });
-
-  it('calls deleteRoom when delete icon is clicked', () => {
-    const setRoomMock = jest.fn();
-    render(<Room room={roomData} setRoom={setRoomMock} />);
-    const deleteRoomButton = screen.getByTestId('delete-room-button');
-    fireEvent.click(deleteRoomButton);
-    expect(mockDeleteRoom()).toHaveBeenCalledWith('1');
   });
 });

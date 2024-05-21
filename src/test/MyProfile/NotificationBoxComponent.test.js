@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import NotificationBoxComponent from '../../components/MyProfile/NotificationBoxComponent'
-import { useNotifications } from '../../hooks/home/useNotifications'
+import { useNotifications } from '../../hooks/home/useNotifications.js'
 
-jest.mock('../../hooks/home/useNotifications', () => ({
+jest.mock('../../hooks/home/useNotifications.js', () => ({
     useNotifications: jest.fn()
 }))
 
@@ -11,10 +11,10 @@ describe('NotificationBoxComponent', () => {
     let useNotificationsMock
 
     beforeEach(() => {
-        useNotificationsMock = require('../../hooks/home/useNotifications').useNotifications
+        useNotificationsMock = require('../../hooks/home/useNotifications.js').useNotifications
         useNotificationsMock.mockReturnValue([
-            { dateString: "2024-05-11T10:57:00.000Z", text: "Temperature at home is rising, consider adjusting the thermostat." },
-            { dateString: "2024-05-12T08:30:00.000Z", text: "Humidity levels are high, open a window to let in some fresh air." }
+            { sendAt: "2024-05-11T10:57:00.000Z", message: "Temperature at home is rising, consider adjusting the thermostat." },
+            { sendAt: "2024-05-12T08:30:00.000Z", message: "Humidity levels are high, open a window to let in some fresh air." }
         ])
     })
 

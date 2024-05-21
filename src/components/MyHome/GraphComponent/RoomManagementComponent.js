@@ -23,15 +23,12 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
 
                 if (selectedValue === "Temperature") {
                     newData = TemperatureData ?? null
-                    console.log(newData)
                 }
                 else if (selectedValue === "Humidity") {
                     newData = HumidityData ?? null
-                    console.log(newData)
                 }
                 else if (selectedValue === "Light Level") {
                     newData = LightData ?? null
-                    console.log(newData)
                 }
 
                 return newData

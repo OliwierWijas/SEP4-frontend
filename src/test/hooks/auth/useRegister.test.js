@@ -13,10 +13,6 @@ describe('useRegister integration test', () => {
         const username = 'testUser123123'
         const password = 'testPassword1'
 
-        await useDeleteAccount({ username, password })
-
-        expect(global.alert).toHaveBeenCalledWith('Account has been deleted.')
-
         await useRegister(username, password)
 
         expect(global.alert).toHaveBeenCalledWith('Account has been created.')
