@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import formattedTemperatureData from "../../dummyData/Temperature.js";
+import { HumidityData } from "../../dummyData/Humidity.js";
 
 export function useTemperatureHistory(deviceId, interval) {
     const [temperatureData, setTemperatureData] = useState(null)
@@ -21,7 +23,12 @@ export function useTemperatureHistory(deviceId, interval) {
                 method: "GET"
             })
                 .then(response => response.json())
-                .then(data => setTemperatureData(data))
+                .then(data => {
+                    const formattedTemperatureData = data.map((temp) => ({
+                        ...temp,
+                        readAt: temp.readAt.split('T')[0]
+                    }));
+                    setTemperatureData(formattedTemperatureData)})
                 .catch(error => {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching temperature data: ${error}`)
@@ -34,5 +41,5 @@ export function useTemperatureHistory(deviceId, interval) {
         }
     }, [deviceId, interval])
 
-    return temperatureData
+    return formattedTemperatureData
 }

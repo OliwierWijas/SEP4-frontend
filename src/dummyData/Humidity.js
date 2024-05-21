@@ -1,22 +1,17 @@
-export const HumidityData = [
+const HumidityData = [
     {
-        date: '2024-04-15',
-        value: 0.8,
+        readAt: '2024-05-21T00:00:00Z',
+        value: 30,
     },
     {
-        date: '2024-04-16',
-        value: 0.2,
-    },
-    {
-        date: '2024-04-17',
-        value: 0.15,
-    },
-    {
-        date: '2024-04-18',
-        value: 0.07,
-    },
-    {
-        date: '2024-04-19',
-        value: 0.54,
+        readAt: '2024-05-22T00:00:00Z',
+        value: 33,
     }
 ]
+
+const formattedHumidityData = HumidityData.map((temp) => ({
+    ...temp,
+    readAt: temp.readAt.split('T')[0]
+}));
+
+export default formattedHumidityData

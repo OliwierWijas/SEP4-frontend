@@ -1,12 +1,13 @@
 import React from 'react';
 import { useDeleteRoom } from '../../../hooks/room/useDeleteRoom.js';
 
-function DeleteRoom({ room, setIsOpen }) {
+function DeleteRoom({ room, setIsOpen, refreshRoomData }) {
 
   const deleteRoom = useDeleteRoom()
 
   const onDelete = () => {
     deleteRoom(room?.deviceId)
+    refreshRoomData(prev => prev + 1)
     setIsOpen(false)
   }
 

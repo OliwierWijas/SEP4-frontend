@@ -2,17 +2,20 @@ import { useState } from 'react';
 import BrownButton from '../BrownButton.js';
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
+import { useChangeLockPassword } from '../../hooks/home/useChangeLockPassword.js';
 
 function EditLockPassword() {
-    const [buttonText] = useState("Edit");
     const [isVisible, toggleVisible] = useState(false);
     const [password, setPassword] = useState("");
+    
+    const changeLockPassword = useChangeLockPassword()
 
     const handleVisible = () => {
         toggleVisible(!isVisible);
     };
 
     const handleButtonClick = () => {
+        changeLockPassword(localStorage.getItem("houseId"), password)
         setPassword("");
     };
 
@@ -37,7 +40,7 @@ function EditLockPassword() {
                             </div>
                         </div>
                         <div>
-                            <BrownButton text={buttonText} onClick={handleButtonClick} />
+                            <BrownButton text={"Edit"} onClick={handleButtonClick} />
                         </div>
                     </div>
                 </div>

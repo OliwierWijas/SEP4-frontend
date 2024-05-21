@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import formattedHumidityData from "../../dummyData/Humidity.js";
 
 export function useHumidityHistory(deviceId, interval) {
     const [humidityData, setHumidityData] = useState(null)
@@ -18,7 +19,13 @@ export function useHumidityHistory(deviceId, interval) {
                 method: "GET"
             })
                 .then(response => response.json())
-                .then(data => setHumidityData(data))
+                .then(data => {
+                    const formattedHumidityData = data.map((temp) => ({
+                        ...temp,
+                        readAt: temp.readAt.split('T')[0]
+                    }));
+                    setHumidityData(formattedHumidityData)
+                })
                 .catch(error => {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching humidity data: ${error}`)
@@ -31,5 +38,5 @@ export function useHumidityHistory(deviceId, interval) {
         }
     }, [deviceId, interval])
 
-    return humidityData
+    return formattedHumidityData
 }

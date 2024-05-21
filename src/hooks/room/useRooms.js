@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useRoomData(houseId) {
+export function useRoomData(houseId, roomDataIndex) {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
@@ -45,7 +45,7 @@ export function useRoomData(houseId) {
                 controller.abort();
             }
         }
-    }, [houseId]);
+    }, [houseId, roomDataIndex]);
 
     return rooms;
 }

@@ -1,22 +1,17 @@
-export const TemperatureData = [
+const TemperatureData = [
     {
-        date: '2016-01-01',
-        value: 22,
+        readAt: '2024-05-16T00:00:00Z',
+        value: 29.00723684210526,
     },
     {
-        date: '2016-01-02',
-        value: 25,
-    },
-    {
-        date: '2016-01-03',
-        value: 23,
-    },
-    {
-        date: '2016-01-04',
-        value: 23,
-    },
-    {
-        date: '2016-01-05',
-        value: 20,
+        readAt: '2024-05-17T00:00:00Z',
+        value: 34.19962962962963,
     }
 ]
+
+const formattedTemperatureData = TemperatureData.map((temp) => ({
+    ...temp,
+    readAt: temp.readAt.split('T')[0]
+}));
+
+export default formattedTemperatureData

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useEditRoom } from "../../../hooks/room/useEditRoom.js";
 
-function EditRoom({ room }) {
+function EditRoom({ room, refreshRoomData }) {
     const { name, deviceId, preferedTemperature, preferedHumidity } = room;
 
     const [newName, setNewName] = useState(name);
@@ -21,6 +21,7 @@ function EditRoom({ room }) {
 
         // dont know if edit room is by device id or by roomId
         editRoom(deviceId, editedRoom)
+        refreshRoomData(prev => prev + 1)
     }
 
     return (

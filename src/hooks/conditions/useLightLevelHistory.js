@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import formattedLightData from "../../dummyData/LightData.js";
 
 export function useLightLevelHistory(deviceId, interval) {
     const [lightLevelData, setLightLevelData] = useState(null)
@@ -18,7 +19,13 @@ export function useLightLevelHistory(deviceId, interval) {
                 method: "GET"
             })
                 .then(response => response.json())
-                .then(data => setLightLevelData(data))
+                .then(data => {
+                    const formattedLightData = data.map((temp) => ({
+                        ...temp,
+                        readAt: temp.readAt.split('T')[0]
+                    }));
+                    setLightLevelData(formattedLightData)
+                })
                 .catch(error => {
                     if (error.name !== "AbortError") {
                         console.log(`Error fetching light level data: ${error}`)
@@ -31,5 +38,5 @@ export function useLightLevelHistory(deviceId, interval) {
         }
     }, [deviceId, interval])
 
-    return lightLevelData
+    return formattedLightData
 }

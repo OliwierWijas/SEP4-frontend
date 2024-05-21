@@ -1,22 +1,17 @@
-export const LightData = [
+const LightData = [
     {
-        date: '2017-01-01',
-        value: 0.9,
+        readAt: '2024-05-17T00:00:00Z',
+        value: 57,
     },
     {
-        date: '2017-01-02',
-        value: 0.88,
-    },
-    {
-        date: '2017-01-03',
-        value: 0.83,
-    },
-    {
-        date: '2017-01-04',
-        value: 0.48,
-    },
-    {
-        date: '2017-01-05',
-        value: 0.92,
+        readAt: '2024-05-18T00:00:00Z',
+        value: 67,
     }
 ]
+
+const formattedLightData = LightData.map((temp) => ({
+    ...temp,
+    readAt: temp.readAt.split('T')[0]
+}));
+
+export default formattedLightData

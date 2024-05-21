@@ -15,34 +15,23 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
     const HumidityData = useHumidityHistory(room?.deviceId, interval)
     const LightData = useLightLevelHistory(room?.deviceId, interval)
 
-    console.log("temperatuer")
-    console.log(TemperatureData)
-
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {
-            const startDate = interval.startDate
-            const endDate = interval.endDate
 
             const filterData = () => {
                 let newData = [];
 
                 if (selectedValue === "Temperature") {
-                    newData = TemperatureData && TemperatureData[0] && TemperatureData.filter(data => {
-                        const dataDate = parse(data.date, 'yyyy-MM-dd', new Date());
-                        return dataDate >= startDate && dataDate <= endDate;
-                    });
+                    newData = TemperatureData ?? null
+                    console.log(newData)
                 }
                 else if (selectedValue === "Humidity") {
-                    newData = HumidityData && HumidityData[0] && HumidityData.filter(data => {
-                        const dataDate = parse(data.date, 'yyyy-MM-dd', new Date());
-                        return dataDate >= startDate && dataDate <= endDate;
-                    });
+                    newData = HumidityData ?? null
+                    console.log(newData)
                 }
                 else if (selectedValue === "Light Level") {
-                    newData = LightData && LightData[0] && LightData.filter(data => {
-                        const dataDate = parse(data.date, 'yyyy-MM-dd', new Date());
-                        return dataDate >= startDate && dataDate <= endDate;
-                    });
+                    newData = LightData ?? null
+                    console.log(newData)
                 }
 
                 return newData
@@ -51,7 +40,7 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
             const updateData = (newData) => {
                 setData(prevData => ({
                     ...prevData,
-                    labels: newData && newData[0] && newData.map(data => format(parse(data.date, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy')),
+                    labels: newData && newData[0] && newData.map(data => format(parse(data.readAt, 'yyyy-MM-dd', new Date()), 'MM/dd/yyyy')),
                     datasets: [{
                         ...prevData?.datasets[0],
                         label: selectedValue,

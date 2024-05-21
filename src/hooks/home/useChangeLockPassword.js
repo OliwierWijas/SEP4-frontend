@@ -1,18 +1,19 @@
-export function useLockState() {
-    const getLockState = async (houseId) => {
+export function useChangeLockPassword() {
+    const changeLockPassword = async (houseId, newPassword) => {
         try {
             if (houseId > 0) {
-                console.log("getting lock state")
+                console.log(houseId)
+                console.log(JSON.stringify(newPassword))
                 const token = localStorage.getItem("jwt")
 
-                //change url
-                const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
+                const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/password`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                    method: "POST",
+                    method: "PUT",
+                    body: JSON.stringify(newPassword)
                 }).catch(error => alert(`Error getting current house lock state: ${error}`))
                 if (response) {
                     const responseBody = await response.text()
-                    return responseBody
+                    alert(responseBody)
                 } else {
                     alert("Error getting current house lock state.")
                 }
@@ -22,5 +23,5 @@ export function useLockState() {
         }
     }
 
-    return getLockState
+    return changeLockPassword
 }
