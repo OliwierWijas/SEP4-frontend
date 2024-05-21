@@ -11,13 +11,11 @@ export function useSetLightLevel() {
                         "Authorization": `Bearer ${token}`
                     },
                     method: "POST",
-                    body: JSON.stringify(level),
+                    body: level
                 }).catch(error => alert(`Error setting light level: ${error}`))
                 if (response) {
                     const responseBody = await response.text()
-                    const errorResponse = JSON.parse(responseBody)
-                    const errorMessage = errorResponse.title
-                    alert(errorMessage)
+                    alert(responseBody)
                 } else {
                     alert("Error while changing light level.")
                 }

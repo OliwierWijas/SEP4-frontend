@@ -5,20 +5,23 @@ export function useDoor() {
             console.log(password)
             console.log(state)
             if (houseId > 0 && password !== undefined && state !== undefined) {
+                const token = localStorage.getItem("jwt")
+
                 const body = {
                     password,
                     state
                 }
+
+                console.log(body)
+
                 const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
-                    headers: { "Content-Type": "application/json" },
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "POST",
                     body: JSON.stringify(body),
                 }).catch(error => alert(`Error changing door state: ${error}`))
                 if (response) {
                     const responseBody = await response.text()
-                    const errorResponse = JSON.parse(responseBody)
-                    const errorMessage = errorResponse.title
-                    alert(errorMessage)
+                    alert(responseBody)
                 } else {
                     alert("Error while changing door state.")
                 }

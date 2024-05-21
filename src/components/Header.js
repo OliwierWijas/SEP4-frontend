@@ -5,10 +5,14 @@ import { IoLockOpenOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
+import { useLockState } from "../hooks/home/useLockState.js";
 
 export default function Header({ setNotificationOpen, setLockerOpen }) {
+  const getLockState = useLockState()
+  //const currentState = getLockState(localStorage.getItem("houseId"))
+  const currentState = false;
   const [isOpen, setIsOpen] = useState(false);
-  const [isHouseLocked, toggleLocker] = useState(false);
+  const [isHouseLocked, toggleLocker] = useState(currentState);
 
   const handleLocker = () => {
     toggleLocker(!isHouseLocked);
@@ -107,7 +111,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
                 onClick={() => handleLocker()}
                 className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
               >
-                {isHouseLocked ? "Lock House" : "Unlock"}
+                {isHouseLocked ? "Lock Home" : "Unlock Home"}
               </div>
               <Link to="/Login" onClick={handleNavbarItemClick}>
                 <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"> Login </p>

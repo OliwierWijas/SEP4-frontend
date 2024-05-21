@@ -15,9 +15,7 @@ export function useSwitchWindow() {
                 }).catch(error => alert(`Error setting window state: ${error}`))
                 if (response) {
                     const responseBody = await response.text()
-                    const errorResponse = JSON.parse(responseBody)
-                    const errorMessage = errorResponse.title
-                    alert(errorMessage)
+                    alert(responseBody)
                 } else {
                     alert("Error while changing the status of window.")
                 }

@@ -11,13 +11,11 @@ export function useSetRadiator() {
                         "Authorization": `Bearer ${token}`
                     },
                     method: "POST",
-                    body: JSON.stringify(level),
+                    body: level,
                 }).catch(error => alert(`Error setting radiator level: ${error}`))
-                if (response) {
+                if (response.ok) {
                     const responseBody = await response.text()
-                    const errorResponse = JSON.parse(responseBody)
-                    const errorMessage = errorResponse.title
-                    alert(errorMessage)
+                    alert(responseBody)
                 } else {
                     alert("Error while setting changing radiator level.")
                 }

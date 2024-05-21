@@ -15,6 +15,9 @@ function RoomManagementComponent({ data, setData, interval, setInterval, selecte
     const HumidityData = useHumidityHistory(room?.deviceId, interval)
     const LightData = useLightLevelHistory(room?.deviceId, interval)
 
+    console.log("temperatuer")
+    console.log(TemperatureData)
+
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {
             const startDate = interval.startDate

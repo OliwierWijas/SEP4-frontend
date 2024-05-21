@@ -7,9 +7,16 @@ export function useNotifications(homeId) {
         if (homeId > 0) {
             const controller = new AbortController()
             const signal = controller.signal
+            
+            const token = localStorage.getItem("jwt")
 
             const fetchData = () => {
-                fetch(`http://localhost:8080/notifications/${homeId}`, { signal })
+                fetch(`http://localhost:8080/notifications/${homeId}`, {
+                    signal, headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    },
+                })
                     .then(response => response.json())
                     .then(data => {
                         setNotificationsData(data)

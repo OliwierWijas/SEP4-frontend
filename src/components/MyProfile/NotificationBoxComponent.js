@@ -3,7 +3,7 @@ import '../../styles/ScrollBar.css';
 import { useNotifications } from "../../hooks/home/useNotifications.js";
 
 function NotificationBoxComponent() {
-    const notificationData = useNotifications(localStorage.getItem("jwt"))
+    const notificationData = useNotifications(localStorage.getItem("houseId"))
 
     return (
         <div className="brown-gradient-y h-512 w-full flex flex-col rounded-md shadow-md" data-testid="notification-box">
