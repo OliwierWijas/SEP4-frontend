@@ -30,7 +30,7 @@ describe('HouseMembersComponent', () => {
     const deleteButton = screen.getByTestId('delete-button');
     fireEvent.click(deleteButton);
     
-    expect(deleteMember).toHaveBeenCalledWith('TestUser', expect.anything());
+    expect(deleteMember).toHaveBeenCalledWith('TestUser', undefined);
   
     await waitFor(() => {
       expect(useDeleteMemberMock).toHaveBeenCalled();
