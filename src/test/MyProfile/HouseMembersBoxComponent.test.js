@@ -45,7 +45,7 @@ describe('HouseMembersBoxComponent', () => {
 
     const addMember = useAddMember()
 
-    expect(addMember).toHaveBeenCalledWith("NewUser")
+    expect(addMember).toHaveBeenCalledWith("NewUser", expect.anything())
   });
 
   it('deletes a member correctly', async () => {
@@ -61,6 +61,6 @@ describe('HouseMembersBoxComponent', () => {
     const deleteButton = (await screen.findAllByTestId('delete-button'))[0];
     fireEvent.click(deleteButton)
 
-    expect(deleteMember).toHaveBeenCalledWith("admin")
+    expect(deleteMember).toHaveBeenCalledWith("admin", expect.anything())
   });
 });
