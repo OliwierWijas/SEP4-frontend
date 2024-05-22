@@ -11,7 +11,7 @@ export function useEditUsername() {
                     },
                     method: "PUT",
                     body: JSON.stringify(editedAccount),
-                }).catch(error => alert(`Error edditing username: ${error}`))
+                })
                 if (response) {
                     const responseBody = await response.text()
                     if (response.ok)

@@ -10,7 +10,7 @@ describe('useRegister integration test', () => {
     })
 
     it('should create an account successfully', async () => {
-        const username = 'testUser123123'
+        const username = 'testUser123'
         const password = 'testPassword1'
 
         await useRegister(username, password)
@@ -32,6 +32,6 @@ describe('useRegister integration test', () => {
 
         await useRegister(username, password)
 
-        expect(global.alert).toHaveBeenCalledWith('An error occurred during signing up.')
+        expect(global.alert).toHaveBeenCalledWith('User with username testUser is already registered')
     })
 })

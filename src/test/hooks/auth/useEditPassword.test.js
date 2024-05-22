@@ -6,7 +6,7 @@ global.alert = jest.fn()
 describe('useEditPassword integration test', () => {
     beforeEach(async () => {
         localStorage.clear()
-        const username = 'testUser'
+        const username = 'testUser1'
         const password = 'testPassword'
 
         const user = {
@@ -26,24 +26,24 @@ describe('useEditPassword integration test', () => {
         expect(localStorage.getItem("jwt")).not.toBeUndefined()
 
         const editedAccount = {
-            username: "testUser",
+            username: "testUser1",
             oldPassword: "testPassword",
             newPassword: "newTestPassword"
         }
 
         const editedAccount1 = {
-            username: "testUser",
+            username: "testUser1",
             oldPassword: "newTestPassword",
             newPassword: "testPassword"
         }
 
         const editPassword = useEditPassword()
-        await editPassword("testUser", editedAccount)
+        await editPassword("testUser1", editedAccount)
 
         expect(localStorage.getItem("password")).toBe("newTestPassword")
         expect(global.alert).toHaveBeenNthCalledWith(1, "Password changed.")
 
-        await editPassword("testUser", editedAccount1)
+        await editPassword("testUser1", editedAccount1)
 
         expect(localStorage.getItem("password")).toBe("testPassword")
         expect(global.alert).toHaveBeenNthCalledWith(2, "Password changed.")
@@ -53,13 +53,13 @@ describe('useEditPassword integration test', () => {
         expect(localStorage.getItem("jwt")).not.toBeUndefined()
         
         const editedAccount = {
-            username: "testUser",
+            username: "testUser1",
             oldPassword: "invalidPassword",
             newPassword: "newTestPassword"
         }
 
         const editPassword = useEditPassword()
-        await editPassword("testUser", editedAccount)
+        await editPassword("testUser1", editedAccount)
 
         expect(localStorage.getItem("password")).toBe("testPassword")
         expect(global.alert).toHaveBeenCalledWith("Password mismatch")

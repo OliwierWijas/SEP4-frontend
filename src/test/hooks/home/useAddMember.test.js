@@ -1,4 +1,5 @@
 import { useAddMember } from "../../../hooks/home/useAddMember.js"
+import { useDeleteMember } from "../../../hooks/home/useDeleteMember.js"
 import { useLogin } from "../../../hooks/auth/useLogin.js"
 
 global.alert = jest.fn()
@@ -29,10 +30,13 @@ describe('useAddMember integration test', () => {
 
         const refresh = jest.fn()
 
+        const deleteMember = useDeleteMember()
+        await deleteMember("testUser", refresh)
+
         const addMember = useAddMember()
         await addMember("testUser", refresh)
 
-        expect(global.alert).toHaveBeenCalledWith("Member added to house.")
+        expect(global.alert).toHaveBeenNthCalledWith(2, "Member added to house.")
     })
 
     it('should return error when member with the given username already exists in home', async () => {

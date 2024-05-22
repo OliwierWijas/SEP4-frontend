@@ -1,4 +1,5 @@
 import { useDeleteRoom } from "../../../hooks/room/useDeleteRoom.js"
+import { useAddRoom } from "../../../hooks/room/useAddRoom.js"
 import { useLogin } from "../../../hooks/auth/useLogin.js"
 
 global.alert = jest.fn()
@@ -27,10 +28,21 @@ describe('useDeleteRoom integration test', () => {
         expect(localStorage.getItem("jwt")).not.toBeUndefined()
         expect(localStorage.getItem("houseId")).not.toBeUndefined()
 
+        const room = {
+            name: "testName",
+            deviceId: "988",
+            homeId: localStorage.getItem("houseId"),
+            preferedTemperature: "20",
+            preferedHumidity : "25"
+        }
+
         const refresh = jest.fn()
 
-        const addRoom = useDeleteRoom()
-        await addRoom(987, refresh)
+        const addRoom = useAddRoom()
+        await addRoom(room, refresh)
+
+        const deleteRoom = useDeleteRoom()
+        await deleteRoom(988, refresh)
 
         expect(global.alert).toHaveBeenCalledWith("Room deleted.")
     })

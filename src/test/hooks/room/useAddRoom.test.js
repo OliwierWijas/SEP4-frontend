@@ -1,4 +1,5 @@
 import { useAddRoom } from "../../../hooks/room/useAddRoom.js"
+import { useDeleteRoom } from "../../../hooks/room/useDeleteRoom.js"
 import { useLogin } from "../../../hooks/auth/useLogin.js"
 
 global.alert = jest.fn()
@@ -41,6 +42,9 @@ describe('useAddRoom integration test', () => {
         await addRoom(room, refresh)
 
         expect(global.alert).toHaveBeenCalledWith("Room created.")
+
+        const deleteRoom = useDeleteRoom()
+        await deleteRoom(988, refresh)
     })
 
     it('should return error when room with the given deviceId already exists', async () => {
@@ -60,7 +64,8 @@ describe('useAddRoom integration test', () => {
 
         const addRoom = useAddRoom()
         await addRoom(room, refresh)
+        await addRoom(room, refresh)
 
-        expect(global.alert).toHaveBeenCalledWith("Room 988 already exists in home 1")
+        expect(global.alert).toHaveBeenNthCalledWith(2,"Room 988 already exists in home 1")
     })
 })

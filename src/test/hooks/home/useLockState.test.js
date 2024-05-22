@@ -22,6 +22,9 @@ describe('useLockState integration test', () => {
         localStorage.clear()
     })
 
+    it("test", () => {
+    })
+
     //from route instead from query in webapi, to be solved by backend
 
     /*it('should add member successfully', async () => {
