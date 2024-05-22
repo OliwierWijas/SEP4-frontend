@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  tests-frontend:
+  graph-component-tests:
     name: Unit tests - Frontend
     runs-on: ubuntu-latest
     steps:
@@ -27,9 +27,64 @@ jobs:
           npm install typescript --save-dev
           npm install date-fns
       
+      - name: Run tests
+        run: npm run test test/MyHome/GraphComponent
+
+  house-component-tests:
+    name: Unit tests - Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: Run tests
+        run: |
+          npm run test test/MyHome/HouseComponent
+          npm run test MyHome.test.js
+
+  myprofile-page-tests:
+    name: Unit tests - Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: Run tests
+        run: | 
+          npm run test test/MyProfile
+          npm run test LockerPopUp.test.js
+
+  signup-login-pages-tests:
+    name: Unit tests - Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
+      - name: Run tests
+        run: npm run test test/SignUpLogin
+
+  integration-tests:
+    name: Unit tests - Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      
       - name: Run Jest tests
-        run: npm run test a
+        run: npm run test test/hooks
 
       - name: Stop containers
-        run: |
-          docker compose down
+        run: docker compose down
