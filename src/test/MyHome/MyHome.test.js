@@ -29,7 +29,7 @@ describe('myHome Component Tests', () => {
 
   beforeEach(() => {
     useRoomsMock = require('../../hooks/room/useRooms.js').useRoomData;
-    useRoomsMock.mockReturnValue([{ id: 1, deviceId: 1, name: "Living Room", latestTemperature: "23", latestHumidity: 35, latestLightLevel: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 }, { id: 2, deviceId: 3, name: "Hall", latestTemperature: "20", latestHumidity: 67, latestLightLevel: 50, radiatorState: 4, isWindowOpen: true, lightLevel: 2 }]);
+    useRoomsMock.mockReturnValue([{ id: 1, deviceId: 1, name: "Living Room", tempValue: "23", humiValue: 35, lightValue: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 }, { id: 2, deviceId: 3, name: "Hall", tempValue: "20", humiValue: 67, lightValue: 50, radiatorState: 4, isWindowOpen: true, lightLevel: 2 }]);
     useTemperatureMock = require('../../hooks/conditions/useTemperatureHistory.js').useTemperatureHistory;
     useTemperatureMock.mockReturnValue([{ date: new Date(), value: 25 }])
   })
