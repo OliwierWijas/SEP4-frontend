@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useMembers(homeId) {
+export function useMembers(homeId, memberDataIndex) {
     const [membersData, setMembersData] = useState([]);
 
     useEffect(() => {
@@ -30,7 +30,7 @@ export function useMembers(homeId) {
                 controller.abort()
             }
         }
-    }, [homeId]);
+    }, [homeId, memberDataIndex]);
 
     return membersData;
 }

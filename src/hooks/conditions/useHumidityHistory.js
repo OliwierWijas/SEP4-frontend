@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import formattedHumidityData from "../../dummyData/Humidity.js";
 
 export function useHumidityHistory(deviceId, interval) {
     const [humidityData, setHumidityData] = useState(null)
@@ -11,7 +10,13 @@ export function useHumidityHistory(deviceId, interval) {
 
             const token = localStorage.getItem("jwt")
 
-            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${interval?.endDate}`, {
+            const temp = new Date(interval.endDate);
+            temp.setDate(temp.getDate() + 1);
+
+            let dateFrom = JSON.stringify(interval?.startDate).replace(/"/g, '')
+            let dateTo = JSON.stringify(temp).replace(/"/g, '')
+
+            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
@@ -38,5 +43,5 @@ export function useHumidityHistory(deviceId, interval) {
         }
     }, [deviceId, interval])
 
-    return formattedHumidityData
+    return humidityData
 }

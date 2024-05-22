@@ -6,8 +6,7 @@ function DeleteRoom({ room, setIsOpen, refreshRoomData }) {
   const deleteRoom = useDeleteRoom()
 
   const onDelete = () => {
-    deleteRoom(room?.deviceId)
-    refreshRoomData(prev => prev + 1)
+    deleteRoom(room?.deviceId, refreshRoomData)
     setIsOpen(false)
   }
 

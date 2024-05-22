@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import formattedTemperatureData from "../../dummyData/Temperature.js";
-import { HumidityData } from "../../dummyData/Humidity.js";
 
 export function useTemperatureHistory(deviceId, interval) {
     const [temperatureData, setTemperatureData] = useState(null)
@@ -12,10 +10,13 @@ export function useTemperatureHistory(deviceId, interval) {
             
             const token = localStorage.getItem("jwt")
 
-            const endDate = new Date(interval.endDate);
-            endDate.setDate(endDate.getDate() + 1);
+            const temp = new Date(interval.endDate);
+            temp.setDate(temp.getDate() + 1);
 
-            fetch(`http://localhost:8080/temperature/${deviceId}/history?dateFrom=${interval?.startDate}&dateTo=${endDate}`,  {
+            let dateFrom = JSON.stringify(interval?.startDate).replace(/"/g, '')
+            let dateTo = JSON.stringify(temp).replace(/"/g, '')
+
+            fetch(`http://localhost:8080/temperature/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`,  {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
@@ -41,5 +42,5 @@ export function useTemperatureHistory(deviceId, interval) {
         }
     }, [deviceId, interval])
 
-    return formattedTemperatureData
+    return temperatureData
 }

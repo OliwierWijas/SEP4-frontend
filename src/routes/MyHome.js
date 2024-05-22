@@ -61,10 +61,10 @@ function MyHome() {
   return (
     <div>
       <PopUp isOpen={editRoomOpen} setIsOpen={setEditRoomOpen} testId="edit-room-popup">
-        <EditRoom room={editRoom} refreshRoomData={setRoomDataIndex} />
+        <EditRoom room={editRoom} refreshRoomData={setRoomDataIndex} setIsOpen={setEditRoomOpen} />
       </PopUp>
       <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen} testId="create-room-popup">
-        <CreateRoom refreshRoomData={setRoomDataIndex} />
+        <CreateRoom refreshRoomData={setRoomDataIndex} setIsOpen={setCreateRoomOpen} />
       </PopUp >
       <PopUp isOpen={deleteRoomOpen} setIsOpen={setDeleteRoomOpen} testId="delete-room-popup">
         <DeleteRoom room={deleteRoom} setIsOpen={setDeleteRoomOpen} refreshRoomData={setRoomDataIndex}/>

@@ -12,12 +12,11 @@ export function useEditUsername() {
                     method: "PUT",
                     body: JSON.stringify(editedAccount),
                 }).catch(error => alert(`Error edditing username: ${error}`))
-                if (response.ok) {
+                if (response) {
                     const responseBody = await response.text()
-                    localStorage.setItem("username", editedAccount.newUsername)
+                    if (response.ok)
+                        localStorage.setItem("username", editedAccount.newUsername)
                     alert(responseBody)
-                } else {
-                    alert("Error while editing username.")
                 }
             }
         } catch (error) {

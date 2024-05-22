@@ -1,9 +1,6 @@
 export function useDoor() {
     const switchDoor = async (houseId, password, state) => {
         try {
-            console.log(houseId)
-            console.log(password)
-            console.log(state)
             if (houseId > 0 && password !== undefined && state !== undefined) {
                 const token = localStorage.getItem("jwt")
 
@@ -11,8 +8,6 @@ export function useDoor() {
                     password,
                     state
                 }
-
-                console.log(body)
 
                 const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },

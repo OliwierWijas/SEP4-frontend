@@ -1,7 +1,6 @@
 export function useDeleteRoom() {
-    const deleteRoom = async (deviceId) => {
+    const deleteRoom = async (deviceId, refreshRoomData) => {
         try {
-            console.log(deviceId)
             if (deviceId > 0) {
                 const token = localStorage.getItem("jwt")
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}`, {
@@ -12,6 +11,7 @@ export function useDeleteRoom() {
                     method: "DELETE"
                 }).catch(error => alert(`Error deleting room: ${error}`))
                 if (response) {
+                    refreshRoomData(prev => prev + 1)
                     const responseBody = await response.text()
                     alert(responseBody)
                 } else {

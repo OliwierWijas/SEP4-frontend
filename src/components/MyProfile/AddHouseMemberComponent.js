@@ -2,12 +2,13 @@ import BrownButton from "../BrownButton.js";
 import { useState } from 'react';
 import { useAddMember } from "../../hooks/home/useAddMember.js";
 
-function AddHouseMember() {
+function AddHouseMember({refreshMemberData}) {
     const [username, setUsername] = useState('');
     const addMember = useAddMember()
 
     const onAdd = () => {
-        addMember(username)
+        addMember(username, refreshMemberData)
+        setUsername('')
     };
 
     return (

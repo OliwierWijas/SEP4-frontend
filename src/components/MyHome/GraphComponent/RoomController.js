@@ -63,7 +63,7 @@ function RoomController({ room, setRoom }) {
                 </div>
                 <div className='flex items-center mt-8 lg:mt-0'>
                     <p style={{ color: "#a79277" }} className="font-semibold mx-2">Windows</p>
-                    <Toggle status={room?.isWindowOpen} setStatus={switchWindow}></Toggle>
+                    <Toggle status={room?.isWindowOpen ?? false} setStatus={switchWindow}></Toggle>
                 </div>
                 <div className="flex items-center mt-8 lg:mt-0">
                     <p style={{ color: "#a79277" }} className="font-semibold">Light level</p>

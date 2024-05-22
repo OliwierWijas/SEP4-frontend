@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAddRoom } from "../../../hooks/room/useAddRoom.js";
 
-function CreateRoom({refreshRoomData}) {
+function CreateRoom({refreshRoomData, setIsOpen}) {
     const [roomName, setRoomName] = useState('');
     const [deviceId, setDeviceId] = useState('');
     const [preferredTemperature, setPreferredTemperature] = useState('');
@@ -26,16 +26,8 @@ function CreateRoom({refreshRoomData}) {
             homeId: localStorage.getItem("houseId"),
             preferedTemperature: preferredTemperature,
             preferedHumidity :preferredHumidity
-        })
-        refreshRoomData(prev => prev + 1)
-        clear()
-    }
-
-    const clear = () => {
-        setRoomName('')
-        setDeviceId('')
-        setPreferredTemperature('')
-        setPreferredHumidity('')
+        }, refreshRoomData)
+        setIsOpen(false)
     }
 
     return (

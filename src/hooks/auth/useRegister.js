@@ -6,25 +6,13 @@ export async function useRegister(username, password) {
             method: "POST",
             body: JSON.stringify(user),
         })
-        console.log(response.status)
 
-        if (!response.ok) {
-            if (response.body) {
-                let responseBody = ''
-                const reader = response.body.getReader()
-
-                while (true) {
-                    const { done, value } = await reader.read()
-                    if (done) break;
-                    responseBody += new TextDecoder().decode(value)
-                }
-
-                alert(responseBody)
-            } else {
-                alert("An error occurred during signing up.")
-            }
-        } else {
+        if (response.ok) {
             alert("Account has been created.")
+        }
+        else {
+            const responseBody = await response.text();
+            alert(responseBody)
         }
     }
 

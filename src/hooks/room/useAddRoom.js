@@ -1,5 +1,5 @@
 export function useAddRoom() {
-    const addRoom = async (room) => {
+    const addRoom = async (room, refreshRoomData) => {
         try {
             if (room !== undefined && room !== null) {
                 const token = localStorage.getItem("jwt")
@@ -12,6 +12,7 @@ export function useAddRoom() {
                     body: JSON.stringify(room),
                 }).catch(error => alert(`Error adding room: ${error}`))
                 if (response) {
+                    refreshRoomData(prev => prev + 1)
                     const responseBody = await response.text()
                     alert(responseBody)
                 } else {

@@ -11,13 +11,12 @@ export function useEditPassword() {
                     },
                     method: "PUT",
                     body: JSON.stringify(editedAccount),
-                }).catch(error => alert(`Error edditing password: ${error}`))
-                if (response.ok) {
+                })
+                if (response) {
                     const responseBody = await response.text()
-                    localStorage.setItem("password", editedAccount.newPassword)
+                    if (response.ok)
+                        localStorage.setItem("password", editedAccount.newPassword)
                     alert(responseBody)
-                } else {
-                    alert("Error while editing password.")
                 }
             }
         } catch (error) {

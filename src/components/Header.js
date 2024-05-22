@@ -9,8 +9,8 @@ import { useLockState } from "../hooks/home/useLockState.js";
 
 export default function Header({ setNotificationOpen, setLockerOpen }) {
   const getLockState = useLockState()
-  //const currentState = getLockState(localStorage.getItem("houseId"))
-  const currentState = false;
+  const currentState = getLockState(localStorage.getItem("houseId"))
+  console.log(currentState)
   const [isOpen, setIsOpen] = useState(false);
   const [isHouseLocked, toggleLocker] = useState(currentState);
 

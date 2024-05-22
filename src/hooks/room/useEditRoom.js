@@ -1,5 +1,5 @@
 export function useEditRoom() {
-    const editRoom = async (roomId, editedRoom) => {
+    const editRoom = async (roomId, editedRoom, refreshRoomData) => {
         try {
             if (roomId > 0 && editedRoom !== null && editedRoom !== undefined) {
                 const token = localStorage.getItem("jwt")
@@ -11,7 +11,8 @@ export function useEditRoom() {
                     method: "PUT",
                     body: JSON.stringify(editedRoom),
                 }).catch(error => alert(`Error editing room: ${error}`))
-                if (response.ok) {
+                if (response) {
+                    refreshRoomData(prev => prev + 1)
                     const responseBody = await response.text()
                     alert(responseBody)
                 } else {

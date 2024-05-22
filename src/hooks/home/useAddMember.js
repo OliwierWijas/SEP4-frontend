@@ -1,5 +1,5 @@
 export function useAddMember() {
-    const addMember = async (username) => {
+    const addMember = async (username, refreshMemberData) => {
         try {
             if (username !== undefined && username !== null && username !== '') {
                 const token = localStorage.getItem("jwt")
@@ -10,12 +10,11 @@ export function useAddMember() {
                         "Authorization": `Bearer ${token}`
                     },
                     method: "PATCH",
-                }).catch(error => alert(`Error adding member: ${error}`))
+                })
                 if (response) {
+                    refreshMemberData(prev => prev + 1)
                     const responseBody = await response.text()
                     alert(responseBody)
-                } else {
-                    alert("Error while adding member.")
                 }
             }
         } catch (error) {
