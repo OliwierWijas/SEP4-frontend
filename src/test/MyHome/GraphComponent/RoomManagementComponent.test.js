@@ -38,24 +38,8 @@ describe('RoomManagementComponent', () => {
       data: [25, 26]
     }]
   };
-
-  const humidityData = {
-    labels: ['01/01/2024', '01/02/2024'],
-    datasets: [{
-      label: 'Humidity',
-      data: [50, 55]
-    }]
-  };
-
-  const lightLevelData = {
-    labels: ['01/01/2024', '01/02/2024'],
-    datasets: [{
-      label: 'Light Level',
-      data: [75, 80]
-    }]
-  };
   
-  const roomData = { id: 1, deviceId: 1, name: "Living Room", latestTemperature: "23", latestHumidity: 35, latestLightLevel: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 };
+  const roomData = { id: 1, deviceId: 1, name: "Living Room", tempValue: "23", humiValue: 35, lightValue: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 };
 
   const interval = {
     startDate: new Date('2024-05-01'),
