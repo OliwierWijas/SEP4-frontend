@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import BrownButton from '../BrownButton.js';
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
 import { useChangeLockPassword } from '../../hooks/home/useChangeLockPassword.js';
+import { AuthContext } from '../../auth/AuthContext.js';
 
 function EditLockPassword() {
+    const { claims } = useContext(AuthContext)
+    const token = claims?.token
+    const houseId = claims?.houseId
+
     const [isVisible, toggleVisible] = useState(false);
     const [password, setPassword] = useState("");
     
@@ -15,7 +20,7 @@ function EditLockPassword() {
     };
 
     const handleButtonClick = () => {
-        changeLockPassword(localStorage.getItem("houseId"), password)
+        changeLockPassword(houseId, password, token)
         setPassword("");
     };
 

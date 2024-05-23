@@ -1,7 +1,6 @@
 export function useDeleteMember() {
-    const deleteMember = async (username, refreshMemberData) => {
+    const deleteMember = async (username, refreshMemberData, token) => {
         if (username) {
-            const token = localStorage.getItem("jwt")
             const response = await fetch(`http://localhost:8080/home/members/${username}`, {
                 headers: {
                     "Content-Type": "application/json",

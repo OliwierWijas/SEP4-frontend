@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useContext, useEffect } from "react"
 import "../../../index.css"
 import DataReadingComponent from "./DataReadingComponent.js"
 import DateIntervalPicker from "./DateIntervalPicker.js"
@@ -9,11 +9,15 @@ import { useTemperatureHistory } from "../../../hooks/conditions/useTemperatureH
 import { useHumidityHistory } from "../../../hooks/conditions/useHumidityHistory.js"
 import { useLightLevelHistory } from "../../../hooks/conditions/useLightLevelHistory.js"
 import { parse, format } from 'date-fns';
+import { AuthContext } from "../../../auth/AuthContext.js"
 
 function RoomManagementComponent({ data, setData, interval, setInterval, selectedValue, setSelectedValue, room, setRoom }) {
-    const TemperatureData = useTemperatureHistory(room?.deviceId, interval)
-    const HumidityData = useHumidityHistory(room?.deviceId, interval)
-    const LightData = useLightLevelHistory(room?.deviceId, interval)
+    const { claims } = useContext(AuthContext)
+    const token = claims?.token
+
+    const TemperatureData = useTemperatureHistory(room?.deviceId, interval, token)
+    const HumidityData = useHumidityHistory(room?.deviceId, interval, token)
+    const LightData = useLightLevelHistory(room?.deviceId, interval, token)
 
     useEffect(() => {
         if (TemperatureData && HumidityData && LightData) {

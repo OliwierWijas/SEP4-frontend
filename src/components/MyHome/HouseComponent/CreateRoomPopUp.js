@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useAddRoom } from "../../../hooks/room/useAddRoom.js";
+import { AuthContext } from '../../../auth/AuthContext.js';
 
 function CreateRoom({refreshRoomData, setIsOpen}) {
     const [roomName, setRoomName] = useState('');
@@ -7,6 +8,9 @@ function CreateRoom({refreshRoomData, setIsOpen}) {
     const [preferredTemperature, setPreferredTemperature] = useState('');
     const [preferredHumidity, setPreferredHumidity] = useState('');
 
+    const { claims } = useContext(AuthContext)
+    const token = claims?.token
+    const houseId = claims?.houseId
     const addRoom = useAddRoom();
 
     const handleAddRoom = (event) => {
@@ -23,10 +27,10 @@ function CreateRoom({refreshRoomData, setIsOpen}) {
         addRoom({
             name: roomName,
             deviceId,
-            homeId: localStorage.getItem("houseId"),
+            homeId: houseId,
             preferedTemperature: preferredTemperature,
             preferedHumidity :preferredHumidity
-        }, refreshRoomData)
+        }, refreshRoomData, token)
         setIsOpen(false)
     }
 

@@ -1,8 +1,7 @@
 export function useEditRoom() {
-    const editRoom = async (roomId, editedRoom, refreshRoomData) => {
+    const editRoom = async (roomId, editedRoom, refreshRoomData, token) => {
         try {
-            if (roomId > 0 && editedRoom !== null && editedRoom !== undefined) {
-                const token = localStorage.getItem("jwt")
+            if (roomId !== undefined && roomId !== null && editedRoom !== null && editedRoom !== undefined) {
                 const response = await fetch(`http://localhost:8080/rooms/${roomId}`, {
                     headers: {
                         "Content-Type": "application/json",

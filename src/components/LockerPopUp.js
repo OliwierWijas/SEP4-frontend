@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../styles/ScrollBar.css';
 import BrownButton from './BrownButton.js';
 import { useDoor } from '../hooks/home/useDoor.js';
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
+import { AuthContext } from '../auth/AuthContext.js';
 
 function LockerPopUp() {
+    const { claims } = useContext(AuthContext)
+    const houseId = claims?.houseId
+    const token = claims?.token
+
     const [buttonText, setButtonText] = useState("Lock");
     const [password, setPassword] = useState("");
     const [isVisible, toggleVisible] = useState(false);
@@ -16,9 +21,8 @@ function LockerPopUp() {
         toggleVisible(!isVisible);
     };
 
-    const handleButtonClick = () => {
-        const houseId = localStorage.getItem("houseId")
-        switchDoor(houseId, password, buttonText === "Lock" ? true : false)
+    const handleButtonClick = async () => {
+        await switchDoor(houseId, password, buttonText === "Lock" ? true : false, token)
         setPassword("");
         setButtonText(buttonText === "Lock" ? "Unlock" : "Lock");
     };

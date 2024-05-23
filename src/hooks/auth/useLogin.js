@@ -1,24 +1,35 @@
-export async function useLogin(user) {
-    const login = async () => {
+export function useLogin() {
+    const login = async (username, password) => {
+        const user = {
+            username,
+            password
+        }
+
         const response = await fetch("http://localhost:8080/auth/login", {
             headers: { "Content-Type": "application/json" },
             method: "POST",
             body: JSON.stringify(user),
         })
+
         if (response.ok) {
             const token = await response.text()
             localStorage.setItem("jwt", token)
 
-            const claims = decodeJWT(token)
+            const tempClaims = decodeJWT(token)
 
-            const username = claims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
-            const role = claims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-            const houseId = claims.HouseId;
+            const username = tempClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+            const role = tempClaims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+            const houseId = tempClaims.HouseId;
 
-            localStorage.setItem("username", username)
-            localStorage.setItem("password", user?.password)
-            localStorage.setItem("role", role)
-            localStorage.setItem("houseId", houseId)
+            const claims = {
+                token,
+                username,
+                password: user?.password,
+                role,
+                houseId: 1
+            }
+
+            localStorage.setItem("claims", JSON.stringify(claims))
         } else {
             const responseBody = await response.text();
             try {
@@ -44,5 +55,5 @@ export async function useLogin(user) {
         return JSON.parse(jsonPayload);
     }
 
-    await login()
+    return login
 }

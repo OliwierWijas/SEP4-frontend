@@ -1,9 +1,15 @@
 import NotificationComponent from "./NotificationComponent.js"
 import '../../styles/ScrollBar.css';
 import { useNotifications } from "../../hooks/home/useNotifications.js";
+import { useContext } from "react";
+import { AuthContext } from "../../auth/AuthContext.js";
 
 function NotificationBoxComponent() {
-    const notificationData = useNotifications(localStorage.getItem("houseId"))
+    const { claims } = useContext(AuthContext)
+    const houseId = claims?.houseId
+    const token = claims?.token
+
+    const notificationData = useNotifications(houseId, token)
 
     return (
         <div className="brown-gradient-y h-512 w-full flex flex-col rounded-md shadow-md" data-testid="notification-box">

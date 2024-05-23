@@ -1,8 +1,7 @@
 export function useDeleteRoom() {
-    const deleteRoom = async (deviceId, refreshRoomData) => {
+    const deleteRoom = async (deviceId, refreshRoomData, token) => {
         try {
             if (deviceId > 0) {
-                const token = localStorage.getItem("jwt")
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}`, {
                     headers: {
                         "Content-Type": "application/json",

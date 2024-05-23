@@ -1,5 +1,5 @@
 import { FaRegEdit } from "react-icons/fa";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -8,8 +8,15 @@ import { useNavigate } from "react-router-dom";
 import ConfirmWithPassword from "./ConfirmWithPassword.js";
 import { useEditUsername } from "../../hooks/auth/useEditUsername.js";
 import { useEditPassword } from "../../hooks/auth/useEditPassword.js";
+import { useDeleteAccount } from "../../hooks/auth/useDeleteAccount.js";
+import { AuthContext } from "../../auth/AuthContext.js";
 
-export default function EditDeleteAccount({ setEditProfileOpen }) {
+export default function EditDeleteAccount() {
+  const { claims, setClaims } = useContext(AuthContext)
+  const token = claims?.token
+  const currentUsername = claims?.username
+  const currentPassword = claims?.password
+
   const navigate = useNavigate();
 
   const [isVisible, toggleVisible] = useState(false)
@@ -22,26 +29,32 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
 
   const editUsername = useEditUsername()
   const editPassword = useEditPassword()
+  const deleteAccount = useDeleteAccount()
 
-  const onEdit = () => {
-    const currentUsername = localStorage.getItem("username")
-    const currentPassword = localStorage.getItem("password")
+  const handleSave = () => {
+    if (isEditing) {
+      const editedUsername = {
+        newUsername,
+        password: currentPassword
+      }
 
-    const editedUsername = {
-      newUsername,
-      password: currentPassword
+      const editedPassword = {
+        username: currentUsername,
+        oldPassword: currentPassword,
+        newPassword
+      }
+
+      if (currentUsername !== newUsername && newUsername !== '')
+        editUsername(currentUsername, editedUsername, setClaims, token)
+      if (currentPassword !== newPassword && newPassword !== '')
+        editPassword(currentUsername, editedPassword, setClaims, token)
+      handleEditing()
+    } else {
+      deleteAccount(currentUsername, currentPassword, setClaims, token)
+      navigate("/")
     }
 
-    const editedPassword ={
-      username: currentUsername,
-      oldPassword: currentPassword,
-      newPassword
-    }
-
-    if (currentUsername !== newUsername && newUsername !== '') 
-      editUsername(currentUsername, editedUsername)
-    if (currentPassword !== newPassword && newPassword !== '')
-      editPassword(currentUsername, editedPassword)
+    handlePopup()
   }
 
   const handleVisible = () => {
@@ -61,8 +74,8 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
   };
 
   const handleConfirmSave = () => {
-    if (confirmPassword === localStorage.getItem("password")) {
-      onEdit()
+    if (confirmPassword === currentPassword) {
+      handleSave()
     } else {
       alert("Incorrect password");
     }
@@ -100,7 +113,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
                     onChange={(e) => setNewUsername(e.target.value)}
                   />
                 ) : (
-                  ` ${localStorage.getItem("username")}`
+                  ` ${currentUsername}`
                 )}
               </div>
             </div>
@@ -120,7 +133,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
                   />
                 ) : (
                   <>
-                    {isVisible ? ` ${localStorage.getItem("password")}` : "*".repeat(localStorage.getItem("password")?.length)}
+                    {isVisible ? ` ${currentPassword}` : "*".repeat(currentPassword?.length)}
                     <div className="absolute top-3 right-2">
                       {isVisible ? (
                         <FaRegEye
@@ -144,10 +157,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
               data-testid="savedelete"
               className="text-white w-1/4 py-2 px-4 rounded mt-4"
               style={{ backgroundColor: isEditing ? "#a79277" : "#FFA7A7" }}
-              //onClick={handlePopup}
-              //remember to change here sth idk what
-              //deleted onEdit from here
-              onClick={isEditing ? onEdit : () => setEditProfileOpen(true)}
+              onClick={handlePopup}
             >
               {isEditing ? "SAVE" : "DELETE ACCOUNT"}
             </button>
@@ -158,7 +168,7 @@ export default function EditDeleteAccount({ setEditProfileOpen }) {
         <ConfirmWithPassword
           isEditing={isEditing}
           handleSave={handleConfirmSave}
-          handlePasswordChange={handleConfirmPasswordChange}
+          newPassword={handleConfirmPasswordChange}
         />
       </PopUp>
     </>

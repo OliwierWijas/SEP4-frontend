@@ -1,4 +1,4 @@
-export default function ConfirmWithPassword({ isEditing, handleSave, handlePasswordChange }) {
+export default function ConfirmWithPassword({ isEditing, handleSave, newPassword }) {
   return (
     <>
       <div className="brown-gradient-y flex flex-col w-full h-60 lg:w-1/2 rounded-md shadow-md justify-center items-center">
@@ -9,7 +9,7 @@ export default function ConfirmWithPassword({ isEditing, handleSave, handlePassw
           <div className="ml-3 mr-3">
             {isEditing ? "Old" : ""} password:
           </div>
-          <input type="password" data-testid="passwordConfirmInput" onChange={handlePasswordChange} />
+          <input type="password" data-testid="passwordConfirmInput" onChange={newPassword} />
         </div>
         <button
           data-testid="confirmPasswordButton"

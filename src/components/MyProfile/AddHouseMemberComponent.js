@@ -1,13 +1,18 @@
 import BrownButton from "../BrownButton.js";
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useAddMember } from "../../hooks/home/useAddMember.js";
+import { AuthContext } from "../../auth/AuthContext.js";
 
 function AddHouseMember({refreshMemberData}) {
+    const { claims } = useContext(AuthContext)
+    const token = claims?.token
+    const houseId = claims?.houseId
+
     const [username, setUsername] = useState('');
     const addMember = useAddMember()
 
     const onAdd = () => {
-        addMember(username, refreshMemberData)
+        addMember(username, refreshMemberData, token, houseId)
         setUsername('')
     };
 

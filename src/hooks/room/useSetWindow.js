@@ -1,10 +1,9 @@
 export function useSwitchWindow() {
-    const switchWindow = async (room) => {
+    const switchWindow = async (room, token) => {
         try {
             const deviceId = room?.deviceId
             const state = room?.isWindowOpen
             if (deviceId > 0 && state !== undefined) {
-                const token = localStorage.getItem("jwt")
                 const response = await fetch(`http://localhost:8080/rooms/${deviceId}/window/set`, {
                     headers: {
                         "Content-Type": "application/json",

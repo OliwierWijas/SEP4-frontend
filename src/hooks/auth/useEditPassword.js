@@ -1,8 +1,7 @@
 export function useEditPassword() {
-    const editPassword = async (username, editedAccount) => {
+    const editPassword = async (username, editedAccount, setClaims, token) => {
         try {
             if (username !== undefined && username !== null && username !== '' && editedAccount !== null && editedAccount !== undefined) {
-                const token = localStorage.getItem("jwt")
 
                 const response = await fetch(`http://localhost:8080/auth/edit/${username}/password`, {
                     headers: {
@@ -14,8 +13,12 @@ export function useEditPassword() {
                 })
                 if (response) {
                     const responseBody = await response.text()
-                    if (response.ok)
-                        localStorage.setItem("password", editedAccount.newPassword)
+                    if (response.ok) {
+                        setClaims(prevClaims => ({
+                            ...prevClaims,
+                            password: editedAccount?.newPassword
+                        }));
+                    }
                     alert(responseBody)
                 }
             }

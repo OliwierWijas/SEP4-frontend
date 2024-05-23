@@ -1,9 +1,7 @@
 export function useAddMember() {
-    const addMember = async (username, refreshMemberData) => {
+    const addMember = async (username, refreshMemberData, token, houseId) => {
         try {
             if (username !== undefined && username !== null && username !== '') {
-                const token = localStorage.getItem("jwt")
-                const houseId = localStorage.getItem("houseId")
                 const response = await fetch(`http://localhost:8080/home/${houseId}/members/${username}`, {
                     headers: {
                         "Content-Type": "application/json",

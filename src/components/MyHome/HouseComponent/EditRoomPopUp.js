@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useEditRoom } from "../../../hooks/room/useEditRoom.js";
+import { AuthContext } from "../../../auth/AuthContext.js";
 
 function EditRoom({ room, refreshRoomData, setIsOpen }) {
+    const { claims } = useContext(AuthContext)
+    const token = claims?.token
+
     const { name, deviceId, preferedTemperature, preferedHumidity } = room;
 
     const [newName, setNewName] = useState(name);
@@ -11,7 +15,8 @@ function EditRoom({ room, refreshRoomData, setIsOpen }) {
 
     const editRoom = useEditRoom()
 
-    const onEdit = () => {
+    const onEdit = (event) => {
+        event.preventDefault()
         const editedRoom = {
             name: newName,
             deviceId: newDeviceId,
@@ -19,8 +24,7 @@ function EditRoom({ room, refreshRoomData, setIsOpen }) {
             preferedHumidity: newPreferredHumidity
         }
 
-        // dont know if edit room is by device id or by roomId
-        editRoom(deviceId, editedRoom, refreshRoomData)
+        editRoom(room?.id, editedRoom, refreshRoomData, token)
         setIsOpen(false)
     }
 
@@ -45,7 +49,7 @@ function EditRoom({ room, refreshRoomData, setIsOpen }) {
                         <label className="mr-2 font-bold text-white">Preferred Humidity:</label>
                         <input className="w-full h-8 my-1 p-1 rounded-md focus:outline-none placeholder-gray-300 focus:opacity-75 hover:opacity-75" type="number" id="newPreferredHumidity" name="humidity" placeholder="Preferred humidity (%)" min="0" max="100" defaultValue={preferedHumidity} onChange={(e) => setNewPreferredHumidity(e.target.value)} required />
                     </div>
-                    <button className="bg-light-brown text-base w-64 h-16 mx-auto mt-5 py-5 rounded-md" onClick={() => onEdit()}>Update</button>
+                    <button className="bg-light-brown text-base w-64 h-16 mx-auto mt-5 py-5 rounded-md" onClick={(event) => onEdit(event)}>Update</button>
                 </form>
             </div>
         </div>

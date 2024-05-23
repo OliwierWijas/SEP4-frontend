@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './routes/App.js';
-import About from "./routes/About.js"
 import { RouterProvider, createHashRouter } from "react-router-dom"
 import MyHome from './routes/MyHome.js';
 import HomePage from './routes/HomePage.js';
@@ -34,10 +33,6 @@ const router = createHashRouter([
       {
         path: "/MyProfile",
         element: <MyProfile />
-      },
-      {
-        path: "/About",
-        element: <About />
       },
     ],
   },

@@ -53,7 +53,7 @@ function SignUp() {
                 <p className="my-1">Unlock the full potential of your property with our comprehensive suite of smart home solutions.</p>
                 <p className="my-1">Sign up today to experience seamless control and monitoring of your home's environment like never before.</p>
             </div>
-            <h style={{ color: "#C4B097" }} className="text-6xl text-center font-bold mt-8 mb-10">Your way to be smart</h>
+            <h1 style={{ color: "#C4B097" }} className="text-6xl text-center font-bold mt-8 mb-10">Your way to be smart</h1>
             <div className="flex flex-wrap justify-evenly">
                 <TextBox title="Real-Time Monitoring" textArray={textArray1} />
                 <TextBox title="Remote Control" textArray={textArray2} />
@@ -64,8 +64,8 @@ function SignUp() {
                 <TextBox title="Account Management" textArray={textArray7} />
                 <TextBox title="Proactive Notifications" textArray={textArray8} />
             </div>
-            <h style={{ color: "#C4B097" }} className="text-2xl text-center font-bold mt-8 ">Join our community of smart homeowners today and take control of your living space like never before</h>
-            <h style={{ color: "#C4B097" }} className="text-4xl text-center font-bold mt-8">Sign up now!</h>
+            <h1 style={{ color: "#C4B097" }} className="text-2xl text-center font-bold mt-8 ">Join our community of smart homeowners today and take control of your living space like never before</h1>
+            <h1 style={{ color: "#C4B097" }} className="text-4xl text-center font-bold mt-8">Sign up now!</h1>
             <SignUpLogin textArrayToDisplay={loginTextArray} usernameNeeded passwordNeeded repeatPasswordNeeded mainButtonText="Sign Up" mark={mark} smallText={smallText} smallButtonText="Login" action={useRegister} linkTo={"/Login"} />
         </div>
     )

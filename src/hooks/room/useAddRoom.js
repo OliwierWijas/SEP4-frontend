@@ -1,8 +1,7 @@
 export function useAddRoom() {
-    const addRoom = async (room, refreshRoomData) => {
+    const addRoom = async (room, refreshRoomData, token) => {
         try {
             if (room !== undefined && room !== null) {
-                const token = localStorage.getItem("jwt")
                 const response = await fetch("http://localhost:8080/rooms", {
                     headers: {
                         "Content-Type": "application/json",

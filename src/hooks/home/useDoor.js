@@ -1,8 +1,7 @@
 export function useDoor() {
-    const switchDoor = async (houseId, password, state) => {
+    const switchDoor = async (houseId, password, state, token) => {
         try {
             if (houseId > 0 && password !== undefined && state !== undefined) {
-                const token = localStorage.getItem("jwt")
 
                 const body = {
                     password,

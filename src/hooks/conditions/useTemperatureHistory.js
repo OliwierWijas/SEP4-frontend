@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useTemperatureHistory(deviceId, interval) {
+export function useTemperatureHistory(deviceId, interval, token) {
     const [temperatureData, setTemperatureData] = useState(null)
 
     useEffect(() => {
@@ -8,8 +8,6 @@ export function useTemperatureHistory(deviceId, interval) {
             const controller = new AbortController()
             const signal = controller.signal
             
-            const token = localStorage.getItem("jwt")
-
             const temp = new Date(interval.endDate);
             temp.setDate(temp.getDate() + 1);
 
@@ -40,7 +38,7 @@ export function useTemperatureHistory(deviceId, interval) {
                 controller.abort()
             }
         }
-    }, [deviceId, interval])
+    }, [deviceId, interval, token])
 
     return temperatureData
 }

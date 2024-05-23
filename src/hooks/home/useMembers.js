@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 
-export function useMembers(homeId, memberDataIndex) {
+export function useMembers(homeId, memberDataIndex, token) {
     const [membersData, setMembersData] = useState([]);
 
     useEffect(() => {
         if (homeId > 0) {
             const controller = new AbortController()
             const signal = controller.signal
-
-            const token = localStorage.getItem("jwt")
 
             fetch(`http://localhost:8080/home/${homeId}/members`, {
                 signal, headers: {
@@ -30,7 +28,7 @@ export function useMembers(homeId, memberDataIndex) {
                 controller.abort()
             }
         }
-    }, [homeId, memberDataIndex]);
+    }, [homeId, memberDataIndex, token]);
 
     return membersData;
 }

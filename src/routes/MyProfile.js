@@ -1,22 +1,25 @@
 import EditDeleteAccount from "../components/MyProfile/EditDeleteAccount.js";
 import HouseMembersBoxComponent from "../components/MyProfile/HouseMembersBoxComponent.js";
 import EditLockPassword from "../components/MyProfile/EditLockPasswordComponent.js";
-import { useState } from "react";
+import { AuthContext } from "../auth/AuthContext.js";
+import { useContext } from "react";
 
 function MyProfile() {
-  const [editProfileOpen, setEditProfileOpen] = useState(false);
-  const [confirmationStatus, setConfirmationStatus] = useState(false);
-  
-  const handleConfirmation = (status) => {
-    setConfirmationStatus(status)
-    setEditProfileOpen(false)
-  };
+  const { claims } = useContext(AuthContext)
+  const isAuthenticated = Boolean(claims?.token);
+  const isAdmin = Boolean(claims?.role === "Admin")
 
   return (
     <>
-      <EditDeleteAccount setEditProfileOpen={setEditProfileOpen}/>
-      <HouseMembersBoxComponent />
-      <EditLockPassword/>
+      {isAuthenticated && (
+        <>
+          <EditDeleteAccount />
+          <HouseMembersBoxComponent />
+          {isAdmin && (
+            <EditLockPassword />
+          )}
+        </>
+      )}
     </>
   );
 }

@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useDeleteRoom } from '../../../hooks/room/useDeleteRoom.js';
+import { AuthContext } from '../../../auth/AuthContext.js';
 
 function DeleteRoom({ room, setIsOpen, refreshRoomData }) {
-
+  const { claims } = useContext(AuthContext)
+  const token = claims?.token
   const deleteRoom = useDeleteRoom()
 
   const onDelete = () => {
-    deleteRoom(room?.deviceId, refreshRoomData)
+    deleteRoom(room?.deviceId, refreshRoomData, token)
     setIsOpen(false)
   }
 

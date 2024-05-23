@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export function useNotifications(homeId) {
+export function useNotifications(homeId, token) {
     const [notificationsData, setNotificationsData] = useState(null)
 
     useEffect(() => {
@@ -8,8 +8,6 @@ export function useNotifications(homeId) {
             const controller = new AbortController()
             const signal = controller.signal
             
-            const token = localStorage.getItem("jwt")
-
             const fetchData = () => {
                 fetch(`http://localhost:8080/notifications/${homeId}`, {
                     signal, headers: {
@@ -40,7 +38,7 @@ export function useNotifications(homeId) {
                 clearInterval(interval)
             }
         }
-    }, [homeId])
+    }, [homeId, token])
 
     return notificationsData
 }

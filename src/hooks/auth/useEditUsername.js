@@ -1,8 +1,7 @@
 export function useEditUsername() {
-    const editUsername = async (username, editedAccount) => {
+    const editUsername = async (username, editedAccount, setClaims, token) => {
         try {
             if (username !== undefined && username !== null && username !== '' && editedAccount !== null && editedAccount !== undefined) {
-                const token = localStorage.getItem("jwt")
 
                 const response = await fetch(`http://localhost:8080/auth/edit/${username}/username`, {
                     headers: {
@@ -14,8 +13,12 @@ export function useEditUsername() {
                 })
                 if (response) {
                     const responseBody = await response.text()
-                    if (response.ok)
-                        localStorage.setItem("username", editedAccount.newUsername)
+                    if (response.ok) {
+                        setClaims(prevClaims => ({
+                            ...prevClaims,
+                            username: editedAccount?.newUsername
+                        }));
+                    }
                     alert(responseBody)
                 }
             }

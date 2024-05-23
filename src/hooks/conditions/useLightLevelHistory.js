@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 
-export function useLightLevelHistory(deviceId, interval) {
+export function useLightLevelHistory(deviceId, interval, token) {
     const [lightLevelData, setLightLevelData] = useState(null)
 
     useEffect(() => {
         if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
-
-            const token = localStorage.getItem("jwt")
 
             const temp = new Date(interval.endDate);
             temp.setDate(temp.getDate() + 1);
@@ -41,7 +39,7 @@ export function useLightLevelHistory(deviceId, interval) {
                 controller.abort()
             }
         }
-    }, [deviceId, interval])
+    }, [deviceId, interval, token])
 
     return lightLevelData
 }

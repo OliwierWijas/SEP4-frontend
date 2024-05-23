@@ -1,11 +1,7 @@
 export function useChangeLockPassword() {
-    const changeLockPassword = async (houseId, newPassword) => {
+    const changeLockPassword = async (houseId, newPassword, token) => {
         try {
             if (houseId > 0) {
-                console.log(houseId)
-                console.log(JSON.stringify(newPassword))
-                const token = localStorage.getItem("jwt")
-
                 const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/password`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "PUT",

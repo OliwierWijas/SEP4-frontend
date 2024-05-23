@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 export default function ConfirmDelete({ handleConfirmation }) {
   const navigate = useNavigate();
 
-  //add here delete account
-
   const handleConfirmClick = () => {
     handleConfirmation(true);
     navigate("/");
