@@ -27,7 +27,7 @@ function CreateRoom({refreshRoomData, setIsOpen}) {
         addRoom({
             name: roomName,
             deviceId,
-            homeId: houseId,
+            homeId: houseId.toString(),
             preferedTemperature: preferredTemperature,
             preferedHumidity :preferredHumidity
         }, refreshRoomData, token)
