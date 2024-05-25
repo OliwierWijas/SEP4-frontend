@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export function useRoomData(houseId, roomDataIndex) {
+export function useRoomData(houseId, roomDataIndex, token) {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
         if (houseId && houseId > 0) {
             const controller = new AbortController();
             const signal = controller.signal;
-            const token = localStorage.getItem("jwt");
 
             fetch(`http://localhost:8080/rooms/${houseId}`, {
                 signal,
@@ -29,7 +28,7 @@ export function useRoomData(houseId, roomDataIndex) {
                 controller.abort();
             }
         }
-    }, [houseId, roomDataIndex]);
+    }, [houseId, roomDataIndex, token]);
 
     return rooms;
 }

@@ -37,7 +37,7 @@ function MyHome() {
 
   const [roomDataIndex, setRoomDataIndex] = useState(0)
 
-  const RoomData = useRoomData(houseId, roomDataIndex)
+  const RoomData = useRoomData(houseId, roomDataIndex, token)
 
   useEffect(() => {
     setRoom(RoomData.length > 0 ? RoomData[0] : null);
