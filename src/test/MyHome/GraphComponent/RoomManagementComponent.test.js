@@ -77,14 +77,13 @@ describe('RoomManagementComponent', () => {
   })
 
   const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
-    const {rerender} = render(
+    return render(
       <AuthContext.Provider value={providerProps}>
         {ui}
       </AuthContext.Provider>,
       renderOptions
-    );
-    return rerender
-  };
+    )
+  }
 
   it('renders RoomManagementComponent with provided data', async () => {
     const providerProps = { claims: { token: 'mock-token' } };
@@ -115,7 +114,7 @@ describe('RoomManagementComponent', () => {
 
   test('changes selected value on dropdown change', () => {
     const providerProps = { claims: { token: 'mock-token' } };
-    const rerender = renderWithAuthContext(
+    renderWithAuthContext(
       <RoomManagementComponent
         data={data}
         setData={setDataMock}
@@ -128,17 +127,11 @@ describe('RoomManagementComponent', () => {
       />,
     { providerProps });
 
-    /*expect(setDataMock).toHaveBeenCalledTimes(1)
-    const returnValue = setDataMock.mock.calls[0][0]()
-    console.log(returnValue)
-    console.log(data)
-    expect(returnValue).toBe(data)*/
-
     const dropdown = screen.getByTestId('dropdown-list');
     fireEvent.change(dropdown, { target: { value: 'Humidity' } });
     expect(setSelectedValueMock).toHaveBeenCalledWith('Humidity');
 
-    rerender(
+    renderWithAuthContext(
       <RoomManagementComponent
         data={data}
         setData={setDataMock}
@@ -148,8 +141,7 @@ describe('RoomManagementComponent', () => {
         setSelectedValue={setSelectedValueMock}
         room={roomData}
         setRoom={setRoomMock}
-      />,
-    { providerProps });
+      />, { providerProps });
 
     fireEvent.change(dropdown, { target: { value: 'Light Level' } });
     expect(setSelectedValueMock).toHaveBeenNthCalledWith(2, 'Light Level');

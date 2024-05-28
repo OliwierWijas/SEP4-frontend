@@ -1,8 +1,14 @@
 version: "3.8"
 services:
-  backend:
+  backend-server:
+    image: vlaad08/smart-home-server:latest
+    container_name: 'sep-backend-server-container'
+    ports:
+      - 8888:88
+
+  backend-webapi:
     image: vlaad08/smart-home:latest
-    container_name: 'sep-backend-container'
+    container_name: 'sep-backend-webapi-container'
     ports:
       - 8080:80
 
@@ -14,7 +20,7 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      - backend
+      - backend-webapi
 
 
 volumes:

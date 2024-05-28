@@ -2,12 +2,24 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import NotificationBoxComponent from '../../components/MyProfile/NotificationBoxComponent'
 import { useNotifications } from '../../hooks/home/useNotifications.js'
+import { AuthContext } from '../../auth/AuthContext.js'
 
 jest.mock('../../hooks/home/useNotifications.js', () => ({
     useNotifications: jest.fn()
 }))
 
 describe('NotificationBoxComponent', () => {
+    const providerProps = { claims: { token: 'mock-token', role: "Member", houseId: 1 } }
+
+    const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+      return render(
+        <AuthContext.Provider value={providerProps}>
+          {ui}
+        </AuthContext.Provider>,
+        renderOptions
+      )
+    }
+
     let useNotificationsMock
 
     beforeEach(() => {
@@ -19,7 +31,7 @@ describe('NotificationBoxComponent', () => {
     })
 
     it('renders the title and notifications correctly', () => {
-        render(<NotificationBoxComponent />);
+        renderWithAuthContext(<NotificationBoxComponent />, { providerProps });
 
         const notificationBox = screen.getByTestId('notification-box')
         expect(notificationBox).toBeInTheDocument()

@@ -134,7 +134,7 @@ export default function EditDeleteAccount() {
                 ) : (
                   <>
                     {isVisible ? ` ${currentPassword}` : "*".repeat(currentPassword?.length)}
-                    <div className="absolute top-3 right-2">
+                    <div className="absolute top-3 right-2" data-testid="change-visibility">
                       {isVisible ? (
                         <FaRegEye
                           onClick={handleVisible}

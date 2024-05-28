@@ -5,6 +5,7 @@ import HouseMembersBoxComponent from '../../components/MyProfile/HouseMembersBox
 import { useMembers } from '../../hooks/home/useMembers.js';
 import { useAddMember } from '../../hooks/home/useAddMember.js';
 import { useDeleteMember } from '../../hooks/home/useDeleteMember.js';
+import { AuthContext } from '../../auth/AuthContext.js';
 
 jest.mock('../../hooks/home/useMembers.js', () => ({
   useMembers: jest.fn()
@@ -30,13 +31,24 @@ describe('HouseMembersBoxComponent', () => {
     useDeleteMemberMock.mockReturnValue(jest.fn())
   })
 
+  const providerProps = { claims: { token: 'mock-token', role: "Admin", houseId: 1 } }
+
+  const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+    return render(
+      <AuthContext.Provider value={providerProps}>
+        {ui}
+      </AuthContext.Provider>,
+      renderOptions
+    )
+  }
+
   it('renders without crashing', () => {
-    render(<HouseMembersBoxComponent />);
+    renderWithAuthContext(<HouseMembersBoxComponent />, { providerProps });
   });
 
 
   it('adds a member correctly', async () => {
-    render(<HouseMembersBoxComponent />);
+    renderWithAuthContext(<HouseMembersBoxComponent />, { providerProps });
 
     const input = screen.getByTestId("username-input");
     fireEvent.change(input, { target: { value: 'NewUser' } });
@@ -45,11 +57,11 @@ describe('HouseMembersBoxComponent', () => {
 
     const addMember = useAddMember()
 
-    expect(addMember).toHaveBeenCalledWith("NewUser", expect.anything())
+    expect(addMember).toHaveBeenCalledWith("NewUser", expect.anything(), "mock-token", 1)
   });
 
   it('deletes a member correctly', async () => {
-    render(<HouseMembersBoxComponent />);
+    renderWithAuthContext(<HouseMembersBoxComponent />, { providerProps });
 
     const deleteMember = useDeleteMember()
 
@@ -61,6 +73,6 @@ describe('HouseMembersBoxComponent', () => {
     const deleteButton = (await screen.findAllByTestId('delete-button'))[0];
     fireEvent.click(deleteButton)
 
-    expect(deleteMember).toHaveBeenCalledWith("admin", expect.anything())
+    expect(deleteMember).toHaveBeenCalledWith("admin", expect.anything(), "mock-token")
   });
 });

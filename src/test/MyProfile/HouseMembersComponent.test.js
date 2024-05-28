@@ -3,12 +3,24 @@ import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import HouseMembersComponent from '../../components/MyProfile/HouseMembersComponent.js';
 import { useDeleteMember } from '../../hooks/home/useDeleteMember.js';
+import { AuthContext } from '../../auth/AuthContext.js';
 
 jest.mock('../../hooks/home/useDeleteMember.js', () => ({
   useDeleteMember: jest.fn(() => jest.fn())
 }))
 
 describe('HouseMembersComponent', () => {
+  const providerProps = { claims: { token: 'mock-token', role: "Admin", houseId: 1 } }
+
+  const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+    return render(
+      <AuthContext.Provider value={providerProps}>
+        {ui}
+      </AuthContext.Provider>,
+      renderOptions
+    )
+  }
+
   let useDeleteMemberMock
   const member = { houseId: 1, username: 'TestUser' };
 
@@ -18,12 +30,12 @@ describe('HouseMembersComponent', () => {
   });
 
   test('renders member username correctly', () => {
-    render(<HouseMembersComponent member={member} />);
+    renderWithAuthContext(<HouseMembersComponent member={member} />, { providerProps });
     expect(screen.getByText('TestUser')).toBeInTheDocument();
   });
 
   test('calls deleteMember function when delete button is clicked', async () => {
-    render(<HouseMembersComponent member={member}/>);
+    renderWithAuthContext(<HouseMembersComponent member={member}/>, { providerProps });
     
     const deleteMember = useDeleteMember()
     

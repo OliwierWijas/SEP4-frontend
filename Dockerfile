@@ -1,3 +1,4 @@
+FROM vlaad08/smart-home-server:latest
 FROM vlaad08/smart-home:latest
 
 # Use official Node.js image as the base image

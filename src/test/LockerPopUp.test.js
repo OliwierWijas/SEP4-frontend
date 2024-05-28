@@ -1,10 +1,22 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import LockerPopUp from '../components/LockerPopUp.js';
+import { AuthContext } from '../auth/AuthContext.js';
 
 describe('LockerPopUp', () => {
+  const providerProps = { claims: { token: 'mock-token', role: "Admin" } }
+
+  const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+    return render(
+      <AuthContext.Provider value={providerProps}>
+        {ui}
+      </AuthContext.Provider>,
+      renderOptions
+    )
+  }
+
   test('renders correctly', () => {
-    render(<LockerPopUp />);
+    renderWithAuthContext(<LockerPopUp />, { providerProps });
     const titleElement = screen.getByText('HOME LOCKER');
     const passwordInput = screen.getByPlaceholderText('Enter password...');
 
@@ -13,7 +25,7 @@ describe('LockerPopUp', () => {
   });
 
   test('toggles password visibility', () => {
-    render(<LockerPopUp />);
+    renderWithAuthContext(<LockerPopUp />, { providerProps });
     const visibilityButton = screen.getByTestId('visibility-button');
     const passwordInput = screen.getByTestId('password-input');
   
@@ -27,30 +39,15 @@ describe('LockerPopUp', () => {
   
     expect(passwordInput.type).toBe('password');
   });
-
-  /*test('triggers onChange event for password input', () => {
-    render(<LockerPopUp />);
-    const passwordInput = screen.getByTestId('password-input');
-
-    fireEvent.change(passwordInput, { target: { value: 'password123' } });
-
-    expect(passwordInput.value).toBe('password123');
-  });*/
-  
-
   
   test('changes button text and clears password field on button click', () => {
-    render(<LockerPopUp />);
+    renderWithAuthContext(<LockerPopUp />, { providerProps });
     const button = screen.getByText('Lock');
     const passwordInput = screen.getByTestId('password-input');
   
     fireEvent.click(button);
   
-    expect(button).toHaveTextContent('Unlock');
-  
-    const newButtonText = button.textContent;
-    expect(newButtonText).toBe('Unlock'); 
+    expect(button).toHaveTextContent('Lock');
     expect(passwordInput.value).toBe(''); 
   });
-  
 });

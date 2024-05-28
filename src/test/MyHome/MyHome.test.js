@@ -7,6 +7,7 @@ import 'jest-canvas-mock';
 import { useRoomData } from '../../hooks/room/useRooms.js';
 import { useTemperatureHistory } from '../../hooks/conditions/useTemperatureHistory.js';
 import { addDays } from 'date-fns';
+import { AuthContext } from '../../auth/AuthContext.js';
 
 jest.mock('react-chartjs-2', () => ({
   Line: () => <div>
@@ -34,14 +35,25 @@ describe('myHome Component Tests', () => {
     useTemperatureMock.mockReturnValue([{ date: new Date(), value: 25 }])
   })
 
+  const providerProps = { claims: { token: 'mock-token', role: "Admin" } }
+
+  const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+    return render(
+      <AuthContext.Provider value={providerProps}>
+        {ui}
+      </AuthContext.Provider>,
+      renderOptions
+    )
+  }
+
   it('renders without crashing', async () => {
-    render(<MyHome />)
+    renderWithAuthContext(<MyHome />, { providerProps })
     expect(await screen.findByText('Temperature')).toBeInTheDocument()
     expect(await screen.findByTestId('create-room-popup')).toBeInTheDocument()
   })
 
   it('room selection updates state', async () => {
-    render(<MyHome />)
+    renderWithAuthContext(<MyHome />, { providerProps })
     const rooms = screen.getAllByTestId('room');
     expect(rooms.length).toBe(2);
     fireEvent.click(rooms[0])
@@ -57,12 +69,12 @@ describe('myHome Component Tests', () => {
   })
 
   it('temperature data is fetched and displayed', async () => {
-    render(<MyHome />)
+    renderWithAuthContext(<MyHome />, { providerProps })
     expect(await screen.findByText('25')).toBeInTheDocument()
   })
 
   it('create room pop-up opens and closes', async () => {
-    render(<MyHome />)
+    renderWithAuthContext(<MyHome />, { providerProps })
     fireEvent.click(await screen.findByTestId('create-room-button'))
 
     const popupChild = await screen.findByTestId('create-room-popup')
@@ -77,7 +89,7 @@ describe('myHome Component Tests', () => {
   })
 
   it('edit room pop-up opens and closes', async () => {
-    render(<MyHome />)
+    renderWithAuthContext(<MyHome />, { providerProps })
     const editButton = (await screen.findAllByTestId('edit-room-button'))[0]
     expect(editButton).toBeInTheDocument()
     fireEvent.click(editButton)
@@ -99,7 +111,7 @@ describe('myHome Component Tests', () => {
       { date: addDays(new Date(), 1), value: -5 },
       { date: addDays(new Date(), 2), value: 5 },
     ]);
-    render(<MyHome />);
+    renderWithAuthContext(<MyHome />, { providerProps });
     expect(await screen.findByText('-1°C')).toBeInTheDocument()
     expect(await screen.findByText('-5°C')).toBeInTheDocument()
     expect(await screen.findByText('5°C')).toBeInTheDocument()
