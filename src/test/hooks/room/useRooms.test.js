@@ -5,7 +5,7 @@ import { screen, render } from "@testing-library/react"
 global.alert = jest.fn()
 
 describe('useRooms integration test', () => {
-    beforeEach(async () => {
+    beforeEach(() => {
         localStorage.clear()
         const username = 'testUser'
         const password = 'testPassword'
@@ -15,7 +15,7 @@ describe('useRooms integration test', () => {
             password: password
         }
 
-        await useLogin(user)
+        useLogin(user)
     })
 
     afterEach(() => {
@@ -56,7 +56,7 @@ describe('useRooms integration test', () => {
             password: password
         }
 
-        await useLogin(user)
+        useLogin(user)
         expect(localStorage.getItem("jwt")).not.toBeUndefined()
         expect(localStorage.getItem("houseId")).not.toBeUndefined()
 
