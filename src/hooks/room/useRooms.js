@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 export function useRoomData(houseId, roomDataIndex, token) {
     const [rooms, setRooms] = useState([]);
 
-    useEffect(() => {
+    useEffect(async () => {
         if (houseId && houseId > 0) {
             const controller = new AbortController();
             const signal = controller.signal;
 
-            fetch(`http://localhost:8080/rooms/${houseId}`, {
+            await fetch(`http://localhost:8080/rooms/${houseId}`, {
                 signal,
                 headers: {
                     "Content-Type": "application/json",

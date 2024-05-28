@@ -3,13 +3,13 @@ import { useState, useEffect } from "react";
 export function useNotifications(homeId, token) {
     const [notificationsData, setNotificationsData] = useState(null)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (homeId > 0) {
             const controller = new AbortController()
             const signal = controller.signal
             
-            const fetchData = () => {
-                fetch(`http://localhost:8080/notifications/${homeId}`, {
+            const fetchData = async () => {
+                await fetch(`http://localhost:8080/notifications/${homeId}`, {
                     signal, headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
@@ -30,7 +30,7 @@ export function useNotifications(homeId, token) {
                 }
             }
 
-            fetchData()
+            await fetchData()
 
             const interval = setInterval(fetchData, 5 * 60 * 1000)
 

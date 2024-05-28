@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export function useLightLevelHistory(deviceId, interval, token) {
     const [lightLevelData, setLightLevelData] = useState(null)
 
-    useEffect(() => {
+    useEffect(async () => {
         if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
@@ -14,7 +14,7 @@ export function useLightLevelHistory(deviceId, interval, token) {
             let dateFrom = JSON.stringify(interval?.startDate).replace(/"/g, '')
             let dateTo = JSON.stringify(temp).replace(/"/g, '')
 
-            fetch(`http://localhost:8080/light/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
+            await fetch(`http://localhost:8080/light/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
