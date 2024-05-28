@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Room from './Room.js';
+import Room from './RoomComponent.js';
 import CreateRoom from './CreateRoomButton.js';
 import Triangle from './Triangle.js';
 

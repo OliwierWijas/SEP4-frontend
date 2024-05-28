@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import RoomManagementComponent from "../components/MyHome/GraphComponent/RoomManagementComponent.js";
 import BrownBreakline from "../components/BrownBreakline.js";
-import House from "../components/MyHome/HouseComponent/House.js";
+import House from "../components/MyHome/HouseComponent/HouseComponent.js";
 import { addDays } from 'date-fns';
 import PopUp from "../components/PopUp.js";
 import CreateRoom from "../components/MyHome/HouseComponent/CreateRoomPopUp.js";

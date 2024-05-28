@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import House from '../../../components/MyHome/HouseComponent/House.js';
+import House from '../../../components/MyHome/HouseComponent/HouseComponent.js';
 import roomData from '../../../dummyData/RoomData.js';
 
 describe('House component', () => {

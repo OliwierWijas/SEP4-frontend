@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import RoomController from '../../../components/MyHome/GraphComponent/RoomController.js';
+import RoomController from '../../../components/MyHome/GraphComponent/RoomControllerComponent.js';
 
 jest.mock('../../../hooks/room/useSetRadiator.js', () => ({
   useSetRadiator: jest.fn(() => jest.fn()),

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Room from '../../../components/MyHome/HouseComponent/Room.js';
+import Room from '../../../components/MyHome/HouseComponent/RoomComponent.js';
 
 const roomData = {
   deviceId: '1',
