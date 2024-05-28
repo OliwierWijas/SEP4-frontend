@@ -9,7 +9,7 @@ function RoomController({ room, setRoom }) {
     const { claims } = useContext(AuthContext)
     const token = claims?.token
 
-    const setTemperature = useSetRadiator()
+    const setRadiator = useSetRadiator()
     const setWindow = useSwitchWindow()
     const setLight = useSetLightLevel()
 
@@ -17,7 +17,7 @@ function RoomController({ room, setRoom }) {
         setRoom(prevRoom => {
             const newRadiatorState = Math.min(prevRoom.radiatorState + 1, 6)
             const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
-            setTemperature(newRoom, token)
+            setRadiator(newRoom, token)
             return newRoom
         })
     }
@@ -26,7 +26,7 @@ function RoomController({ room, setRoom }) {
         setRoom(prevRoom => {
             const newRadiatorState = Math.max(prevRoom.radiatorState - 1, 0)
             const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
-            setTemperature(newRoom, token)
+            setRadiator(newRoom, token)
             return newRoom
         })
     }
@@ -35,7 +35,7 @@ function RoomController({ room, setRoom }) {
         setRoom(prevRoom => {
             const newLightLevel = Math.min(prevRoom.lightLevel + 1, 4)
             const newRoom = { ...prevRoom, lightLevel: newLightLevel }
-            setLight(newRoom, token)
+            setRadiator(newRoom, token)
             return newRoom
         })
     }

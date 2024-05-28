@@ -11,19 +11,11 @@ function Room({ room, setRoom, setEditRoomOpen, setDeleteRoomOpen }) {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  }
-
   return (
     <div
       className="room w-full flex flex-col justify-center bg-medium-brown items-center shadow-md rounded relative"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       onClick={() => setRoom(room)}
       data-testid="room"
     >

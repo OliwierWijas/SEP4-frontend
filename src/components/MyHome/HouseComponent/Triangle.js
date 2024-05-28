@@ -5,7 +5,6 @@ const Triangle = () => {
   return (
     <div className="triangle-container">
       <div className="triangle"></div>
-      <p className="triangle-text"><span>My</span>Home</p>
     </div>
   );
 };

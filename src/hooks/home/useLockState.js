@@ -9,12 +9,10 @@ export function useLockState() {
                 if (response) {
                     const responseBody = await response.text()
                     return responseBody
-                } else {
-                    alert("Error getting current house lock state.")
                 }
             }
         } catch (error) {
-            alert("Error getting current house lock state.")
+            console.log("Error getting current house lock state.")
         }
     }
 
