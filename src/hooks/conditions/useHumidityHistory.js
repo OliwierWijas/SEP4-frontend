@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 export function useHumidityHistory(deviceId, interval, token) {
     const [humidityData, setHumidityData] = useState(null)
 
-    useEffect(async () => {
+    useEffect(() => {
         if (deviceId > 0 && interval?.startDate && interval?.endDate) {
             const controller = new AbortController()
             const signal = controller.signal
@@ -14,7 +14,7 @@ export function useHumidityHistory(deviceId, interval, token) {
             let dateFrom = JSON.stringify(interval?.startDate).replace(/"/g, '')
             let dateTo = JSON.stringify(temp).replace(/"/g, '')
 
-            await fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
+            fetch(`http://localhost:8080/humidity/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
