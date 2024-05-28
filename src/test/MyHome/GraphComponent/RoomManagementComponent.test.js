@@ -6,6 +6,7 @@ import 'jest-canvas-mock';
 import { useTemperatureHistory } from '../../../hooks/conditions/useTemperatureHistory';
 import { useHumidityHistory } from '../../../hooks/conditions/useHumidityHistory.js';
 import { useLightLevelHistory } from '../../../hooks/conditions/useLightLevelHistory.js';
+import { AuthContext } from '../../../auth/AuthContext.js';
 
 jest.mock('react-chartjs-2', () => ({
   Line: () => null,
@@ -38,7 +39,7 @@ describe('RoomManagementComponent', () => {
       data: [25, 26]
     }]
   };
-  
+
   const roomData = { id: 1, deviceId: 1, name: "Living Room", tempValue: "23", humiValue: 35, lightValue: 100, radiatorState: 1, isWindowOpen: true, lightLevel: 4 };
 
   const interval = {
@@ -75,15 +76,26 @@ describe('RoomManagementComponent', () => {
     })
   })
 
+  const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
+    const {rerender} = render(
+      <AuthContext.Provider value={providerProps}>
+        {ui}
+      </AuthContext.Provider>,
+      renderOptions
+    );
+    return rerender
+  };
+
   it('renders RoomManagementComponent with provided data', async () => {
-    render(<RoomManagementComponent
+    const providerProps = { claims: { token: 'mock-token' } };
+    renderWithAuthContext(<RoomManagementComponent
       data={data}
       setData={setDataMock}
       interval={{ startDate: new Date(), endDate: new Date() }}
       setInterval={setIntervalMock}
       selectedValue="Temperature"
       setSelectedValue={setSelectedValueMock}
-      room={roomData} />);
+      room={roomData} />, { providerProps });
 
     expect(screen.getByText('Living Room')).toBeInTheDocument();
 
@@ -102,7 +114,8 @@ describe('RoomManagementComponent', () => {
   });
 
   test('changes selected value on dropdown change', () => {
-    const {rerender } = render(
+    const providerProps = { claims: { token: 'mock-token' } };
+    const rerender = renderWithAuthContext(
       <RoomManagementComponent
         data={data}
         setData={setDataMock}
@@ -112,8 +125,8 @@ describe('RoomManagementComponent', () => {
         setSelectedValue={setSelectedValueMock}
         room={roomData}
         setRoom={setRoomMock}
-      />
-    );
+      />,
+    { providerProps });
 
     /*expect(setDataMock).toHaveBeenCalledTimes(1)
     const returnValue = setDataMock.mock.calls[0][0]()
@@ -135,8 +148,8 @@ describe('RoomManagementComponent', () => {
         setSelectedValue={setSelectedValueMock}
         room={roomData}
         setRoom={setRoomMock}
-      />
-    );
+      />,
+    { providerProps });
 
     fireEvent.change(dropdown, { target: { value: 'Light Level' } });
     expect(setSelectedValueMock).toHaveBeenNthCalledWith(2, 'Light Level');

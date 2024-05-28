@@ -35,7 +35,7 @@ function RoomController({ room, setRoom }) {
         setRoom(prevRoom => {
             const newLightLevel = Math.min(prevRoom.lightLevel + 1, 4)
             const newRoom = { ...prevRoom, lightLevel: newLightLevel }
-            setRadiator(newRoom, token)
+            setLight(newRoom, token)
             return newRoom
         })
     }
