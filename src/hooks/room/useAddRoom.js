@@ -2,7 +2,7 @@ export function useAddRoom() {
     const addRoom = async (room, refreshRoomData, token) => {
         try {
             if (room !== undefined && room !== null) {
-                const response = await fetch("http://localhost:8080/rooms", {
+                const response = await fetch("http://172.214.63.232:80/rooms", {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

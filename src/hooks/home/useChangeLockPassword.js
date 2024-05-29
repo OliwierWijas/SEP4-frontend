@@ -6,7 +6,7 @@ export function useChangeLockPassword() {
                     alert("Password cannot be empty.")
                     return
                 }
-                const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/password`, {
+                const response = await fetch(`http://172.214.63.232:80/door/houses/${houseId}/doors/password`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "PUT",
                     body: JSON.stringify(newPassword)
