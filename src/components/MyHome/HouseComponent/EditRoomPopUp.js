@@ -17,6 +17,19 @@ function EditRoom({ room, refreshRoomData, setIsOpen }) {
 
     const onEdit = (event) => {
         event.preventDefault()
+        if (newName === '') {
+            alert("Room name cannot be empty.")
+            return
+        } else if (newDeviceId === '') {
+            alert("Device id cannot be empty.")
+            return
+        } else if (newPreferredTemperature === '') {
+            alert("Temperature cannot be empty.")
+            return
+        } else if (newPreferredHumidity === '') {
+            alert("Humidity cannot be empty.")
+            return
+        }
         const editedRoom = {
             name: newName,
             deviceId: newDeviceId,
@@ -24,8 +37,10 @@ function EditRoom({ room, refreshRoomData, setIsOpen }) {
             preferedHumidity: newPreferredHumidity
         }
 
-        editRoom(room?.id, editedRoom, refreshRoomData, token)
-        setIsOpen(false)
+        const success = editRoom(room?.id, editedRoom, refreshRoomData, token)
+        if (success) {
+            setIsOpen(false)
+        }
     }
 
     return (

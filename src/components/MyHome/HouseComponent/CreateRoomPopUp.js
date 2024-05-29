@@ -13,25 +13,31 @@ function CreateRoom({refreshRoomData, setIsOpen}) {
     const houseId = claims?.houseId
     const addRoom = useAddRoom();
 
-    const handleAddRoom = (event) => {
+    const handleAddRoom = async (event) => {
         event.preventDefault();
         if (roomName === '') {
             alert("Room name cannot be empty.")
+            return
         } else if (deviceId === '') {
             alert("Device id cannot be empty.")
+            return
         } else if (preferredTemperature === '') {
             alert("Temperature cannot be empty.")
+            return
         } else if (preferredHumidity === '') {
             alert ("Humidity cannot be empty.")
+            return
         }
-        addRoom({
+        const success = await addRoom({
             name: roomName,
             deviceId,
             homeId: houseId.toString(),
             preferedTemperature: preferredTemperature,
             preferedHumidity :preferredHumidity
         }, refreshRoomData, token)
-        setIsOpen(false)
+        if (success) {
+            setIsOpen(false)
+        }
     }
 
     return (

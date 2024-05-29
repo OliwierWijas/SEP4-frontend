@@ -14,6 +14,9 @@ export function useAddRoom() {
                     refreshRoomData(prev => prev + 1)
                     const responseBody = await response.text()
                     alert(responseBody)
+                    if (response.ok) {
+                        return true
+                    }
                 } else {
                     alert("Error while adding room.")
                 }
