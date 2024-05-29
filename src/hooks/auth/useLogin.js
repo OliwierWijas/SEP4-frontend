@@ -5,7 +5,7 @@ export function useLogin() {
             password
         }
 
-        const response = await fetch("http://localhost:8080/auth/login", {
+        const response = await fetch("http://172.214.63.209:80/auth/login", {
             headers: { "Content-Type": "application/json" },
             method: "POST",
             body: JSON.stringify(user),

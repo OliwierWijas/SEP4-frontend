@@ -8,7 +8,7 @@ export function useDoor() {
                     state
                 }
 
-                const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
+                const response = await fetch(`http://172.214.63.209:80/door/houses/${houseId}/doors/switch`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "POST",
                     body: JSON.stringify(body),

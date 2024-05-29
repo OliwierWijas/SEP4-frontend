@@ -3,7 +3,7 @@ export function useEditPassword() {
         try {
             if (username !== undefined && username !== null && username !== '' && editedAccount !== null && editedAccount !== undefined) {
 
-                const response = await fetch(`http://localhost:8080/auth/edit/${username}/password`, {
+                const response = await fetch(`http://172.214.63.209:80/auth/edit/${username}/password`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

@@ -8,7 +8,7 @@ export function useMembers(homeId, memberDataIndex, token) {
             const controller = new AbortController()
             const signal = controller.signal
 
-            fetch(`http://localhost:8080/home/${homeId}/members`, {
+            fetch(`http://172.214.63.209:80/home/${homeId}/members`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`

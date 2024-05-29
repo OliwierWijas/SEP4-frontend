@@ -9,7 +9,7 @@ export function useNotifications(homeId, token) {
             const signal = controller.signal
             
             const fetchData = async () => {
-                fetch(`http://localhost:8080/notifications/${homeId}`, {
+                fetch(`http://172.214.63.209:80/notifications/${homeId}`, {
                     signal, headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

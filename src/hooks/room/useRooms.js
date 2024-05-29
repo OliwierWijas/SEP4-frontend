@@ -8,7 +8,7 @@ export function useRoomData(houseId, roomDataIndex, token) {
             const controller = new AbortController();
             const signal = controller.signal;
 
-            fetch(`http://localhost:8080/rooms/${houseId}`, {
+            fetch(`http://172.214.63.209:80/rooms/${houseId}`, {
                 signal,
                 headers: {
                     "Content-Type": "application/json",

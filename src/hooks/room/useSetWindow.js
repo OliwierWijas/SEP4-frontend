@@ -4,7 +4,7 @@ export function useSwitchWindow() {
             const deviceId = room?.deviceId
             const state = room?.isWindowOpen
             if (deviceId > 0 && state !== undefined) {
-                const response = await fetch(`http://localhost:8080/rooms/${deviceId}/window/set`, {
+                const response = await fetch(`http://172.214.63.209:80/rooms/${deviceId}/window/set`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

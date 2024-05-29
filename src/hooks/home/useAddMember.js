@@ -2,7 +2,7 @@ export function useAddMember() {
     const addMember = async (username, refreshMemberData, token, houseId) => {
         try {
             if (username !== undefined && username !== null && username !== '') {
-                const response = await fetch(`http://localhost:8080/home/${houseId}/members/${username}`, {
+                const response = await fetch(`http://172.214.63.209:80/home/${houseId}/members/${username}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
