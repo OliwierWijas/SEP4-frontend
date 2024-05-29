@@ -13,6 +13,11 @@ function FormComponent({ usernameNeeded, passwordNeeded, repeatPasswordNeeded, b
             return
         }
 
+        if (passwordNeeded && (password === undefined || password === "")) {
+            alert("Please fill in all required fields.")
+            return
+        }
+
         if (passwordNeeded && repeatPasswordNeeded) {
             if (password === undefined || repeatPassword === undefined || password === "" || repeatPassword === "") {
                 alert("Please fill in all required fields.")
