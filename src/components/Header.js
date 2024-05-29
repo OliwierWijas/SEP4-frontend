@@ -20,7 +20,8 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
   const [isHouseLocked, toggleLocker] = useState(currentState);
 
   const handleLocker = () => {
-    toggleLocker(!isHouseLocked);
+    const temp = getLockState(houseId, token);
+    toggleLocker(temp)
     setLockerOpen(true);
   };
 
@@ -29,7 +30,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
   };
 
   const logOut = () => {
-    setClaims(null)
+    setClaims("")
     navigate("/")
   }
 

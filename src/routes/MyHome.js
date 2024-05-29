@@ -65,7 +65,7 @@ function MyHome() {
 
   return (
     <>
-      {isAuthenticated && (
+      {houseId > 0 && isAuthenticated && (
         <div>
           {isAdmin && (
             <>
@@ -74,15 +74,30 @@ function MyHome() {
               </PopUp>
               <PopUp isOpen={createRoomOpen} setIsOpen={setCreateRoomOpen} testId="create-room-popup">
                 <CreateRoom refreshRoomData={setRoomDataIndex} setIsOpen={setCreateRoomOpen} />
-              </PopUp >
+              </PopUp>
               <PopUp isOpen={deleteRoomOpen} setIsOpen={setDeleteRoomOpen} testId="delete-room-popup">
                 <DeleteRoom room={deleteRoom} setIsOpen={setDeleteRoomOpen} refreshRoomData={setRoomDataIndex} />
               </PopUp>
             </>
           )}
-          <House rooms={RoomData} setRoom={setRoom} setCreateRoomOpen={setCreateRoomOpen} setEditRoomOpen={handleEditRoom} setDeleteRoomOpen={handleDeleteRoom} />
+          <House
+            rooms={RoomData}
+            setRoom={setRoom}
+            setCreateRoomOpen={setCreateRoomOpen}
+            setEditRoomOpen={handleEditRoom}
+            setDeleteRoomOpen={handleDeleteRoom}
+          />
           <BrownBreakline />
-          <RoomManagementComponent data={graphData} setData={setGraphData} interval={interval} setInterval={setInterval} selectedValue={selectedValue} setSelectedValue={setSelectedValue} room={room} setRoom={setRoom} />
+          <RoomManagementComponent
+            data={graphData}
+            setData={setGraphData}
+            interval={interval}
+            setInterval={setInterval}
+            selectedValue={selectedValue}
+            setSelectedValue={setSelectedValue}
+            room={room}
+            setRoom={setRoom}
+          />
         </div>
       )}
     </>

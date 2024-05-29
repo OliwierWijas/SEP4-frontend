@@ -44,6 +44,11 @@ export default function EditDeleteAccount() {
         newPassword
       }
 
+      if (newUsername === "" && newPassword === "") {
+        alert ("Username and password cannot be empty.")
+        return
+      }
+
       if (currentUsername !== newUsername && newUsername !== '')
         editUsername(currentUsername, editedUsername, setClaims, token)
       if (currentPassword !== newPassword && newPassword !== '')

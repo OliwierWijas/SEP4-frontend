@@ -1,7 +1,7 @@
 export function useEditPassword() {
     const editPassword = async (username, editedAccount, setClaims, token) => {
         try {
-            if (username !== undefined && username !== null && username !== '' && editedAccount !== null && editedAccount !== undefined) {
+            if (username !== undefined || username !== null || username !== '' || editedAccount !== null || editedAccount !== undefined) {
 
                 const response = await fetch(`http://localhost:8080/auth/edit/${username}/password`, {
                     headers: {

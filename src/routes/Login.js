@@ -16,16 +16,19 @@ export default function Login() {
   const { setClaims } = useContext(AuthContext)
 
   const handleLogin = async (username, password) => {
-    await login(username, password)
-    const claims = JSON.parse(localStorage.getItem("claims"))
-    setClaims(claims)
-    navigate("/MyHome")
+    const bool = await login(username, password)
+    setClaims(null)
+    if (bool) {
+      const claims = JSON.parse(localStorage.getItem("claims"))
+      setClaims(claims)
+      navigate("/MyHome")
+    }
   }
 
   return (
     <>
-    <Carousel images={images}></Carousel>
-    <SignUpLogin textArrayToDisplay={["Welcome back", "to your smart home", "Log in now"]} usernameNeeded passwordNeeded mainButtonText="Login" smallButtonText="Sign up" smallText={smallText} action={handleLogin} linkTo={"/Signup"}></SignUpLogin>
+      <Carousel images={images}></Carousel>
+      <SignUpLogin textArrayToDisplay={["Welcome back", "to your smart home", "Log in now"]} usernameNeeded passwordNeeded mainButtonText="Login" smallButtonText="Sign up" smallText={smallText} action={handleLogin} linkTo={"/Signup"}></SignUpLogin>
     </>
   );
 }

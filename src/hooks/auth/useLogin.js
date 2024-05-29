@@ -26,10 +26,11 @@ export function useLogin() {
                 username,
                 password: user?.password,
                 role,
-                houseId: 1
+                houseId: houseId
             }
 
             localStorage.setItem("claims", JSON.stringify(claims))
+            return true
         } else {
             const responseBody = await response.text();
             try {
