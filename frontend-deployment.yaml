@@ -2,9 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: C:\Users\oliwi\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
-    kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
+    kompose.cmd: kompose convert
+    kompose.version: 1.32.0 (765fde254)
   labels:
     io.kompose.service: frontend
   name: frontend
@@ -13,24 +12,20 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: frontend
-  strategy: {}
   template:
     metadata:
       annotations:
-        kompose.cmd: C:\Users\oliwi\AppData\Local\Microsoft\WinGet\Packages\Kubernetes.kompose_Microsoft.Winget.Source_8wekyb3d8bbwe\kompose.exe convert
-        kompose.version: 1.31.2 (a92241f79)
-      creationTimestamp: null
+        kompose.cmd: kompose convert
+        kompose.version: 1.32.0 (765fde254)
       labels:
-        io.kompose.network/sep4-frontend-default: "true"
+        io.kompose.network/sep4-frontend-sep4-network: "true"
         io.kompose.service: frontend
     spec:
       containers:
-        - image: frontend:v1
+        - image: oliwierwijas/smart-home-frontend:latest
           name: sep-frontend-container
           ports:
             - containerPort: 3000
               hostPort: 3000
               protocol: TCP
-          resources: {}
       restartPolicy: Always
-status: {}

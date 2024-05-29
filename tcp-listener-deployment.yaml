@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: tcp-listener
+  name: tcp-listener
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: tcp-listener
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/sep4-frontend-sep4-network: "true"
+        io.kompose.service: tcp-listener
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: smart-homel.postgres.database.azure.com
+            - name: DATABASE_NAME
+              value: smart_home
+            - name: DATABASE_PASSWORD
+              value: Semester4Password
+            - name: DATABASE_USER
+              value: sep_user
+            - name: SERVER_ADDRESS
+              value: 172.28.0.2
+          image: vlaad08/smart-home-server:latest
+          name: sep-backend-tcp-listener-container
+          ports:
+            - containerPort: 6868
+              hostPort: 6868
+              protocol: TCP
+      restartPolicy: Always

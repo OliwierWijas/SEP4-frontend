@@ -1,28 +1,46 @@
-version: "3.8"
-services:
-  backend-server:
-    image: vlaad08/smart-home-server:latest
-    container_name: 'sep-backend-server-container'
-    ports:
-      - 8888:88
+networks:
+  sep4-network:
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
 
-  backend-webapi:
-    image: vlaad08/smart-home:latest
-    container_name: 'sep-backend-webapi-container'
-    ports:
-      - 8080:80
+services:
 
   frontend:
-    build:
-      context: ./
+    image: oliwierwijas/smart-home-frontend:latest
     container_name: 'sep-frontend-container'
-    image: 'frontend:v1'
     ports:
-      - 3000:3000
-    depends_on:
-      - backend-webapi
+      - "3000:3000"
+    networks:
+      sep4-network:
+        ipv4_address: 172.28.0.4
 
+  tcp-listener:
+    image: vlaad08/smart-home-server:latest
+    container_name: 'sep-backend-tcp-listener-container'
+    environment:
+      - DATABASE_HOST=smart-homel.postgres.database.azure.com
+      - DATABASE_NAME=smart_home
+      - DATABASE_USER=sep_user
+      - DATABASE_PASSWORD=Semester4Password
+      - SERVER_ADDRESS=172.28.0.2
+    ports:
+      - "6868:6868"
+    networks:
+      sep4-network:
+        ipv4_address: 172.28.0.2
 
-volumes:
-  db:
-    driver: local
+  web-api:
+    image: vlaad08/smart-home:latest
+    container_name: 'sep-backend-webapi-container'
+    environment:
+      - DATABASE_HOST=smart-homel.postgres.database.azure.com
+      - DATABASE_NAME=smart_home
+      - DATABASE_USER=sep_user
+      - DATABASE_PASSWORD=Semester4Password
+      - SERVER_ADDRESS=172.28.0.2
+    ports:
+      - "8080:80"
+    networks:
+      sep4-network:
+        ipv4_address: 172.28.0.3
