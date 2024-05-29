@@ -5,23 +5,18 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
-import { useLockState } from "../hooks/home/useLockState.js";
 import { AuthContext } from "../auth/AuthContext.js";
+import { wait } from "@testing-library/user-event/dist/utils/index.js";
+import { waitFor } from "@testing-library/react";
 
 export default function Header({ setNotificationOpen, setLockerOpen }) {
   const navigate = useNavigate()
-  const { claims, setClaims } = useContext(AuthContext)
-  const houseId = claims?.houseId
-  const token = claims?.token
+  const { claims, setClaims, isHouseLocked } = useContext(AuthContext)
+  const isAuthenticated = Boolean(claims?.token);
 
-  const getLockState = useLockState();
-  const currentState = getLockState(houseId, token);
   const [isOpen, setIsOpen] = useState(false);
-  const [isHouseLocked, toggleLocker] = useState(currentState);
 
   const handleLocker = () => {
-    const temp = getLockState(houseId, token);
-    toggleLocker(temp)
     setLockerOpen(true);
   };
 
@@ -29,12 +24,11 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
     setIsOpen(false);
   };
 
-  const logOut = () => {
-    setClaims("")
+  const logOut = async () => {
+    localStorage.removeItem("claims")
+    setClaims(() => {localStorage.clear(); return null})
     navigate("/")
   }
-
-  let isAuthenticated = Boolean(claims?.token);
 
   return (
     <>
@@ -98,7 +92,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
               )}
             </div>
             <div className="flex items-center md:hidden">
-              <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)}/>
+              <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)} />
             </div>
           </div>
         </div>
@@ -137,7 +131,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
                 </>
               )}
               {isAuthenticated ? (
-                <Link to="/" onClick={() => {handleNavbarItemClick(); logOut()}}>
+                <Link to="/" onClick={() => { handleNavbarItemClick(); logOut() }}>
                   <p className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium">
                     Log out
                   </p>

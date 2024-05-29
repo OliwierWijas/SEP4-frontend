@@ -1,5 +1,5 @@
 import { FaRegEdit } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
@@ -16,6 +16,10 @@ export default function EditDeleteAccount() {
   const token = claims?.token
   const currentUsername = claims?.username
   const currentPassword = claims?.password
+
+  useEffect(() => {
+
+  }, [currentUsername, currentPassword])
 
   const navigate = useNavigate();
 
@@ -55,8 +59,12 @@ export default function EditDeleteAccount() {
         editPassword(currentUsername, editedPassword, setClaims, token)
       handleEditing()
     } else {
-      deleteAccount(currentUsername, currentPassword, setClaims, token)
-      navigate("/")
+      const success = deleteAccount(currentUsername, currentPassword, setClaims, token)
+      if (success) {
+        localStorage.removeItem("claims")
+        setClaims(() => {localStorage.clear(); return null})
+        navigate("/")
+      }
     }
 
     handlePopup()

@@ -11,8 +11,8 @@ export function useDeleteAccount() {
                 body: JSON.stringify(user)
             })
             if (response.ok) {
-                setClaims(null)
                 alert("Account has been deleted.")
+                return true
             }
             else {
                 const responseBody = await response.text();
