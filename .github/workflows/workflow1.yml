@@ -35,8 +35,8 @@ jobs:
           kubectl apply -f tcp-listener-service.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f web-api-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl apply -f web-api-service.yaml 2>&1 >/dev/null | tee /dev/stderr
-          kubectl apply -f website-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
-          kubectl apply -f website-service.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl apply -f frontend-deployment.yaml 2>&1 >/dev/null | tee /dev/stderr
+          kubectl apply -f frontend-service.yaml 2>&1 >/dev/null | tee /dev/stderr
           kubectl get all
           kubectl get pods
           echo "Deployment completed successfully"
@@ -51,10 +51,10 @@ jobs:
           curl -i http://localhost:8080/
       - name: Test frontend service URLs
         run: |
-          echo "SERVICE_URL=$(minikube service website --url)"
-          kubectl port-forward service/website 3000:3000 &> /dev/null &
+          echo "SERVICE_URL=$(minikube service frontend --url)"
+          kubectl port-forward service/frontend 3000:3000 &> /dev/null &
           sleep 5
-          kubectl port-forward service/website 3000:3000 &> /dev/null &
+          kubectl port-forward service/frontend 3000:3000 &> /dev/null &
       - run: |
           curl -i http://localhost:3000/
       - name: Cleanup
