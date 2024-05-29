@@ -2,6 +2,9 @@ export function useChangeLockPassword() {
     const changeLockPassword = async (houseId, newPassword, token) => {
         try {
             if (houseId > 0) {
+                if (newPassword === "" || newPassword === undefined) {
+                    alert("Password cannot be empty.")
+                }
                 const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/password`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "PUT",

@@ -19,7 +19,7 @@ export function useLogin() {
 
             const username = tempClaims["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
             const role = tempClaims["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-            const houseId = tempClaims.HouseId;
+            const houseId = tempClaims.houseId;
 
             const claims = {
                 token,

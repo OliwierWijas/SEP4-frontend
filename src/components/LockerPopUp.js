@@ -5,11 +5,16 @@ import { useDoor } from '../hooks/home/useDoor.js';
 import { FaRegEye } from 'react-icons/fa';
 import { FaRegEyeSlash } from 'react-icons/fa';
 import { AuthContext } from '../auth/AuthContext.js';
+import { useLockState } from '../hooks/home/useLockState.js';
 
 function LockerPopUp() {
     const { claims } = useContext(AuthContext)
     const houseId = claims?.houseId
     const token = claims?.token
+
+    const getLockState = useLockState();
+    const currentState = getLockState(houseId, token);
+    const [isHouseLocked, toggleLocker] = useState(currentState);
 
     const [buttonText, setButtonText] = useState("Lock");
     const [password, setPassword] = useState("");
@@ -22,9 +27,12 @@ function LockerPopUp() {
     };
 
     const handleButtonClick = async () => {
-        await switchDoor(houseId, password, buttonText === "Lock" ? true : false, token)
+        const temp = await switchDoor(houseId, password, isHouseLocked === true ? true : false, token)
         setPassword("");
-        setButtonText(buttonText === "Lock" ? "Unlock" : "Lock");
+        if (temp) {
+            toggleLocker(() => !isHouseLocked)
+            setButtonText(isHouseLocked === true ? "Unlock" : "Lock");
+        }
     };
 
     return (

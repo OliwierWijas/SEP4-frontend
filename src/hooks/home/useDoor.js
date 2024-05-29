@@ -16,6 +16,9 @@ export function useDoor() {
                 if (response) {
                     const responseBody = await response.text()
                     alert(responseBody)
+                    if (response.ok) {
+                        return true
+                    }
                 } else {
                     alert("Error while changing door state.")
                 }
