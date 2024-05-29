@@ -14,6 +14,10 @@ function RoomController({ room, setRoom }) {
     const setLight = useSetLightLevel()
 
     const incrementRadiatorStatus = () => {
+        if (room.radiatorState === 6) {
+            alert("Radiator state cannot be higher than 6.")
+            return
+        }
         setRoom(prevRoom => {
             const newRadiatorState = Math.min(prevRoom.radiatorState + 1, 6)
             const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
@@ -23,6 +27,10 @@ function RoomController({ room, setRoom }) {
     }
 
     const decrementRadiatorStatus = () => {
+        if (room.radiatorState === 0) {
+            alert("Radiator state cannot be lower than 0.")
+            return
+        }
         setRoom(prevRoom => {
             const newRadiatorState = Math.max(prevRoom.radiatorState - 1, 0)
             const newRoom = { ...prevRoom, radiatorState: newRadiatorState }
@@ -32,6 +40,10 @@ function RoomController({ room, setRoom }) {
     }
 
     const incrementLightStatus = () => {
+        if (room.lightLevel === 6) {
+            alert("Light state cannot be higher than 6.")
+            return
+        }
         setRoom(prevRoom => {
             const newLightLevel = Math.min(prevRoom.lightLevel + 1, 4)
             const newRoom = { ...prevRoom, lightLevel: newLightLevel }
@@ -41,6 +53,10 @@ function RoomController({ room, setRoom }) {
     }
 
     const decrementLightStatus = () => {
+        if (room.lightLevel === 0) {
+            alert("Light state cannot be lower than 0.")
+            return
+        }
         setRoom(prevRoom => {
             const newLightLevel = Math.max(prevRoom.lightLevel - 1, 0)
             const newRoom = { ...prevRoom, lightLevel: newLightLevel }
