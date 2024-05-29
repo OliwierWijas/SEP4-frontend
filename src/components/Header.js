@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { FaRegBell } from "react-icons/fa";
 import { IoLockClosedOutline, IoLockOpenOutline } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
 import { Link, useNavigate } from "react-router-dom";
 import BrownButton from "./BrownButton.js";
 import BrownBreakline from "./BrownBreakline.js";
@@ -96,30 +97,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
               )}
             </div>
             <div className="flex items-center md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="text-gray-800 hover:text-gray-900 inline-flex items-center justify-center p-2 rounded-md focus:outline-none ml-2"
-              >
-                <svg
-                  className="h-6 w-6"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d={
-                      isOpen
-                        ? "M6 18L18 6M6 6l12 12"
-                        : "M4 6h16M4 12h16M4 18h16"
-                    }
-                  />
-                </svg>
-              </button>
+              <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)}/>
             </div>
           </div>
         </div>
@@ -145,13 +123,13 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
                   </Link>
                   <div
                     onClick={() => setNotificationOpen(true)}
-                    className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                    className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
                   >
                     Notifications
                   </div>
                   <div
                     onClick={() => handleLocker()}
-                    className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium"
+                    className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
                   >
                     {isHouseLocked ? "Lock Home" : "Unlock Home"}
                   </div>
