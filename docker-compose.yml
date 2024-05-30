@@ -4,7 +4,7 @@ services:
     image: vlaad08/smart-home-server:latest
     container_name: 'sep-backend-server-container'
     ports:
-      - 8888:88
+      - 6868:6868
 
   backend-webapi:
     image: vlaad08/smart-home:latest
