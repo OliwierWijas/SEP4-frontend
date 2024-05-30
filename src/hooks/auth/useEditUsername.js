@@ -3,7 +3,7 @@ export function useEditUsername() {
         try {
             if (username !== undefined || username !== null || username !== '' || editedAccount !== null || editedAccount !== undefined) {
 
-                const response = await fetch(`http://localhost:8080/auth/edit/${username}/username`, {
+                const response = await fetch(`http://172.214.63.232:80/auth/edit/${username}/username`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

@@ -14,7 +14,7 @@ export function useHumidityHistory(deviceId, interval, token) {
             let dateFrom = JSON.stringify(interval?.startDate).replace(/"/g, '')
             let dateTo = JSON.stringify(temp).replace(/"/g, '')
 
-            fetch(`http://localhost:8080/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
+            fetch(`http://172.214.63.232:80/humidity/${deviceId}/history?dateFrom=${dateFrom}&dateTo=${dateTo}`, {
                 signal, headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
