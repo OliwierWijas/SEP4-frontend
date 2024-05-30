@@ -35,7 +35,7 @@ describe('myHome Component Tests', () => {
     useTemperatureMock.mockReturnValue([{ date: new Date(), value: 25 }])
   })
 
-  const providerProps = { claims: { token: 'mock-token', role: "Admin" } }
+  const providerProps = { claims: { token: 'mock-token', role: "Admin", houseId: 1 } }
 
   const renderWithAuthContext = (ui, { providerProps, ...renderOptions }) => {
     return render(
