@@ -2,13 +2,14 @@ export function useDoor() {
     const switchDoor = async (houseId, password, state, token) => {
         try {
             if (houseId > 0 && password !== undefined && state !== undefined) {
+                const temp = Boolean(state)
 
                 const body = {
                     password,
-                    state
+                    state: temp
                 }
 
-                const response = fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
+                const response = await fetch(`http://localhost:8080/door/houses/${houseId}/doors/switch`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "POST",
                     body: JSON.stringify(body),

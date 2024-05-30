@@ -1,13 +1,13 @@
 export function useLockState() {
-    const getLockState = (houseId, token) => {
+    const getLockState = async (houseId, token) => {
         try {
             if (houseId > 0) {
-                const response = fetch(`http://localhost:8080/door/houses/${houseId}`, {
+                const response = await fetch(`http://localhost:8080/door/houses/${houseId}`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "GET",
                 })
                 if (response) {
-                    const responseBody = response.text()
+                    const responseBody = await response.text()
                     return responseBody
                 }
             }

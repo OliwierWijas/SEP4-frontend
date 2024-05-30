@@ -10,14 +10,18 @@ export const AuthProvider = ({ children }) => {
   const getLockState = useLockState();
   
   useEffect(() => {
-    const storedClaims = JSON.parse(localStorage.getItem('claims'));
-    if (storedClaims) {
-      setClaims(storedClaims);
-      const currentState = getLockState(storedClaims?.houseId, storedClaims?.token);
-      setHouseLocked(!currentState)
-    }
+    const fetchData = async () => {
+      const storedClaims = JSON.parse(localStorage.getItem('claims'));
+      if (storedClaims) {
+        setClaims(storedClaims);
+        const currentState = await getLockState(storedClaims?.houseId, storedClaims?.token);
+        setHouseLocked(Boolean(currentState));
+      }
+    };
+  
+    fetchData();
   }, []);
-
+  
   useEffect(() => {
     if (claims) {
       localStorage.setItem('claims', JSON.stringify(claims));
