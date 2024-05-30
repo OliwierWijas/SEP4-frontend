@@ -4,7 +4,7 @@ export function useSetLightLevel() {
             const deviceId = room?.deviceId
             const level = room?.lightLevel
             if (deviceId > 0 && level !== undefined) {
-                const response = await fetch(`http://172.214.63.232:80/rooms/${deviceId}/light/set`, {
+                const response = await fetch(`http://localhost:8080/rooms/${deviceId}/light/set`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`

@@ -2,7 +2,7 @@ export function useEditRoom() {
     const editRoom = async (roomId, editedRoom, refreshRoomData, token) => {
         try {
             if (roomId !== undefined && roomId !== null && editedRoom !== null && editedRoom !== undefined) {
-                const response = await fetch(`http://172.214.63.232:80/rooms/${roomId}`, {
+                const response = await fetch(`http://localhost:8080/rooms/${roomId}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
