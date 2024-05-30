@@ -9,6 +9,8 @@ import Login from './routes/Login.js';
 import SignUp from './routes/SignUp.js';
 import MyProfile from './routes/MyProfile.js';
 
+localStorage.clear()
+
 const router = createHashRouter([
   {
     path: "/",
