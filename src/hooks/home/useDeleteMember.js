@@ -1,7 +1,7 @@
 export function useDeleteMember() {
     const deleteMember = async (username, refreshMemberData, token) => {
         if (username) {
-            const response = await fetch(`http://localhost:8080/home/members/${username}`, {
+            const response = await fetch(`http://172.214.63.232:80/home/members/${username}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`
