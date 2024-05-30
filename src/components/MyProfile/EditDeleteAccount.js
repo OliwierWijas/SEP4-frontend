@@ -64,6 +64,8 @@ export default function EditDeleteAccount() {
         localStorage.removeItem("claims")
         setClaims(() => {localStorage.clear(); return null})
         navigate("/")
+        setNewUsername("")
+        setNewPassword("")
       }
     }
 

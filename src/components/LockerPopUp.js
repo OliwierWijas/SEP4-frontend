@@ -11,7 +11,7 @@ function LockerPopUp() {
     const houseId = claims?.houseId
     const token = claims?.token
 
-    const [buttonText, setButtonText] = useState("Lock");
+    const [buttonText, setButtonText] = useState(isHouseLocked === true ? "Unlock" : "Lock");
     const [password, setPassword] = useState("");
     const [isVisible, toggleVisible] = useState(false);
 
@@ -22,7 +22,7 @@ function LockerPopUp() {
     };
 
     const handleButtonClick = async () => {
-        const success = await switchDoor(houseId, password, !isHouseLocked, token)
+        const success = await switchDoor(houseId, password, isHouseLocked, token)
         setPassword("");
         if (success) {
             setHouseLocked(prev => !prev)

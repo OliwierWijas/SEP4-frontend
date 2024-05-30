@@ -126,7 +126,7 @@ export default function Header({ setNotificationOpen, setLockerOpen }) {
                     onClick={() => handleLocker()}
                     className="hover:text-gray-800 block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
                   >
-                    {isHouseLocked ? "Lock Home" : "Unlock Home"}
+                    {isHouseLocked ? "Unlock Home" : "Lock Home"}
                   </div>
                 </>
               )}

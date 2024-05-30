@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     if (storedClaims) {
       setClaims(storedClaims);
       const currentState = getLockState(storedClaims?.houseId, storedClaims?.token);
-      setHouseLocked(currentState)
+      setHouseLocked(!currentState)
     }
   }, []);
 

@@ -40,7 +40,7 @@ function RoomController({ room, setRoom }) {
     }
 
     const incrementLightStatus = () => {
-        if (room.lightLevel === 6) {
+        if (room.lightLevel === 4) {
             alert("Light state cannot be higher than 6.")
             return
         }
