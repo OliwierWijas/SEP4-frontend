@@ -2,7 +2,7 @@ export function useLockState() {
     const getLockState = async (houseId, token) => {
         try {
             if (houseId > 0) {
-                const response = await fetch(`http://172.214.63.232:80/door/houses/${houseId}`, {
+                const response = await fetch(`http://localhost:8080/door/houses/${houseId}`, {
                     headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
                     method: "GET",
                 })

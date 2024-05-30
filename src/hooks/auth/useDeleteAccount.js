@@ -2,7 +2,7 @@ export function useDeleteAccount() {
     const deleteAccount = async (username, password, setClaims, token) => {
         const user = { username: username, password: password }
         if (username !== null && username !== undefined && password !== null && password !== undefined) {
-            const response = await fetch(`http://172.214.63.232:80/auth/delete/users/${username}`, {
+            const response = await fetch(`http://localhost:8080/auth/delete/users/${username}`, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": `Bearer ${token}`

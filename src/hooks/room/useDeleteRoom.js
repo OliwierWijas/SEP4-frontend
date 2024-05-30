@@ -2,7 +2,7 @@ export function useDeleteRoom() {
     const deleteRoom = async (deviceId, refreshRoomData, token) => {
         try {
             if (deviceId > 0) {
-                const response = await fetch(`http://172.214.63.232:80/rooms/${deviceId}`, {
+                const response = await fetch(`http://localhost:8080/rooms/${deviceId}`, {
                     headers: {
                         "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
